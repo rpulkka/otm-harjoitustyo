@@ -1,0 +1,138 @@
+This is the gitlog file:
+
+commit a883265773a57cc9448cc9596c846732bae2cdd9
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:46:42 2018 +0200
+
+    Removed file1.txt and renamed file2.txt as file22.txt
+
+ tiedostoja/file1.txt  | 1 -
+ tiedostoja/file2.txt  | 1 -
+ tiedostoja/file22.txt | 1 +
+ 3 files changed, 1 insertion(+), 2 deletions(-)
+
+commit daf8e0e91a3a95543ae325f93e50cefab92ff100
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:41:42 2018 +0200
+
+    Added content to the new files
+
+ tiedostoja/file1.txt | 1 +
+ tiedostoja/file2.txt | 1 +
+ tiedostoja/file3.txt | 1 +
+ 3 files changed, 3 insertions(+)
+
+commit 3d255d2a79bcecc02f36563b66b15184f77d9bd3
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:40:15 2018 +0200
+
+    Created three new files listed below
+
+ tiedostoja/file1.txt | 0
+ tiedostoja/file2.txt | 0
+ tiedostoja/file3.txt | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c305071156649444efe45624147b71c984358308
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:16:40 2018 +0200
+
+    Edited file kolmas.txt
+
+ kolmas.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit cfabd95ab18fa9bb745a7f6232fe52190fb88761
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:10:52 2018 +0200
+
+    Modified files eka.txt and kolmas.txt
+
+ eka.txt    | 4 ++--
+ kolmas.txt | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 45fb7a3432657e98d03adeb4fd84e1d2db3920ff
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:07:45 2018 +0200
+
+    Renamed tiedosto.txt as eka.txt
+
+ eka.txt      | 11 +++++++++++
+ tiedosto.txt | 11 -----------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+
+commit c55e59ca5a8730467c52eeb8cdf2d3a836dc0034
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 14:04:40 2018 +0200
+
+    Removed toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit ab05a7f1256c78253b7572c3b541e282688772f0
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:53:27 2018 +0200
+
+    Removed and added text from tiedosto.txt
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 43168684de82e693fd614a8cd6fec5cc2a90ea1f
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:50:59 2018 +0200
+
+    Copied a lot of text into tiedosto.txt
+
+ tiedosto.txt | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+commit aa8ab1b156eae68cc99a6b625d1ef0167e8da26a
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:43:18 2018 +0200
+
+    Created stuff directory which contains file testfile.txt
+
+ stuff/testfile.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 60988d8864303292f0a7d97c9e2bac4fbaaa28ac
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:40:55 2018 +0200
+
+    Modified files toinen.txt and kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit a482956511d4389471456b0ad9fb2d6b1a584ca9
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:39:05 2018 +0200
+
+    Created kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 58757f5a3049fb7e8cab7fba3ca4a3fe09ec8788
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:34:50 2018 +0200
+
+    Edited tiedosto.txt and created toinen.txt
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 3bd7d5e4c8133ea7380719fdf376476face2e14c
+Author: rpulkka <dreamspace2017@yandex.ru>
+Date:   Mon Mar 19 10:29:28 2018 +0200
+
+    Created tiedosto.txt
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+

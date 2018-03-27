@@ -21,8 +21,7 @@
  Käyttöliittymän ydin on pelinäkymä, joka jakautuu kolmeen alueeseen: heittoalue, kombinaatioalue ja tulostaulukko.
  
  ![GitHub Logo](Yahtzee.jpg)
-Format: ![Alt Text](url)
-
+ 
  
  <h2>Perusversion tarjoama toiminnallisuus</h2>
  

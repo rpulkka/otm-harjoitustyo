@@ -20,7 +20,7 @@
  
  Käyttöliittymän ydin on pelinäkymä, joka jakautuu kolmeen alueeseen: heittoalue, kombinaatioalue ja tulostaulukko.
  
- 
+ (Yahtzee.jpg)
  
  <h2>Perusversion tarjoama toiminnallisuus</h2>
  

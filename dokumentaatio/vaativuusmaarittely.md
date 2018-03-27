@@ -43,7 +43,7 @@
  vaikka saisi nolla pistettä. Sarakkeet erottavat pelaajien pisteet toisistaan. Pelin lopuksi kombinaatioista kerrytetyt pisteet 
  lasketaan yhteen ja eniten pisteitä saanut pelaaja voittaa.
  
- -
+ 
  
  <h2>Jatkokehitysideoita</h2> 
  
@@ -62,7 +62,7 @@
  -Pelissä voisi saada palkinnoksi hienommat(eri väriset) nopat, kun on pelannut tarpeeksi monta peliä, tai saanut tarpeeksi
   paljon pisteitä yhdessä pelissä
   
- -(((Tekoäly)))
+ -(Tekoäly)
  
  -Muuta tilastoitavaa dataa aiemmista peleistä
  

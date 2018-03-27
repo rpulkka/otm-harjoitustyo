@@ -60,7 +60,7 @@
  
  -Äänisuunnittelu
  
- -Pelissä voisi saada palkinnoksi hienommat(eri väriset) nopat, kun on pelannut tarpeeksi monta peliä, tai saanut tarpeeksi
+ -Pelissä voisi saada palkinnoksi hienommat (eri väriset) nopat, kun on pelannut tarpeeksi monta peliä, tai saanut tarpeeksi
   paljon pisteitä yhdessä pelissä
   
  -(Tekoäly)

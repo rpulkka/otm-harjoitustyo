@@ -1,5 +1,5 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 17.3. | 2    | Vaativuusmäärittelyn laatiminen ja ohjelman suunnittelu |
+| 27.3. | 2    | Vaativuusmäärittelyn laatiminen ja ohjelman suunnittelu |
 | yht   | 2    | | 

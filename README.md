@@ -1,4 +1,4 @@
-**Yahtzee Game**
+<h1>Yahtzee Game</h1>
 
 This is my project for the OTM course, *welcome!*
 

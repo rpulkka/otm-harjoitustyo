@@ -6,6 +6,8 @@ This is my project for the OTM course, *welcome!*
 
 [Tuntikirjanpito](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+[Kuvalähteet](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/kuvalahteet.md)
+
 ---
 
 **Author: Robert Pulkka**

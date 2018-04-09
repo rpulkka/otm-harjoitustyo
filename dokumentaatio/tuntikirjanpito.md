@@ -5,4 +5,5 @@
 | 5.4. | 2h    | Projektin luominen, käyttöliittymän aloittaminen (JavaFX) |
 | 6.4. | 2h    | Kuvien lisääminen käyttöliittymään |
 | 8.4. | 1h    | Noppien heittoalueen UI:n viimeistely ja nopanheiton logiikan alku |
-| yht   | 7h    | | 
+| 9.4. | 3h    | Heittotoiminnon logiikan toteuttaminen ja testien aloitus |
+| yht   | 10h    | | 

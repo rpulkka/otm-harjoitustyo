@@ -27,12 +27,14 @@ public class Die {
     }
 
     public void setValue(int value) {
-        this.value = value;
-        changeImage(value);
+        if (value >= 0 && value <= 6) {
+            this.value = value;
+            changeImage(value);
+        }
     }
-    
+
     public void changeImage(int value) {
-        switch(value){
+        switch (value){
             case 1:
                 valueImage = imageOptions.get(0);
                 slot.setImage(valueImage.getImage());

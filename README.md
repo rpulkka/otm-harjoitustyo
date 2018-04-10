@@ -1,4 +1,4 @@
-<h1>Yahtzee Game</h1>
+<h1>Yahtzee</h1>
 
 <h2>Dokumentaatio </h2>
 

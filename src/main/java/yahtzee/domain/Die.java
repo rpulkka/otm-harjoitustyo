@@ -13,6 +13,7 @@ public class Die {
     private ImageView slot;
     private DieImage valueImage;
     private ArrayList<DieImage> imageOptions;
+    private boolean chosen;
     
     public Die(ArrayList<DieImage> images){
         this.value = 1;
@@ -20,6 +21,7 @@ public class Die {
         this.valueImage = images.get(0);
         this.slot.setImage(images.get(0).getImage());
         this.imageOptions = images;
+        this.chosen = false;
     }
 
     public int getValue() {
@@ -69,5 +71,13 @@ public class Die {
 
     public void setSlot(ImageView slot) {
         this.slot = slot;
+    }
+    
+    public boolean getChosen(){
+        return chosen;
+    }
+    
+    public void setChosen(boolean boo){
+        chosen = boo;
     }
 }

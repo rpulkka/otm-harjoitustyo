@@ -112,6 +112,7 @@ public class YahtzeeUI extends Application {
             public void handle(MouseEvent event) {
                 slot1.getSlot().setLayoutX(380);
                 slot1.getSlot().setLayoutY(720);
+                slot1.setChosen(true);
             }
         });
 
@@ -120,6 +121,7 @@ public class YahtzeeUI extends Application {
             public void handle(MouseEvent event) {
                 slot2.getSlot().setLayoutX(480);
                 slot2.getSlot().setLayoutY(720);
+                slot2.setChosen(true);
             }
         });
         
@@ -128,6 +130,7 @@ public class YahtzeeUI extends Application {
             public void handle(MouseEvent event) {
                 slot3.getSlot().setLayoutX(580);
                 slot3.getSlot().setLayoutY(720);
+                slot3.setChosen(true);
             }
         });
         
@@ -136,6 +139,7 @@ public class YahtzeeUI extends Application {
             public void handle(MouseEvent event) {
                 slot4.getSlot().setLayoutX(680);
                 slot4.getSlot().setLayoutY(720);
+                slot4.setChosen(true);
             }
         });
         
@@ -144,6 +148,7 @@ public class YahtzeeUI extends Application {
             public void handle(MouseEvent event) {
                 slot5.getSlot().setLayoutX(780);
                 slot5.getSlot().setLayoutY(720);
+                slot5.setChosen(true);
             }
         });
         

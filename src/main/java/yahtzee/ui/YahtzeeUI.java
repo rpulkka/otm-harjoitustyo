@@ -19,8 +19,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
@@ -34,6 +36,9 @@ public class YahtzeeUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Yahtzee Game");
+
+        Rectangle throwingArea = new Rectangle();
+        Rectangle combinationArea = new Rectangle();
 
         URL urlOne = this.getClass().getResource("/images/one.png");
         URL urlTwo = this.getClass().getResource("/images/two.png");
@@ -56,7 +61,7 @@ public class YahtzeeUI extends Application {
         images.add(five);
         DieImage six = new DieImage(urlSix);
         images.add(six);
-        
+
         ArrayList<Die> dice = new ArrayList<Die>();
 
         Die slot1 = new Die(images);
@@ -71,12 +76,26 @@ public class YahtzeeUI extends Application {
         dice.add(slot5);
 
         DiceThrower thrower = new DiceThrower(dice);
-        
+
         Button button = new Button();
         button.setText("Throw the dice!");
 
         Pane layout = new Pane();
+        
+        throwingArea.setX(600);
+        throwingArea.setY(200);
+        throwingArea.setWidth(400);
+        throwingArea.setHeight(300);
+        throwingArea.setArcWidth(20);
+        throwingArea.setArcHeight(20);
 
+        combinationArea.setX(350);
+        combinationArea.setY(700);
+        combinationArea.setWidth(520);
+        combinationArea.setHeight(100);
+        combinationArea.setArcWidth(20);
+        combinationArea.setArcHeight(20);
+        
         slot1.getSlot().setLayoutX(650);
         slot1.getSlot().setLayoutY(250);
         slot2.getSlot().setLayoutX(750);
@@ -87,7 +106,47 @@ public class YahtzeeUI extends Application {
         slot4.getSlot().setLayoutY(350);
         slot5.getSlot().setLayoutX(800);
         slot5.getSlot().setLayoutY(350);
+        
+        slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                slot1.getSlot().setLayoutX(380);
+                slot1.getSlot().setLayoutY(720);
+            }
+        });
 
+        slot2.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                slot2.getSlot().setLayoutX(480);
+                slot2.getSlot().setLayoutY(720);
+            }
+        });
+        
+        slot3.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                slot3.getSlot().setLayoutX(580);
+                slot3.getSlot().setLayoutY(720);
+            }
+        });
+        
+        slot4.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                slot4.getSlot().setLayoutX(680);
+                slot4.getSlot().setLayoutY(720);
+            }
+        });
+        
+        slot5.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                slot5.getSlot().setLayoutX(780);
+                slot5.getSlot().setLayoutY(720);
+            }
+        });
+        
         button.setLayoutX(800);
         button.setLayoutY(450);
 
@@ -95,10 +154,13 @@ public class YahtzeeUI extends Application {
             @Override
             public void handle(ActionEvent e) {
                 thrower.throwDice();
-                
+
             }
         });
 
+        layout.getChildren().add(throwingArea);
+        layout.getChildren().add(combinationArea);
+        
         layout.getChildren().add(slot1.getSlot());
         layout.getChildren().add(slot2.getSlot());
         layout.getChildren().add(slot3.getSlot());

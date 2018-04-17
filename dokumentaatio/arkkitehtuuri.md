@@ -8,6 +8,8 @@ Alla olevassa kaaviossa on kuvattu ohjelman pakkausrakenne, joka koostuu käytt�
 
 ![GitHub Logo](packagediagram.jpg)
 
+<h2>Sovelluslogiikka</h2>
+
 Alla olevassa kaaviossa on kuvattu ohjelman luokkakaavio, joka koostuu käyttöliittymäluokasta YahtzeeUI, noppien
 arvoja ja niihin liittyviä kuvia käsittelevästä luokasta Die, noppien heittoa käsittelevästä luokasta DiceThrower
 sekä toistaiseksi puuttuvasta luokasta Combination, joka tulee käsittelemään kombinaatioiden pisteytystä, jonka

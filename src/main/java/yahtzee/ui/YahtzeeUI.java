@@ -34,6 +34,7 @@ public class YahtzeeUI extends Application {
 
         Label count = new Label();
         Label alert = new Label();
+        Label instr = new Label();
 
         Rectangle throwingArea = new Rectangle();
         Rectangle combinationArea = new Rectangle();
@@ -78,6 +79,9 @@ public class YahtzeeUI extends Application {
         Button button = new Button();
         button.setText("Throw the dice!");
 
+        Button reset = new Button();
+        reset.setText("Reset (New Turn)");
+
         TableView scoreboard = new TableView();
 
         scoreboard.setEditable(true);
@@ -96,14 +100,20 @@ public class YahtzeeUI extends Application {
 
         Pane layout = new Pane();
 
-        count.setLayoutX(10);
-        count.setLayoutY(10);
-        count.setText("" + thrower.getTimesThrown());
+        count.setLayoutX(600);
+        count.setLayoutY(510);
+        count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
+        count.setFont(Font.font("Cambria", 18));
 
         alert.setLayoutX(100);
         alert.setLayoutY(600);
-        alert.setText("Notification: Scoreboard logic hasn't been added yet.");
+        alert.setText("Notification: Scoreboard logic hasn't been added yet! Press the reset button to reset the dice:");
         alert.setFont(Font.font("Cambria", 18));
+        
+        instr.setLayoutX(400);
+        instr.setLayoutY(120);
+        instr.setText("Press the button 'Throw The Dice' to throw the dice. Select a die by clicking after a throw. After 3 times, reset.");
+        instr.setFont(Font.font("Cambria", 14));
 
         throwingArea.setX(600);
         throwingArea.setY(200);
@@ -136,62 +146,101 @@ public class YahtzeeUI extends Application {
         slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                slot1.getSlot().setLayoutX(380);
-                slot1.getSlot().setLayoutY(720);
-                slot1.setChosen(true);
+                if (slot1.getChosen() == false) {
+                    slot1.getSlot().setLayoutX(380);
+                    slot1.getSlot().setLayoutY(720);
+                    slot1.setChosen(true);
+                }
             }
         });
 
         slot2.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                slot2.getSlot().setLayoutX(480);
-                slot2.getSlot().setLayoutY(720);
-                slot2.setChosen(true);
+                if (slot2.getChosen() == false) {
+                    slot2.getSlot().setLayoutX(480);
+                    slot2.getSlot().setLayoutY(720);
+                    slot2.setChosen(true);
+                }
             }
         });
 
         slot3.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                slot3.getSlot().setLayoutX(580);
-                slot3.getSlot().setLayoutY(720);
-                slot3.setChosen(true);
+                if (slot3.getChosen() == false) {
+                    slot3.getSlot().setLayoutX(580);
+                    slot3.getSlot().setLayoutY(720);
+                    slot3.setChosen(true);
+                }
             }
         });
 
         slot4.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                slot4.getSlot().setLayoutX(680);
-                slot4.getSlot().setLayoutY(720);
-                slot4.setChosen(true);
+                if (slot4.getChosen() == false) {
+                    slot4.getSlot().setLayoutX(680);
+                    slot4.getSlot().setLayoutY(720);
+                    slot4.setChosen(true);
+                }
             }
         });
 
         slot5.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                slot5.getSlot().setLayoutX(780);
-                slot5.getSlot().setLayoutY(720);
-                slot5.setChosen(true);
+                if (slot5.getChosen() == false) {
+                    slot5.getSlot().setLayoutX(780);
+                    slot5.getSlot().setLayoutY(720);
+                    slot5.setChosen(true);
+                }
             }
         });
 
         button.setLayoutX(800);
         button.setLayoutY(450);
 
+        reset.setLayoutX(950);
+        reset.setLayoutY(600);
+
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 thrower.throwDice();
-                count.setText("" + thrower.getTimesThrown());
+                count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
 
+            }
+        });
+
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                for (Die die : dice) {
+                    die.setChosen(true);
+                    die.setValue(1);
+                }
+
+                thrower.setTimesThrown(0);
+
+                slot1.getSlot().setLayoutX(650);
+                slot1.getSlot().setLayoutY(250);
+                slot2.getSlot().setLayoutX(750);
+                slot2.getSlot().setLayoutY(250);
+                slot3.getSlot().setLayoutX(850);
+                slot3.getSlot().setLayoutY(250);
+                slot4.getSlot().setLayoutX(700);
+                slot4.getSlot().setLayoutY(350);
+                slot5.getSlot().setLayoutX(800);
+                slot5.getSlot().setLayoutY(350);
+                
+                count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
             }
         });
 
         layout.getChildren().add(count);
         layout.getChildren().add(alert);
+        layout.getChildren().add(instr);
 
         layout.getChildren().add(throwingArea);
         layout.getChildren().add(combinationArea);
@@ -203,6 +252,7 @@ public class YahtzeeUI extends Application {
         layout.getChildren().add(slot5.getSlot());
 
         layout.getChildren().add(button);
+        layout.getChildren().add(reset);
 
         layout.getChildren().add(scoreboard);
 

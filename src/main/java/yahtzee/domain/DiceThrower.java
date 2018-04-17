@@ -16,6 +16,9 @@ public class DiceThrower {
     public void throwDice() {
         if (timesThrown < 3) {
             for (Die die : dice) {
+                if (timesThrown == 0) {
+                    die.setChosen(false);
+                }
                 if (die.getChosen() == false) {
                     int random = (int) (Math.random() * 6 + 1);
                     die.setValue(random);

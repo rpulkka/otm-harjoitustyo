@@ -8,11 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 // @author rpulkka
-public class DieTest {
+public class DomainTest {
     ArrayList<DieImage> images;
+    ArrayList<Die> dice;
     Die die;
+    Die slot1;
+    Die slot2;
+    Die slot3;
+    Die slot4;
+    Die slot5;
+    DiceThrower thrower;
 
-    public DieTest() throws Exception{
+    public DomainTest() throws Exception{
         URL urlOne = this.getClass().getResource("/images/one.png");
         URL urlTwo = this.getClass().getResource("/images/two.png");
         URL urlThree = this.getClass().getResource("/images/three.png");
@@ -34,6 +41,21 @@ public class DieTest {
         images.add(five);
         DieImage six = new DieImage(urlSix);
         images.add(six);
+        
+        dice = new ArrayList<Die>();
+        
+        slot1 = new Die(images);
+        dice.add(slot1);
+        slot2 = new Die(images);
+        dice.add(slot2);
+        slot3 = new Die(images);
+        dice.add(slot3);
+        slot4 = new Die(images);
+        dice.add(slot4);
+        slot5 = new Die(images);
+        dice.add(slot5);
+        
+        thrower = new DiceThrower(dice);
     }
 
     @Before
@@ -51,5 +73,27 @@ public class DieTest {
     public void wrongValueTest(){
         die.setValue(-2);
         assertEquals(die.getValue(),1);
+    }
+    
+    @Test
+    public void throwCountTest(){
+        thrower.setTimesThrown(0);
+        thrower.throwDice();
+        assertEquals(thrower.getTimesThrown(),1);
+    }
+    
+    @Test
+    public void throwLimitTest(){
+        thrower.setTimesThrown(3);
+        thrower.throwDice();
+        assertEquals(thrower.getTimesThrown(),3);
+        assertEquals(slot4.getChosen(),true);
+    }
+    
+    @Test
+    public void diceUnlockTest(){
+        thrower.setTimesThrown(0);
+        thrower.throwDice();
+        assertEquals(slot4.getChosen(),false);
     }
 }

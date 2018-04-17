@@ -2,29 +2,24 @@ package yahtzee.ui;
 
 import yahtzee.domain.*;
 
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 
 //author rpulkka
 public class YahtzeeUI extends Application {
@@ -36,6 +31,9 @@ public class YahtzeeUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Yahtzee Game");
+
+        Label count = new Label();
+        Label alert = new Label();
 
         Rectangle throwingArea = new Rectangle();
         Rectangle combinationArea = new Rectangle();
@@ -80,8 +78,33 @@ public class YahtzeeUI extends Application {
         Button button = new Button();
         button.setText("Throw the dice!");
 
+        TableView scoreboard = new TableView();
+
+        scoreboard.setEditable(true);
+
+        TableColumn<String, String> combinationColumn = new TableColumn<>("Combination");
+        combinationColumn.setMinWidth(200);
+        combinationColumn.setCellValueFactory(new PropertyValueFactory<String, String>("combination"));
+        TableColumn<String, String> playerColumn = new TableColumn<>("Player 1");
+        playerColumn.setMinWidth(200);
+        playerColumn.setCellValueFactory(new PropertyValueFactory<String, String>("points"));
+
+        scoreboard.setItems(scoreboardData());
+
+        scoreboard.getColumns().add(combinationColumn);
+        scoreboard.getColumns().add(playerColumn);
+
         Pane layout = new Pane();
-        
+
+        count.setLayoutX(10);
+        count.setLayoutY(10);
+        count.setText("" + thrower.getTimesThrown());
+
+        alert.setLayoutX(100);
+        alert.setLayoutY(600);
+        alert.setText("Notification: Scoreboard logic hasn't been added yet.");
+        alert.setFont(Font.font("Cambria", 18));
+
         throwingArea.setX(600);
         throwingArea.setY(200);
         throwingArea.setWidth(400);
@@ -95,7 +118,7 @@ public class YahtzeeUI extends Application {
         combinationArea.setHeight(100);
         combinationArea.setArcWidth(20);
         combinationArea.setArcHeight(20);
-        
+
         slot1.getSlot().setLayoutX(650);
         slot1.getSlot().setLayoutY(250);
         slot2.getSlot().setLayoutX(750);
@@ -106,7 +129,10 @@ public class YahtzeeUI extends Application {
         slot4.getSlot().setLayoutY(350);
         slot5.getSlot().setLayoutX(800);
         slot5.getSlot().setLayoutY(350);
-        
+
+        scoreboard.setLayoutX(100);
+        scoreboard.setLayoutY(150);
+
         slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -124,7 +150,7 @@ public class YahtzeeUI extends Application {
                 slot2.setChosen(true);
             }
         });
-        
+
         slot3.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -133,7 +159,7 @@ public class YahtzeeUI extends Application {
                 slot3.setChosen(true);
             }
         });
-        
+
         slot4.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -142,7 +168,7 @@ public class YahtzeeUI extends Application {
                 slot4.setChosen(true);
             }
         });
-        
+
         slot5.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -151,7 +177,7 @@ public class YahtzeeUI extends Application {
                 slot5.setChosen(true);
             }
         });
-        
+
         button.setLayoutX(800);
         button.setLayoutY(450);
 
@@ -159,13 +185,17 @@ public class YahtzeeUI extends Application {
             @Override
             public void handle(ActionEvent e) {
                 thrower.throwDice();
+                count.setText("" + thrower.getTimesThrown());
 
             }
         });
 
+        layout.getChildren().add(count);
+        layout.getChildren().add(alert);
+
         layout.getChildren().add(throwingArea);
         layout.getChildren().add(combinationArea);
-        
+
         layout.getChildren().add(slot1.getSlot());
         layout.getChildren().add(slot2.getSlot());
         layout.getChildren().add(slot3.getSlot());
@@ -174,9 +204,29 @@ public class YahtzeeUI extends Application {
 
         layout.getChildren().add(button);
 
+        layout.getChildren().add(scoreboard);
+
         Scene scene = new Scene(layout, 1200, 900);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
+    public ObservableList<Score> scoreboardData() {
+        ObservableList<Score> data = FXCollections.observableArrayList();
+        data.add(new Score("Aces", "0"));
+        data.add(new Score("Twos", "0"));
+        data.add(new Score("Threes", "0"));
+        data.add(new Score("Fours", "0"));
+        data.add(new Score("Fives", "0"));
+        data.add(new Score("Sixes", "0"));
+        data.add(new Score("Bonus", "0"));
+        data.add(new Score("3 of a kind", "0"));
+        data.add(new Score("Full house", "0"));
+        data.add(new Score("Small straight", "0"));
+        data.add(new Score("Large straigth", "0"));
+        data.add(new Score("Yahtzee", "0"));
+        data.add(new Score("Chance", "0"));
+        data.add(new Score("Total", "0"));
+        return data;
+    }
 }

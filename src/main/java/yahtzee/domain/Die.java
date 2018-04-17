@@ -1,21 +1,18 @@
-
 package yahtzee.domain;
 
 // @author rpulkka
-
 import java.util.ArrayList;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
- 
 public class Die {
+
     private int value;
     private ImageView slot;
     private DieImage valueImage;
     private ArrayList<DieImage> imageOptions;
     private boolean chosen;
-    
-    public Die(ArrayList<DieImage> images){
+
+    public Die(ArrayList<DieImage> images) {
         this.value = 1;
         this.slot = new ImageView();
         this.valueImage = images.get(0);
@@ -36,7 +33,7 @@ public class Die {
     }
 
     public void changeImage(int value) {
-        switch (value){
+        switch (value) {
             case 1:
                 valueImage = imageOptions.get(0);
                 slot.setImage(valueImage.getImage());
@@ -57,11 +54,12 @@ public class Die {
                 valueImage = imageOptions.get(4);
                 slot.setImage(valueImage.getImage());
                 break;
-            case 6:    
+            case 6:
                 valueImage = imageOptions.get(5);
                 slot.setImage(valueImage.getImage());
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
@@ -72,12 +70,12 @@ public class Die {
     public void setSlot(ImageView slot) {
         this.slot = slot;
     }
-    
-    public boolean getChosen(){
+
+    public boolean getChosen() {
         return chosen;
     }
-    
-    public void setChosen(boolean boo){
+
+    public void setChosen(boolean boo) {
         chosen = boo;
     }
 }

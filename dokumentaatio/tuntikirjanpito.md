@@ -9,4 +9,4 @@
 | 13.4. | 2h    | Kombinaatioalueen lisäys, noppien toiminnan parannus, lisäosien lisäys. |
 | 17.4. | 5h    | Kombinaatioalueen logiikka, tulostaulun UI, arkkitehtuuri.md, testit. |
 | 19.4. | 2h    | Tulostaulun logiikan aloittaminen. |
-| yht   | 17h    | | 
+| yht   | 19h    | | 

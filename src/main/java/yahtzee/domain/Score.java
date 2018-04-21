@@ -11,6 +11,7 @@ public class Score {
     private SimpleStringProperty points;
     
     public Score(String combo, String number){
+        super();
         this.combination = new SimpleStringProperty(combo);
         this.points = new SimpleStringProperty(number);
     }

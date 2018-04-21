@@ -1,5 +1,10 @@
 <h1>Yahtzee</h1>
 
+Sovellus on kuuluisan Yatzy -noppapelin virtuaalinen versio. Pelin tarkoituksena on keräillä viittä noppaa 
+heittämällä ennalta määrättyjä kombinaatioita, joista sitten saa lähtökohtaisesti noppien silmälukujen verran
+pisteitä ja lopussa eniten pisteitä kerännyt pelaaja voittaa. Peliä voi pelata kahdestaan vuorottelemalla tai
+kilpailla yksin tavoitellen omaa ennätystä.
+
 <h2>Dokumentaatio</h2>
 
 [Vaativuusmäärittely](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/vaativuusmaarittely.md)
@@ -8,9 +13,12 @@
 
 [Arkkitehtuurikuvaus](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
-<h2>Komentorivitoiminnot</h2>
 
-## Komentorivitoiminnot
+<h2>Releaset</h2>
+
+Tulossa!
+
+<h2>Komentorivitoiminnot</h2>
 
 ### Testaus
 

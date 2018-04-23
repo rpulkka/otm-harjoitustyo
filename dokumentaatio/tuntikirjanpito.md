@@ -11,4 +11,4 @@
 | 19.4. | 2h    | Tulostaulun logiikan aloittaminen. |
 | 21.4. | 2h    | Kombinaatioluokkien suunnittelu, luominen ja valmistelu. |
 | 22.4. | 2h    | Kombinaatioluokkien toteutus. |
-| yht   | 21h    | | 
+| yht   | 23h    | | 

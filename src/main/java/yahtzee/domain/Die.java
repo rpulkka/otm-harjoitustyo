@@ -18,7 +18,7 @@ public class Die {
         this.valueImage = images.get(0);
         this.slot.setImage(images.get(0).getImage());
         this.imageOptions = images;
-        this.chosen = true;
+        this.chosen = false;
     }
 
     public int getValue() {

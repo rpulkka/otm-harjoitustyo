@@ -5,12 +5,10 @@ import yahtzee.domain.*;
 import java.net.URL;
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -80,6 +78,12 @@ public class YahtzeeUI extends Application {
 
         DiceThrower thrower = new DiceThrower(dice);
 
+        DiceMover mover1 = new DiceMover(thrower, slot1, 380, 720);
+        DiceMover mover2 = new DiceMover(thrower, slot2, 480, 720);
+        DiceMover mover3 = new DiceMover(thrower, slot3, 580, 720);
+        DiceMover mover4 = new DiceMover(thrower, slot4, 680, 720);
+        DiceMover mover5 = new DiceMover(thrower, slot5, 780, 720);
+
         Button button = new Button();
         button.setText("Throw the dice!");
 
@@ -98,30 +102,34 @@ public class YahtzeeUI extends Application {
         playerColumn.setMinWidth(200);
         playerColumn.setCellValueFactory(new PropertyValueFactory<String, String>("points"));
         playerColumn.setSortable(false);
-        
+
         ObservableList<Score> data = FXCollections.observableArrayList();
-        data.add(new Score("Aces", "0"));
-        data.add(new Score("Twos", "0"));
-        data.add(new Score("Threes", "0"));
-        data.add(new Score("Fours", "0"));
-        data.add(new Score("Fives", "0"));
-        data.add(new Score("Sixes", "0"));
-        data.add(new Score("Bonus", "0"));
-        data.add(new Score("Pair", "0"));
-        data.add(new Score("Two pairs", "0"));
-        data.add(new Score("3 of a kind", "0"));
-        data.add(new Score("4 of a kind", "0"));
-        data.add(new Score("Full house", "0"));
-        data.add(new Score("Small straight", "0"));
-        data.add(new Score("Large straigth", "0"));
-        data.add(new Score("Yahtzee", "0"));
-        data.add(new Score("Chance", "0"));
-        data.add(new Score("Total", "0"));
+        data.add(new Score("Aces", "-"));
+        data.add(new Score("Twos", "-"));
+        data.add(new Score("Threes", "-"));
+        data.add(new Score("Fours", "-"));
+        data.add(new Score("Fives", "-"));
+        data.add(new Score("Sixes", "-"));
+        data.add(new Score("Bonus", "-"));
+        data.add(new Score("Pair", "-"));
+        data.add(new Score("Two pairs", "-"));
+        data.add(new Score("3 of a kind", "-"));
+        data.add(new Score("4 of a kind", "-"));
+        data.add(new Score("Full house", "-"));
+        data.add(new Score("Small straight", "-"));
+        data.add(new Score("Large straight", "-"));
+        data.add(new Score("Yahtzee", "-"));
+        data.add(new Score("Chance", "-"));
+        data.add(new Score("Total", "-"));
 
         scoreboard.setItems(data);
 
         scoreboard.getColumns().add(combinationColumn);
         scoreboard.getColumns().add(playerColumn);
+
+        CombinationManager combinationManager = new CombinationManager(scoreboard, dice, images);
+
+        Reset resetGame = new Reset(combinationManager, thrower, count, dice);
 
         Pane layout = new Pane();
 
@@ -171,76 +179,49 @@ public class YahtzeeUI extends Application {
         slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (slot1.getChosen() == false) {
-                    slot1.getSlot().setLayoutX(380);
-                    slot1.getSlot().setLayoutY(720);
-                    slot1.setChosen(true);
-                }
+                mover1.move();
             }
         });
 
         slot2.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (slot2.getChosen() == false) {
-                    slot2.getSlot().setLayoutX(480);
-                    slot2.getSlot().setLayoutY(720);
-                    slot2.setChosen(true);
-                }
+                mover2.move();
             }
         });
 
         slot3.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (slot3.getChosen() == false) {
-                    slot3.getSlot().setLayoutX(580);
-                    slot3.getSlot().setLayoutY(720);
-                    slot3.setChosen(true);
-                }
+                mover3.move();
             }
         });
 
         slot4.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (slot4.getChosen() == false) {
-                    slot4.getSlot().setLayoutX(680);
-                    slot4.getSlot().setLayoutY(720);
-                    slot4.setChosen(true);
-                }
+                mover4.move();
             }
         });
 
         slot5.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (slot5.getChosen() == false) {
-                    slot5.getSlot().setLayoutX(780);
-                    slot5.getSlot().setLayoutY(720);
-                    slot5.setChosen(true);
-                }
+                mover5.move();
             }
         });
 
-        
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent event) {
-                Score p = (Score) scoreboard.getSelectionModel().getSelectedItem();
-                if(p != null){
-                System.out.println(p.getCombination());
-                p.setPoints("10");
-                System.out.println(p.getPoints());
-                scoreboard.getSelectionModel().clearSelection();
-                scoreboard.refresh();
+                Score score = (Score) scoreboard.getSelectionModel().getSelectedItem();
+                if (score != null) {
+                    combinationManager.scoreCombination(score, resetGame);
                 }
-                //System.out.println(scoreboard.getSelectionModel().getSelectedItem().);
-                //System.out.println(scoreboard.getSelectionModel().getSelectedItem().getPoints());
             }
-        }); 
-        
+        });
+
         button.setLayoutX(800);
         button.setLayoutY(450);
 
@@ -250,34 +231,7 @@ public class YahtzeeUI extends Application {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                thrower.throwDice();
-                count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
-
-            }
-        });
-
-        reset.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                for (Die die : dice) {
-                    die.setChosen(true);
-                    die.setValue(1);
-                }
-
-                thrower.setTimesThrown(0);
-
-                slot1.getSlot().setLayoutX(650);
-                slot1.getSlot().setLayoutY(250);
-                slot2.getSlot().setLayoutX(750);
-                slot2.getSlot().setLayoutY(250);
-                slot3.getSlot().setLayoutX(850);
-                slot3.getSlot().setLayoutY(250);
-                slot4.getSlot().setLayoutX(700);
-                slot4.getSlot().setLayoutY(350);
-                slot5.getSlot().setLayoutX(800);
-                slot5.getSlot().setLayoutY(350);
-
-                count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
+                thrower.throwDice(count);
             }
         });
 
@@ -303,23 +257,4 @@ public class YahtzeeUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-/*
-    public ObservableList<Score> scoreboardData() {
-        ObservableList<Score> data = FXCollections.observableArrayList();
-        data.add(new Score("Aces", "0"));
-        data.add(new Score("Twos", "0"));
-        data.add(new Score("Threes", "0"));
-        data.add(new Score("Fours", "0"));
-        data.add(new Score("Fives", "0"));
-        data.add(new Score("Sixes", "0"));
-        data.add(new Score("Bonus", "0"));
-        data.add(new Score("3 of a kind", "0"));
-        data.add(new Score("Full house", "0"));
-        data.add(new Score("Small straight", "0"));
-        data.add(new Score("Large straigth", "0"));
-        data.add(new Score("Yahtzee", "0"));
-        data.add(new Score("Chance", "0"));
-        data.add(new Score("Total", "0"));
-        return data;
-    } */
 }

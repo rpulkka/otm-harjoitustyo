@@ -1,6 +1,7 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
+import javafx.scene.control.Label;
 
 // @author rpulkka
 public class DiceThrower {
@@ -13,7 +14,7 @@ public class DiceThrower {
         this.timesThrown = 0;
     }
 
-    public void throwDice() {
+    public void throwDice(Label label) {
         if (timesThrown < 3) {
             for (Die die : dice) {
                 if (timesThrown == 0) {
@@ -25,6 +26,7 @@ public class DiceThrower {
                 }
             }
             timesThrown++;
+            label.setText("Times thrown: "+timesThrown+"/3");
         }
 
     }

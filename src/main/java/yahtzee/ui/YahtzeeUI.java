@@ -174,7 +174,7 @@ public class YahtzeeUI extends Application {
         scoreboard.setLayoutX(100);
         scoreboard.setLayoutY(150);
         scoreboard.setMinHeight(440);
-        
+
         button.setLayoutX(800);
         button.setLayoutY(450);
 

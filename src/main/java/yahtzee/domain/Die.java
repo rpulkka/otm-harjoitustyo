@@ -63,6 +63,10 @@ public class Die {
         }
     }
 
+    public DieImage getImage() {
+        return this.valueImage;
+    }
+
     public ImageView getSlot() {
         return slot;
     }

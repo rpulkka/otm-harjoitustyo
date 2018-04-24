@@ -1,11 +1,8 @@
-
 package yahtzee.domain;
 
 import java.util.ArrayList;
 
-
 // @author rpulkka
-
 public class FullHouse implements Combination {
 
     private ArrayList<Die> dice;
@@ -18,7 +15,7 @@ public class FullHouse implements Combination {
 
     public int score() {
         this.isAvailable = false;
-        
+
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
 
@@ -31,18 +28,18 @@ public class FullHouse implements Combination {
             return 0;
         } else {
             int sum = 0;
-            for(Die die:dice){
+            for (Die die : dice) {
                 sum += die.getValue();
             }
             return sum;
         }
     }
-    
-    public boolean getIsAvailable(){
+
+    public boolean getIsAvailable() {
         return this.isAvailable;
     }
-    
-    public void setIsAvailable(boolean b){
+
+    public void setIsAvailable(boolean b) {
         this.isAvailable = b;
     }
 }

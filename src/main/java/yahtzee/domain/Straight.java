@@ -20,19 +20,18 @@ public class Straight implements Combination {
 
     public int score() {
         this.isAvailable = false;
-        
+
         ChosenDiceList correctDice = new ChosenDiceList();
-        
-        if(correctDice.chosenList(dice).size()!=5){
+
+        if (correctDice.chosenList(dice).size() != 5) {
             return 0;
         }
-        
+
         dice = correctDice.chosenList(dice);
-        
+
         ArrayList<Integer> org = new ArrayList<Integer>();
         ArrayList<Integer> req = new ArrayList<Integer>();
-        
-        
+
         if (smallOrLarge.equals("large")) {
             req.add(2);
             req.add(3);
@@ -52,26 +51,26 @@ public class Straight implements Combination {
         org.add(dice.get(2).getValue());
         org.add(dice.get(3).getValue());
         org.add(dice.get(4).getValue());
-        
+
         Collections.sort(org);
-        
+
         if (org.equals(req)) {
             if (smallOrLarge.equals("large")) {
                 return 20;
             } else if (smallOrLarge.equals("small")) {
                 return 15;
             }
-        }else{
+        } else {
             return 0;
         }
         return 0;
     }
-    
-    public boolean getIsAvailable(){
+
+    public boolean getIsAvailable() {
         return this.isAvailable;
     }
-    
-    public void setIsAvailable(boolean b){
+
+    public void setIsAvailable(boolean b) {
         this.isAvailable = b;
     }
 }

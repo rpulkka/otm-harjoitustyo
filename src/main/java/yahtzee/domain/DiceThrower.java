@@ -26,7 +26,7 @@ public class DiceThrower {
                 }
             }
             timesThrown++;
-            label.setText("Times thrown: "+timesThrown+"/3");
+            label.setText("Times thrown: " + timesThrown + "/3");
         }
 
     }

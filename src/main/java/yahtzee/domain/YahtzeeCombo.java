@@ -25,13 +25,13 @@ public class YahtzeeCombo implements Combination {
 
     public int score() {
         this.isAvailable = false;
-        
+
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-        if(dice.size()!=5){
+        if (dice.size() != 5) {
             return 0;
         }
-        
+
         boolean validCombination = true;
 
         int number = dice.get(0).getValue();
@@ -53,11 +53,11 @@ public class YahtzeeCombo implements Combination {
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
     }
-    
+
     public boolean getAlreadyScored() {
         return this.alreadyScored;
     }
-    
+
     public void setAlreadyScored(boolean b) {
         this.alreadyScored = true;
     }

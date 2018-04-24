@@ -9,7 +9,7 @@ public class CombinationManager {
     private TableView scoreboard;
 
     private ArrayList<Die> dice;
-    
+
     private DiceThrower thrower;
 
     private int total;
@@ -47,7 +47,7 @@ public class CombinationManager {
         this.scoreboard = scoreboard;
 
         this.dice = dice;
-        
+
         this.thrower = thrower;
 
         this.total = 0;
@@ -105,11 +105,11 @@ public class CombinationManager {
 
     public void scoreCombination(Reset reset) {
         Score score = (Score) scoreboard.getSelectionModel().getSelectedItem();
-        
+
         if (score == null) {
             return;
         }
-        
+
         String combinationType = score.getCombination();
         String points = "0";
 
@@ -306,9 +306,11 @@ public class CombinationManager {
                 }
                 Score item = (Score) scoreboard.getItems().get(6);
                 if (this.total >= 63) {
+
                     item.setPoints("50");
                     this.total += 50;
-                }else{
+                } else {
+
                     item.setPoints("0");
                 }
                 this.isFirstRound = false;

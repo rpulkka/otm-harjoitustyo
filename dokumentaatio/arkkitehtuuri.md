@@ -27,6 +27,8 @@ Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia so
  
  ![GitHub Logo](throwDice.png)
  
+ test
+ 
  <h3>Kombinaation pisteytys</3>
  
   ![GitHub Logo](combination.png)

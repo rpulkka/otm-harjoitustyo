@@ -23,12 +23,32 @@ Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia so
  
  <h3>Noppien heitto</h3>
  
- Alla olevan kuvan mukaisesti noppien heitto alkaa 
+ Alla olevan kuvan mukaisesti noppien heitto alkaa, kun käyttäjä painaa "Throw the dice" nappia.
+ Käyttöliittymäluokan
+ event handler sitten kutsuu DiceThrower luokan throwDice(Label) metodia, johon annetaan Label count, jossa on
+ ilmoitettu käyttäjälle tekstinä tällä vuorolla tehtyjen heittojen määrä ja maksimin (3 heittoa) lukumäärä. 
+ Mikäli DiceThrower olion timesThrown metodi on nolla, eli kyseessä on kierroksen ensimmäinen heitto, niin se
+ palauttaa nopat yksi kerrallaan takaisin valittaviksi kutsumalla Die -luokan metodia setChosen() parametrilla
+ false.
+ Sitten DiceThrower kutsuu kaikille ei-valituille nopille Die -luokan metodia setValue() metodia parametrinaan
+ arvottu luku 1-6. Kyseinen metodi vaihtaa uuden arvon perusteella nopan silmälukua ja asettaa nopalle silmälukua
+ vastaavan kuvan, jolloin käyttäjä näkee nopan silmäluvun vaihtuneen. Sitten DiceThrower lisää muuttujaansa 
+ timesThrown yhdellä, jotta muistetaan montako kertaa on heitetty tällä kierroksella. Sitten DiceThrower muuttaa
+ Label countin (sijaitsee käyttöliittymäluokassa) arvoa timesThrown muuttujan mukaiseksi, jolloin käyttäjä näkee
+ muutoksen tekstinä. 
  
  ![GitHub Logo](throwDice.png)
  
- test
- 
  <h3>Kombinaation pisteytys</3>
+ 
+ Kombinaation pisteytys alkaa, kun käyttäjä klikkaa tulostaulun jotain solua. EventHandler käyttöliittymäluokassa
+ tällöin kutsuu CombinationManager -luokan scoreCombination() metodia parametrinaan Reset olio. Taulun solun
+ klikkaamisen perusteella tiedetään, mikä kombinaatio halutaan pisteyttää ja kuvan tapauksessa solu oli täyskättä
+ vastaava solu, eli CombinationManager kutsuu kombinaatiota vastaavan luokan FullHouse metodia score().
+ Metodi laskee pisteet ja esimerkkinä saatiin pisteiksi 15, tällöin silmäluvut olisivat olleet 1,1,1,6,6.
+ Sitten metodi palauttaa arvon CombinationManager:iin, jossa sitten kutsutaan Score luokan metodia setPoints()
+ parametrinaan (joka unohtui kuvasta) pisteet ja metodi sitten muuttaa pisteet näkyviin kombinaation kohdalle
+ taulukkoon, jolloin käyttäjä näkee muutoksen. Sen jälkeen CombinationManager kutsuu Reset luokan resetNow()
+ metodia, joka asettaa nopat alkutilanteeseen, jonka käyttäjä näkee ruudulta.
  
   ![GitHub Logo](combination.png)

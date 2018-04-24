@@ -16,7 +16,7 @@ kilpailla yksin tavoitellen omaa ennätystä.
 
 <h2>Releaset</h2>
 
-Tulossa!
+[Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases)
 
 <h2>Komentorivitoiminnot</h2>
 

@@ -12,4 +12,5 @@
 | 21.4. | 2h    | Kombinaatioluokkien suunnittelu, luominen ja valmistelu. |
 | 22.4. | 2h    | Kombinaatioluokkien toteutus. |
 | 23.4. | 6h    | Kombinaatioluokkien integrointi tulostauluun, logiikan eriytys, vaativamman pelilogiikan toteutus. |
-| yht   | 29h    | | 
+| 24.4. | 5h    | Pelilogiikan hiominen, sekvenssikaaviot, testaus (epäonnistui). |
+| yht   | 34h    | | 

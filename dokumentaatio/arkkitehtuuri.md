@@ -18,3 +18,15 @@ että luokka sisältyy pakkaukseen yahtzee.ui, valkoinen puolestaan pakkaukseen 
 Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia sovelluslogiikan näkökulmasta.
 
  ![GitHub Logo](classdiagram.jpg)
+ 
+ <h2>Päätoiminnallisuudet</h2>
+ 
+ <h3>Noppien heitto</h3>
+ 
+ Alla olevan kuvan mukaisesti noppien heitto alkaa 
+ 
+ ![GitHub Logo](throwDice.png)
+ 
+ <h3>Kombinaation pisteytys</3>
+ 
+  ![GitHub Logo](combination.png)

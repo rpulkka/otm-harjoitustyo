@@ -8,6 +8,4 @@ public interface Combination {
     public int score();
     public boolean getIsAvailable();
     public void setIsAvailable(boolean b);
-    public boolean getAlreadyScored();
-    public void setAlreadyScored(boolean b);
 }

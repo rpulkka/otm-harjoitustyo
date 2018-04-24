@@ -7,11 +7,13 @@ import javafx.scene.control.TableView;
 public class CombinationManager {
 
     private TableView scoreboard;
-    
+
     private ArrayList<Die> dice;
+    
+    private DiceThrower thrower;
 
     private int total;
-    
+
     private boolean scoredYet = false;
 
     private FirstRoundCombination aces;
@@ -41,10 +43,12 @@ public class CombinationManager {
 
     private boolean isFirstRound;
 
-    public CombinationManager(TableView scoreboard, ArrayList<Die> dice, ArrayList<DieImage> images) {
+    public CombinationManager(TableView scoreboard, ArrayList<Die> dice, ArrayList<DieImage> images, DiceThrower thrower) {
         this.scoreboard = scoreboard;
-        
+
         this.dice = dice;
+        
+        this.thrower = thrower;
 
         this.total = 0;
 
@@ -63,8 +67,8 @@ public class CombinationManager {
 
         this.fullHouse = new FullHouse(dice);
 
-        this.smallStraight = new Straight(images, dice, "small");
-        this.largeStraight = new Straight(images, dice, "large");
+        this.smallStraight = new Straight(dice, "small");
+        this.largeStraight = new Straight(dice, "large");
 
         this.chance = new Chance(dice);
 
@@ -72,14 +76,14 @@ public class CombinationManager {
 
         this.firstRound = new ArrayList<FirstRoundCombination>();
         this.combinations = new ArrayList<Combination>();
-        
+
         this.firstRound.add(aces);
         this.firstRound.add(twos);
         this.firstRound.add(threes);
         this.firstRound.add(fours);
         this.firstRound.add(fives);
         this.firstRound.add(sixes);
-        
+
         this.combinations.add(aces);
         this.combinations.add(twos);
         this.combinations.add(threes);
@@ -95,207 +99,195 @@ public class CombinationManager {
         this.combinations.add(largeStraight);
         this.combinations.add(chance);
         this.combinations.add(yahtzee);
-        
+
         this.isFirstRound = true;
     }
 
-    public void scoreCombination(Score score, Reset reset) {
-        String combinationType = score.getCombination();
-        System.out.println(combinationType);
-        String points = "0";
+    public void scoreCombination(Reset reset) {
+        Score score = (Score) scoreboard.getSelectionModel().getSelectedItem();
         
+        if (score == null) {
+            return;
+        }
+        
+        String combinationType = score.getCombination();
+        String points = "0";
+
         boolean test = false;
-        for(Die die:dice){
-            if(die.getChosen() == true){
+        for (Die die : dice) {
+            if (die.getChosen() == true) {
                 test = true;
             }
         }
-        
-        if(test == false){
-            return;
-        }
-        
-        if(this.scoredYet == true){
+
+        if (test == false) {
             return;
         }
 
-        this.scoredYet = true;
-        
+        if (this.scoredYet == true) {
+            return;
+        }
+
         switch (combinationType) {
             case "Aces":
-                if(aces.getAlreadyScored()==true){
-                    System.out.println("true");
-                    return;
-                }
                 if (aces.getIsAvailable() == true) {
                     int number = aces.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Twos":
-                if(twos.getAlreadyScored()==true){
-                    return;
-                }
                 if (twos.getIsAvailable() == true) {
                     int number = twos.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Threes":
-                if(threes.getAlreadyScored()==true){
-                    return;
-                }
                 if (threes.getIsAvailable() == true) {
                     int number = threes.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Fours":
-                if(fours.getAlreadyScored()==true){
-                    return;
-                }
                 if (fours.getIsAvailable() == true) {
                     int number = fours.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Fives":
-                if(fives.getAlreadyScored()==true){
-                    return;
-                }
                 if (fives.getIsAvailable() == true) {
                     int number = fives.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Sixes":
-                if(sixes.getAlreadyScored()==true){
-                    return;
-                }
                 if (sixes.getIsAvailable() == true) {
                     int number = sixes.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Bonus":
-                break;
+                return;
             case "Pair":
-                if(pair.getAlreadyScored()==true){
-                    return;
-                }
                 if (pair.getIsAvailable() == true) {
                     int number = pair.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Two pairs":
-                if(twoPairs.getAlreadyScored()==true){
-                    return;
-                }
                 if (twoPairs.getIsAvailable() == true) {
                     int number = twoPairs.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "3 of a kind":
-                if(threeOfAKind.getAlreadyScored()==true){
-                    return;
-                }
                 if (threeOfAKind.getIsAvailable() == true) {
                     int number = threeOfAKind.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "4 of a kind":
-                if(fourOfAKind.getAlreadyScored()==true){
-                    return;
-                }
                 if (fourOfAKind.getIsAvailable() == true) {
                     int number = fourOfAKind.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Full house":
-                if(fullHouse.getAlreadyScored()==true){
-                    return;
-                }
                 if (fullHouse.getIsAvailable() == true) {
                     int number = fullHouse.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Small straight":
-                if(smallStraight.getAlreadyScored()==true){
-                    return;
-                }
                 if (smallStraight.getIsAvailable() == true) {
                     int number = smallStraight.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Large straight":
-                if(largeStraight.getAlreadyScored()==true){
-                    return;
-                }
                 if (largeStraight.getIsAvailable() == true) {
                     int number = largeStraight.score();
-                    System.out.println(number);
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Chance":
-                if(chance.getAlreadyScored()==true){
-                    return;
-                }
                 if (chance.getIsAvailable() == true) {
                     int number = chance.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Yahtzee":
-                if(yahtzee.getAlreadyScored()==true){
-                    return;
-                }
                 if (yahtzee.getIsAvailable() == true) {
                     int number = yahtzee.score();
                     points = "" + number;
                     total += number;
                     score.setPoints(points);
+                } else {
+                    return;
                 }
                 break;
             case "Total":
-                break;
+                return;
             default:
-                break;
+                return;
         }
+
+        this.scoredYet = true;
 
         if (this.isFirstRound == true) {
             boolean check = true;
@@ -313,8 +305,12 @@ public class CombinationManager {
                     }
                 }
                 Score item = (Score) scoreboard.getItems().get(6);
-                item.setPoints("50");
-                this.total += 50;
+                if (this.total >= 63) {
+                    item.setPoints("50");
+                    this.total += 50;
+                }else{
+                    item.setPoints("0");
+                }
                 this.isFirstRound = false;
             }
         } else {
@@ -327,16 +323,15 @@ public class CombinationManager {
             if (check == true) {
                 Score item = (Score) scoreboard.getItems().get(16);
                 item.setPoints("" + total);
-                System.out.println(item.getCombination());
+                thrower.setTimesThrown(99);
             }
         }
-        System.out.println(points);
         scoreboard.getSelectionModel().clearSelection();
         scoreboard.refresh();
         reset.resetNow();
     }
-    
-    public void setScoredYet(boolean b){
+
+    public void setScoredYet(boolean b) {
         this.scoredYet = b;
     }
 }

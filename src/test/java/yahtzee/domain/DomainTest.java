@@ -3,6 +3,8 @@ package yahtzee.domain;
 
 import java.net.URL;
 import java.util.ArrayList;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,10 @@ public class DomainTest {
     Die slot4;
     Die slot5;
     DiceThrower thrower;
+    Label count = new Label();
+    TableView scoreboard;
+    CombinationManager combinationManager;
+    Reset reset;
 
     public DomainTest() throws Exception{
         URL urlOne = this.getClass().getResource("/images/one.png");
@@ -56,6 +62,12 @@ public class DomainTest {
         dice.add(slot5);
         
         thrower = new DiceThrower(dice);
+        
+        scoreboard = new TableView();
+        
+        combinationManager = new CombinationManager(scoreboard, dice, images, thrower);
+        
+        reset = new Reset(combinationManager, thrower, count, dice);
     }
 
     @Before
@@ -78,14 +90,14 @@ public class DomainTest {
     @Test
     public void throwCountTest(){
         thrower.setTimesThrown(0);
-        thrower.throwDice();
+        thrower.throwDice(count);
         assertEquals(thrower.getTimesThrown(),1);
     }
     
     @Test
     public void throwLimitTest(){
         thrower.setTimesThrown(3);
-        thrower.throwDice();
+        thrower.throwDice(count);
         assertEquals(thrower.getTimesThrown(),3);
         assertEquals(slot4.getChosen(),true);
     }
@@ -93,7 +105,13 @@ public class DomainTest {
     @Test
     public void diceUnlockTest(){
         thrower.setTimesThrown(0);
-        thrower.throwDice();
+        thrower.throwDice(count);
         assertEquals(slot4.getChosen(),false);
     }
+    /*
+    @Test
+    public void firstRoundCombinationScored(){
+        combinationManager.scoreCombination(reset);
+        
+    }*/
 }

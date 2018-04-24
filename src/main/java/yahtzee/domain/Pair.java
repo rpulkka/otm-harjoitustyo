@@ -10,13 +10,11 @@ public class Pair implements Combination {
     private ArrayList<Die> dice;
     private String type;
     private boolean isAvailable;
-    private boolean alreadyScored;
 
     public Pair(ArrayList<Die> dice, String type) {
         this.dice = dice;
         this.type = type;
         this.isAvailable = false;
-        this.alreadyScored = false;
     }
 
     public int score() {
@@ -61,13 +59,5 @@ public class Pair implements Combination {
     
     public void setIsAvailable(boolean b){
         this.isAvailable = b;
-    }
-    
-    public boolean getAlreadyScored() {
-        return this.alreadyScored;
-    }
-    
-    public void setAlreadyScored(boolean b) {
-        this.alreadyScored = true;
     }
 }

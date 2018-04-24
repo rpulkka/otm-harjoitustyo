@@ -35,7 +35,6 @@ public class YahtzeeUI extends Application {
         primaryStage.setTitle("Yahtzee Game");
 
         Label count = new Label();
-        Label alert = new Label();
         Label instr = new Label();
 
         Rectangle throwingArea = new Rectangle();
@@ -87,9 +86,6 @@ public class YahtzeeUI extends Application {
         Button button = new Button();
         button.setText("Throw the dice!");
 
-        Button reset = new Button();
-        reset.setText("Reset (New Turn)");
-
         scoreboard = new TableView();
 
         scoreboard.setEditable(true);
@@ -127,9 +123,9 @@ public class YahtzeeUI extends Application {
         scoreboard.getColumns().add(combinationColumn);
         scoreboard.getColumns().add(playerColumn);
 
-        CombinationManager combinationManager = new CombinationManager(scoreboard, dice, images);
+        CombinationManager combinationManager = new CombinationManager(scoreboard, dice, images, thrower);
 
-        Reset resetGame = new Reset(combinationManager, thrower, count, dice);
+        Reset reset = new Reset(combinationManager, thrower, count, dice);
 
         Pane layout = new Pane();
 
@@ -138,14 +134,16 @@ public class YahtzeeUI extends Application {
         count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
         count.setFont(Font.font("Cambria", 18));
 
-        alert.setLayoutX(100);
-        alert.setLayoutY(600);
-        alert.setText("Notification: Scoreboard logic hasn't been added yet! Press the reset button to reset the dice:");
-        alert.setFont(Font.font("Cambria", 18));
-
-        instr.setLayoutX(400);
-        instr.setLayoutY(120);
-        instr.setText("Press the button 'Throw The Dice' to throw the dice. Select a die by clicking after a throw. After 3 times, reset.");
+        instr.setLayoutX(100);
+        instr.setLayoutY(600);
+        instr.setText("INSTRUCTIONS: Press the button 'Throw The Dice' to throw the dice. Move a die into combination area by clicking after a throw. "
+                + "Click a combination name\nfrom the scoreboard to score that combination. The combination of dice that the player wishes to score"
+                + " must be found from the combination area.\n"
+                + "Points will be added to scoreboard, if the dice of the combination area meet the requirements of combination that is selected from "
+                + "the scoreboard. "
+                + "After\nscoring, dice will be reset, and a new turn starts. Check the combination requirements from Yahtzee wikipedia page until"
+                + " in-game instructions are finished.\nNotification: you must fill the combinations above 'Bonus' before the other combinations"
+                + " will be unlocked, like in the real game. Close the window to quit,\nbetter solution is under work.");
         instr.setFont(Font.font("Cambria", 14));
 
         throwingArea.setX(600);
@@ -175,6 +173,10 @@ public class YahtzeeUI extends Application {
 
         scoreboard.setLayoutX(100);
         scoreboard.setLayoutY(150);
+        scoreboard.setMinHeight(440);
+        
+        button.setLayoutX(800);
+        button.setLayoutY(450);
 
         slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -212,21 +214,11 @@ public class YahtzeeUI extends Application {
         });
 
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
             @Override
             public void handle(MouseEvent event) {
-                Score score = (Score) scoreboard.getSelectionModel().getSelectedItem();
-                if (score != null) {
-                    combinationManager.scoreCombination(score, resetGame);
-                }
+                combinationManager.scoreCombination(reset);
             }
         });
-
-        button.setLayoutX(800);
-        button.setLayoutY(450);
-
-        reset.setLayoutX(950);
-        reset.setLayoutY(600);
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -236,7 +228,6 @@ public class YahtzeeUI extends Application {
         });
 
         layout.getChildren().add(count);
-        layout.getChildren().add(alert);
         layout.getChildren().add(instr);
 
         layout.getChildren().add(throwingArea);
@@ -249,7 +240,6 @@ public class YahtzeeUI extends Application {
         layout.getChildren().add(slot5.getSlot());
 
         layout.getChildren().add(button);
-        layout.getChildren().add(reset);
 
         layout.getChildren().add(scoreboard);
 

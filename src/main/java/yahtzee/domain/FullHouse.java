@@ -1,26 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package yahtzee.domain;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author rpulkka
- */
+
+// @author rpulkka
+
 public class FullHouse implements Combination {
 
     private ArrayList<Die> dice;
     private boolean isAvailable;
-    private boolean alreadyScored;
 
     public FullHouse(ArrayList<Die> dice) {
         this.dice = dice;
         this.isAvailable = false;
-        this.alreadyScored = false;
     }
 
     public int score() {
@@ -51,13 +44,5 @@ public class FullHouse implements Combination {
     
     public void setIsAvailable(boolean b){
         this.isAvailable = b;
-    }
-    
-    public boolean getAlreadyScored() {
-        return this.alreadyScored;
-    }
-    
-    public void setAlreadyScored(boolean b) {
-        this.alreadyScored = true;
     }
 }

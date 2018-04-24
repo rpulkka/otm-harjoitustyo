@@ -39,7 +39,7 @@ Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia so
  
  ![GitHub Logo](throwDice.png)
  
- <h3>Kombinaation pisteytys</3>
+ <h3>Kombinaation pisteytys</h3>
  
  Kombinaation pisteytys alkaa, kun käyttäjä klikkaa tulostaulun jotain solua. EventHandler käyttöliittymäluokassa
  tällöin kutsuu CombinationManager -luokan scoreCombination() metodia parametrinaan Reset olio. Taulun solun

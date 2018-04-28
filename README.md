@@ -18,8 +18,6 @@ kilpailla yksin tavoitellen omaa ennätystä.
 
 [Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases)
 
-Kommentti: Testaus jäi vaiheeseen, koska mm. JavaFX:n kanssa tuli nyt ongelmia, mutta ohjelma edistyi huomattavasti.
-
 <h2>Komentorivitoiminnot</h2>
 
 ### Testaus

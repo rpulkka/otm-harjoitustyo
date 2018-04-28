@@ -14,5 +14,5 @@
 | 23.4. | 6h    | Kombinaatioluokkien integrointi tulostauluun, logiikan eriytys, vaativamman pelilogiikan toteutus. |
 | 24.4. | 5h    | Pelilogiikan hiominen, sekvenssikaaviot, testaus (epäonnistui), ensimmäinen release. |
 | 27.4. | 2h    | Ohjelman refaktoroinnin aloittaminen. |
-| 27.4. | 2h    | Ohjelman refaktorointi jatkuu. |
+| 28.4. | 2h    | Ohjelman refaktorointi jatkuu. |
 | yht   | 36h    | | 

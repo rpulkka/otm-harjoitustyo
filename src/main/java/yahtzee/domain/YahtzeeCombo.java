@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class YahtzeeCombo implements Combination {
 
     private ArrayList<Die> dice;
+    private CombinationType type;
     private boolean isAvailable;
     private boolean alreadyScored;
 
-    public YahtzeeCombo(ArrayList<Die> dice) {
+    public YahtzeeCombo(ArrayList<Die> dice, CombinationType type) {
         this.dice = dice;
+        this.type = type;
         this.isAvailable = false;
         this.alreadyScored = false;
     }
@@ -54,5 +56,10 @@ public class YahtzeeCombo implements Combination {
 
     public void setAlreadyScored(boolean b) {
         this.alreadyScored = true;
+    }
+
+    @Override
+    public CombinationType getCombinationType() {
+        return this.type;
     }
 }

@@ -2,19 +2,21 @@ package yahtzee.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import static yahtzee.domain.Combination.CombinationType.LARGESTRAIGHT;
+import static yahtzee.domain.Combination.CombinationType.SMALLSTRAIGHT;
 
 //@author rpulkka
 public class Straight implements Combination {
 
     ArrayList<Die> requirements;
     private ArrayList<Die> dice;
-    private String smallOrLarge;
+    private CombinationType type;
     private boolean isAvailable;
 
-    public Straight(ArrayList<Die> dice, String type) {
+    public Straight(ArrayList<Die> dice, CombinationType type) {
         requirements = new ArrayList<Die>();
         this.dice = dice;
-        smallOrLarge = type;
+        this.type = type;
         this.isAvailable = false;
     }
 
@@ -32,13 +34,13 @@ public class Straight implements Combination {
         ArrayList<Integer> org = new ArrayList<Integer>();
         ArrayList<Integer> req = new ArrayList<Integer>();
 
-        if (smallOrLarge.equals("large")) {
+        if (type.equals(LARGESTRAIGHT)) {
             req.add(2);
             req.add(3);
             req.add(4);
             req.add(5);
             req.add(6);
-        } else if (smallOrLarge.equals("small")) {
+        } else if (type.equals(SMALLSTRAIGHT)) {
             req.add(1);
             req.add(2);
             req.add(3);
@@ -55,9 +57,9 @@ public class Straight implements Combination {
         Collections.sort(org);
 
         if (org.equals(req)) {
-            if (smallOrLarge.equals("large")) {
+            if (type.equals(LARGESTRAIGHT)) {
                 return 20;
-            } else if (smallOrLarge.equals("small")) {
+            } else if (type.equals(SMALLSTRAIGHT)) {
                 return 15;
             }
         } else {
@@ -72,5 +74,10 @@ public class Straight implements Combination {
 
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
+    }
+
+    @Override
+    public CombinationType getCombinationType() {
+        return this.type;
     }
 }

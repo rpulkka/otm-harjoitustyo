@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class FullHouse implements Combination {
 
     private ArrayList<Die> dice;
+    private CombinationType type;
     private boolean isAvailable;
 
-    public FullHouse(ArrayList<Die> dice) {
+    public FullHouse(ArrayList<Die> dice, CombinationType type) {
         this.dice = dice;
+        this.type = type;
         this.isAvailable = false;
     }
 
@@ -41,5 +43,10 @@ public class FullHouse implements Combination {
 
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
+    }
+
+    @Override
+    public CombinationType getCombinationType() {
+        return this.type;
     }
 }

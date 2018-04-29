@@ -40,7 +40,6 @@ public class Die {
     public void setValue(int value) {
         if (value >= 0 && value <= 6) {
             this.value = value;
-            //ui.viewImage(order);
             changeImage(value);
         }
     }

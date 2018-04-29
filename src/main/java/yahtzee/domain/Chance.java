@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class Chance implements Combination {
 
     private ArrayList<Die> dice;
+    private CombinationType type;
     private boolean isAvailable;
 
-    public Chance(ArrayList<Die> dice) {
+    public Chance(ArrayList<Die> dice, CombinationType type) {
         this.dice = dice;
+        this.type = type;
         this.isAvailable = false;
     }
 
@@ -34,6 +36,11 @@ public class Chance implements Combination {
 
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
+    }
+
+    @Override
+    public CombinationType getCombinationType() {
+        return this.type;
     }
 
 }

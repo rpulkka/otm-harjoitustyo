@@ -1,15 +1,17 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
+import static yahtzee.domain.Combination.CombinationType.PAIR;
+import static yahtzee.domain.Combination.CombinationType.TWOPAIRS;
 
 // @author rpulkka
 public class Pair implements Combination {
 
     private ArrayList<Die> dice;
-    private String type;
+    private CombinationType type;
     private boolean isAvailable;
 
-    public Pair(ArrayList<Die> dice, String type) {
+    public Pair(ArrayList<Die> dice, CombinationType type) {
         this.dice = dice;
         this.type = type;
         this.isAvailable = false;
@@ -24,7 +26,7 @@ public class Pair implements Combination {
         DataList datalist = new DataList(dice);
         ArrayList<Integer> pairValue = datalist.list(2);
 
-        if (pairValue.size() == 1 && type.equals("one")) {
+        if (pairValue.size() == 1 && type.equals(PAIR)) {
             return pairValue.get(0) * 2;
         } else if (pairValue.size() == 2) {
             Integer highest = 0;
@@ -39,11 +41,11 @@ public class Pair implements Combination {
                 }
             }
 
-            if (type.equals("one")) {
+            if (type.equals(PAIR)) {
                 Integer sum = highest * 2;
                 System.out.println(sum);
                 return sum;
-            } else if (type.equals("two")) {
+            } else if (type.equals(TWOPAIRS)) {
                 Integer sum = highest * 2 + lowest * 2;
                 return sum;
             }
@@ -57,5 +59,10 @@ public class Pair implements Combination {
 
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
+    }
+
+    @Override
+    public CombinationType getCombinationType() {
+        return this.type;
     }
 }

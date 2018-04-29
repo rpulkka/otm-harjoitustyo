@@ -144,12 +144,12 @@ public class YahtzeeUI extends Application {
         data.add(new Row("Sixes", "-"));
         data.add(new Row("Bonus", "-"));
         data.add(new Row("Pair", "-"));
-        data.add(new Row("Two pairs", "-"));
-        data.add(new Row("3 of a kind", "-"));
-        data.add(new Row("4 of a kind", "-"));
-        data.add(new Row("Full house", "-"));
-        data.add(new Row("Small straight", "-"));
-        data.add(new Row("Large straight", "-"));
+        data.add(new Row("Two Pairs", "-"));
+        data.add(new Row("Three Of A Kind", "-"));
+        data.add(new Row("Four Of A Kind", "-"));
+        data.add(new Row("Full House", "-"));
+        data.add(new Row("Small Straight", "-"));
+        data.add(new Row("Large Straight", "-"));
         data.add(new Row("Yahtzee", "-"));
         data.add(new Row("Chance", "-"));
         data.add(new Row("Total", "-"));

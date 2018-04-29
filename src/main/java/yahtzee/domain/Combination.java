@@ -7,7 +7,8 @@ public interface Combination {
         ACES, TWOS, THREES, FOURS, FIVES, SIXES,
         PAIR, TWOPAIRS, THREEOFAKIND, FOUROFAKIND,
         FULLHOUSE, SMALLSTRAIGHT, LARGESTRAIGHT,
-        YAHTZEE, CHANCE
+        YAHTZEE, CHANCE,
+        BONUS, TOTAL
     }
 
     public int score();

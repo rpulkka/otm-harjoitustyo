@@ -34,6 +34,6 @@ public class Reset {
         dice.get(4).move(800, 350);
 
         lbl.setText("Times thrown: " + thr.getTimesThrown() + "/3");
-        com.setScoredYet(false);
+        //com.setScoredYet(false);
     }
 }

@@ -45,34 +45,8 @@ public class Die {
     }
     
     public void changeImage(int value) {
-        switch (value) {
-            case 1:
-                valueImage = imageOptions.get(0);
-                ui.viewImage(order, valueImage);
-                break;
-            case 2:
-                valueImage = imageOptions.get(1);
-                ui.viewImage(order, valueImage);
-                break;
-            case 3:
-                valueImage = imageOptions.get(2);
-                ui.viewImage(order, valueImage);
-                break;
-            case 4:
-                valueImage = imageOptions.get(3);
-                ui.viewImage(order, valueImage);
-                break;
-            case 5:
-                valueImage = imageOptions.get(4);
-                ui.viewImage(order, valueImage);
-                break;
-            case 6:
-                valueImage = imageOptions.get(5);
-                ui.viewImage(order, valueImage);
-                break;
-            default:
-                break;
-        }
+        valueImage = imageOptions.get(value-1);
+        ui.viewImage(order, valueImage);
     }
 
     public void move(int x, int y) {

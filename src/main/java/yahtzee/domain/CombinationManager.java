@@ -3,6 +3,7 @@ package yahtzee.domain;
 import java.util.ArrayList;
 import yahtzee.domain.Combination.CombinationType;
 import static yahtzee.domain.Combination.CombinationType.ACES;
+import static yahtzee.domain.Combination.CombinationType.BONUS;
 import static yahtzee.domain.Combination.CombinationType.CHANCE;
 import static yahtzee.domain.Combination.CombinationType.FIVES;
 import static yahtzee.domain.Combination.CombinationType.FOUROFAKIND;
@@ -14,6 +15,7 @@ import static yahtzee.domain.Combination.CombinationType.SIXES;
 import static yahtzee.domain.Combination.CombinationType.SMALLSTRAIGHT;
 import static yahtzee.domain.Combination.CombinationType.THREEOFAKIND;
 import static yahtzee.domain.Combination.CombinationType.THREES;
+import static yahtzee.domain.Combination.CombinationType.TOTAL;
 import static yahtzee.domain.Combination.CombinationType.TWOPAIRS;
 import static yahtzee.domain.Combination.CombinationType.TWOS;
 import static yahtzee.domain.Combination.CombinationType.YAHTZEE;
@@ -27,8 +29,6 @@ public class CombinationManager {
     private final ArrayList<Die> dice;
 
     private int total;
-
-    private boolean scoredYet = false;
 
     private final FirstRoundCombination aces;
     private final FirstRoundCombination twos;
@@ -116,91 +116,111 @@ public class CombinationManager {
     }
 
     public void scoreCombination(String typeString) {
-        
-        CombinationType type = CombinationType.valueOf(typeString.toUpperCase().replaceAll("\\s+",""));
-
-        if (type == null) {
+        if (typeString == null) {
             return;
         }
-
-        boolean test = false;
-        for (Die die : dice) {
-            if (die.getChosen() == true) {
-                test = true;
-            }
-        }
-
-        if (test == false) {
+        CombinationType type = CombinationType.valueOf(typeString.toUpperCase().replaceAll("\\s+", ""));
+        if (!chosenDiceExist() || isIllegalCombination(type)) {
             return;
         }
-
-        if (this.scoredYet == true) {
+        Combination combination = getCombination(type);
+        if (combination.getIsAvailable() == true) {
+            countPoints(combination);
+        }else{
             return;
         }
-        
-        String points = pointsScored(type);
-
-        this.scoredYet = true;
-
-        if (this.isFirstRound == true) {
-            boolean check = true;
-            for (FirstRoundCombination combo : firstRound) {
-                if (combo.getIsAvailable() == true) {
-                    check = false;
-                }
-            }
-            if (check == true) {
-                for (Combination combo : combinations) {
-                    if (firstRound.contains(combo)) {
-                        continue;
-                    } else {
-                        combo.setIsAvailable(true);
-                    }
-                }
-
-                if (this.total >= 63) {
-
-                    ui.refreshOtherCell("50", 6);
-                    this.total += 50;
-                } else {
-
-                    ui.refreshOtherCell("0", 6);
-                }
-                this.isFirstRound = false;
-            }
-        } else {
-            boolean check = true;
-            for (Combination combo : combinations) {
-                if (combo.getIsAvailable() == true) {
-                    check = false;
-                }
-            }
-            if (check == true) {
-                ui.refreshOtherCell("" + total, 16);
-            }
-        }
+        checkRound();
         ui.refreshRound();
     }
 
-    public String pointsScored(CombinationType type) {
+    public Combination getCombination(CombinationType type) {
         Combination scoredCombination = null;
         for (Combination c : combinations) {
             if (c.getCombinationType().equals(type)) {
                 scoredCombination = c;
             }
         }
-        if (scoredCombination.getIsAvailable() == true) {
-            int score = scoredCombination.score();
+        return scoredCombination;
+    }
+    
+    public void countPoints(Combination combination) {
+        if (combination.getIsAvailable() == true) {
+        int score = combination.score();
             String points = "" + score;
             total += score;
             ui.refreshThisCell(points);
-            return points;
-        } else {
-            return "0";
         }
     }
 
-    public void setScoredYet(boolean b) {
-        this.scoredYet = b;
+    public void checkRound() {
+        if (this.isFirstRound == true) {
+            if (firstRoundIsOver() == true) {
+                beginSecondRound();
+                scoreBonus();
+                this.isFirstRound = false;
+            }
+        } else {
+            if (gameIsOver() == true) {
+                ui.refreshOtherCell("" + total, 16);
+            }
+        }
+    }
+
+    public boolean firstRoundIsOver() {
+        boolean check = true;
+        for (FirstRoundCombination combo : firstRound) {
+            if (combo.getIsAvailable() == true) {
+                check = false;
+            }
+        }
+        return check;
+    }
+
+    public boolean gameIsOver() {
+        boolean check = true;
+        for (Combination combo : combinations) {
+            if (combo.getIsAvailable() == true) {
+                check = false;
+            }
+        }
+        return check;
+    }
+
+    public void beginSecondRound() {
+        for (Combination combo : combinations) {
+            if (firstRound.contains(combo)) {
+                continue;
+            } else {
+                combo.setIsAvailable(true);
+            }
+        }
+    }
+
+    public void scoreBonus() {
+        if (this.total >= 63) {
+
+            ui.refreshOtherCell("50", 6);
+            this.total += 50;
+        } else {
+
+            ui.refreshOtherCell("0", 6);
+        }
+    }
+
+    public boolean chosenDiceExist() {
+        boolean check = false;
+        for (Die die : dice) {
+            if (die.getChosen() == true) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    public boolean isIllegalCombination(CombinationType type) {
+        if (type.equals(BONUS) || type.equals(TOTAL)) {
+            return true;
+        }
+        return false;
     }
 }

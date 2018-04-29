@@ -1,54 +1,52 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
-import javafx.scene.control.TableView;
+import yahtzee.ui.YahtzeeUI;
 
 // @author rpulkka
 public class CombinationManager {
+    
+    private YahtzeeUI ui;
 
-    private TableView scoreboard;
 
-    private ArrayList<Die> dice;
+    private final ArrayList<Die> dice;
 
-    private DiceThrower thrower;
 
     private int total;
 
     private boolean scoredYet = false;
 
-    private FirstRoundCombination aces;
-    private FirstRoundCombination twos;
-    private FirstRoundCombination threes;
-    private FirstRoundCombination fours;
-    private FirstRoundCombination fives;
-    private FirstRoundCombination sixes;
+    private final FirstRoundCombination aces;
+    private final FirstRoundCombination twos;
+    private final FirstRoundCombination threes;
+    private final FirstRoundCombination fours;
+    private final FirstRoundCombination fives;
+    private final FirstRoundCombination sixes;
 
-    private Pair pair;
-    private Pair twoPairs;
+    private final Pair pair;
+    private final Pair twoPairs;
 
-    private XOfAKind threeOfAKind;
-    private XOfAKind fourOfAKind;
+    private final XOfAKind threeOfAKind;
+    private final XOfAKind fourOfAKind;
 
-    private FullHouse fullHouse;
+    private final FullHouse fullHouse;
 
-    private Straight smallStraight;
-    private Straight largeStraight;
+    private final Straight smallStraight;
+    private final Straight largeStraight;
 
-    private Chance chance;
+    private final Chance chance;
 
-    private YahtzeeCombo yahtzee;
+    private final YahtzeeCombo yahtzee;
 
-    private ArrayList<FirstRoundCombination> firstRound;
-    private ArrayList<Combination> combinations;
+    private final ArrayList<FirstRoundCombination> firstRound;
+    private final ArrayList<Combination> combinations;
 
     private boolean isFirstRound;
 
-    public CombinationManager(TableView scoreboard, ArrayList<Die> dice, ArrayList<DieImage> images, DiceThrower thrower) {
-        this.scoreboard = scoreboard;
+    public CombinationManager(YahtzeeUI ui) {
+        this.ui = ui;
 
-        this.dice = dice;
-
-        this.thrower = thrower;
+        this.dice = ui.getDice();
 
         this.total = 0;
 
@@ -103,14 +101,13 @@ public class CombinationManager {
         this.isFirstRound = true;
     }
 
-    public void scoreCombination(Reset reset) {
-        Score score = (Score) scoreboard.getSelectionModel().getSelectedItem();
-
+    public void scoreCombination(String score) {
+        
         if (score == null) {
             return;
         }
-
-        String combinationType = score.getCombination();
+        
+        String combinationType = score;
         String points = "0";
 
         boolean test = false;
@@ -134,7 +131,7 @@ public class CombinationManager {
                     int number = aces.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -144,7 +141,7 @@ public class CombinationManager {
                     int number = twos.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -154,7 +151,7 @@ public class CombinationManager {
                     int number = threes.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -164,7 +161,7 @@ public class CombinationManager {
                     int number = fours.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -174,7 +171,7 @@ public class CombinationManager {
                     int number = fives.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -184,7 +181,7 @@ public class CombinationManager {
                     int number = sixes.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -196,7 +193,7 @@ public class CombinationManager {
                     int number = pair.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -206,7 +203,7 @@ public class CombinationManager {
                     int number = twoPairs.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -216,7 +213,7 @@ public class CombinationManager {
                     int number = threeOfAKind.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -226,7 +223,7 @@ public class CombinationManager {
                     int number = fourOfAKind.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -236,7 +233,7 @@ public class CombinationManager {
                     int number = fullHouse.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -246,7 +243,7 @@ public class CombinationManager {
                     int number = smallStraight.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -256,7 +253,7 @@ public class CombinationManager {
                     int number = largeStraight.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -266,7 +263,7 @@ public class CombinationManager {
                     int number = chance.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -276,7 +273,7 @@ public class CombinationManager {
                     int number = yahtzee.score();
                     points = "" + number;
                     total += number;
-                    score.setPoints(points);
+                    ui.refreshThisCell(points);
                 } else {
                     return;
                 }
@@ -304,14 +301,14 @@ public class CombinationManager {
                         combo.setIsAvailable(true);
                     }
                 }
-                Score item = (Score) scoreboard.getItems().get(6);
+                
                 if (this.total >= 63) {
 
-                    item.setPoints("50");
+                    ui.refreshOtherCell("50", 6);
                     this.total += 50;
                 } else {
 
-                    item.setPoints("0");
+                    ui.refreshOtherCell("0", 6);
                 }
                 this.isFirstRound = false;
             }
@@ -323,14 +320,10 @@ public class CombinationManager {
                 }
             }
             if (check == true) {
-                Score item = (Score) scoreboard.getItems().get(16);
-                item.setPoints("" + total);
-                thrower.setTimesThrown(99);
+                ui.refreshOtherCell(""+total, 16);
             }
         }
-        scoreboard.getSelectionModel().clearSelection();
-        scoreboard.refresh();
-        reset.resetNow();
+        ui.refreshRound();
     }
 
     public void setScoredYet(boolean b) {

@@ -1,5 +1,6 @@
 package yahtzee.ui;
 
+import java.io.IOException;
 import yahtzee.domain.*;
 
 import java.net.URL;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -24,21 +26,23 @@ import javafx.stage.Stage;
 //author rpulkka
 public class YahtzeeUI extends Application {
 
-    TableView scoreboard;
+    private Label count;
+    private Label instr;
+    private ArrayList<DieImage> images;
+    private ArrayList<ImageView> views;
+    private ArrayList<Die> dice;
+    private DiceThrower thrower;
+    private TableView scoreboard;
+    private CombinationManager combinationManager;
+    private Reset reset;
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Yahtzee Game");
-
-        Label count = new Label();
-        Label instr = new Label();
-
-        Rectangle throwingArea = new Rectangle();
-        Rectangle combinationArea = new Rectangle();
+    public YahtzeeUI() throws IOException {
+        count = new Label();
+        instr = new Label();
 
         URL urlOne = this.getClass().getResource("/images/one.png");
         URL urlTwo = this.getClass().getResource("/images/two.png");
@@ -47,8 +51,7 @@ public class YahtzeeUI extends Application {
         URL urlFive = this.getClass().getResource("/images/five.png");
         URL urlSix = this.getClass().getResource("/images/six.png");
 
-        ArrayList<DieImage> images = new ArrayList<DieImage>();
-
+        images = new ArrayList<DieImage>();
         DieImage one = new DieImage(urlOne);
         images.add(one);
         DieImage two = new DieImage(urlTwo);
@@ -61,27 +64,60 @@ public class YahtzeeUI extends Application {
         images.add(five);
         DieImage six = new DieImage(urlSix);
         images.add(six);
+        
+        thrower = new DiceThrower(this);
 
-        ArrayList<Die> dice = new ArrayList<Die>();
+        views = new ArrayList<ImageView>();
+        
+        ImageView view1 = new ImageView();
+        view1.setImage(one.getImage());
+        ImageView view2 = new ImageView();
+        view2.setImage(one.getImage());
+        ImageView view3 = new ImageView();
+        view3.setImage(one.getImage());
+        ImageView view4 = new ImageView();
+        view4.setImage(one.getImage());
+        ImageView view5 = new ImageView();
+        view5.setImage(one.getImage());
+        
+        views.add(view1);
+        views.add(view2);
+        views.add(view3);
+        views.add(view4);
+        views.add(view5);
+        
+        moveImage(650, 250, 0);
+        moveImage(750, 250, 1);
+        moveImage(850, 250, 2);
+        moveImage(700, 350, 3);
+        moveImage(800, 350, 4);
+        
+        dice = new ArrayList<Die>();
 
-        Die slot1 = new Die(images);
-        dice.add(slot1);
-        Die slot2 = new Die(images);
-        dice.add(slot2);
-        Die slot3 = new Die(images);
-        dice.add(slot3);
-        Die slot4 = new Die(images);
-        dice.add(slot4);
-        Die slot5 = new Die(images);
-        dice.add(slot5);
+        Die die1 = new Die(this, 650, 250, 380, 720, 0);
+        dice.add(die1);
+        Die die2 = new Die(this, 750, 250, 480, 720, 1);
+        dice.add(die2);
+        Die die3 = new Die(this, 850, 250, 580, 720, 2);
+        dice.add(die3);
+        Die die4 = new Die(this, 700, 350, 680, 720, 3);
+        dice.add(die4);
+        Die die5 = new Die(this, 800, 350, 780, 720, 4);
+        dice.add(die5);
+        
+        thrower.setDice(dice);
 
-        DiceThrower thrower = new DiceThrower(dice);
+        combinationManager = new CombinationManager(this);
 
-        DiceMover mover1 = new DiceMover(thrower, slot1, 380, 720);
-        DiceMover mover2 = new DiceMover(thrower, slot2, 480, 720);
-        DiceMover mover3 = new DiceMover(thrower, slot3, 580, 720);
-        DiceMover mover4 = new DiceMover(thrower, slot4, 680, 720);
-        DiceMover mover5 = new DiceMover(thrower, slot5, 780, 720);
+        reset = new Reset(this);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Yahtzee Game");
+
+        Rectangle throwingArea = new Rectangle();
+        Rectangle combinationArea = new Rectangle();
 
         Button button = new Button();
         button.setText("Throw the dice!");
@@ -99,33 +135,29 @@ public class YahtzeeUI extends Application {
         playerColumn.setCellValueFactory(new PropertyValueFactory<String, String>("points"));
         playerColumn.setSortable(false);
 
-        ObservableList<Score> data = FXCollections.observableArrayList();
-        data.add(new Score("Aces", "-"));
-        data.add(new Score("Twos", "-"));
-        data.add(new Score("Threes", "-"));
-        data.add(new Score("Fours", "-"));
-        data.add(new Score("Fives", "-"));
-        data.add(new Score("Sixes", "-"));
-        data.add(new Score("Bonus", "-"));
-        data.add(new Score("Pair", "-"));
-        data.add(new Score("Two pairs", "-"));
-        data.add(new Score("3 of a kind", "-"));
-        data.add(new Score("4 of a kind", "-"));
-        data.add(new Score("Full house", "-"));
-        data.add(new Score("Small straight", "-"));
-        data.add(new Score("Large straight", "-"));
-        data.add(new Score("Yahtzee", "-"));
-        data.add(new Score("Chance", "-"));
-        data.add(new Score("Total", "-"));
+        ObservableList<Row> data = FXCollections.observableArrayList();
+        data.add(new Row("Aces", "-"));
+        data.add(new Row("Twos", "-"));
+        data.add(new Row("Threes", "-"));
+        data.add(new Row("Fours", "-"));
+        data.add(new Row("Fives", "-"));
+        data.add(new Row("Sixes", "-"));
+        data.add(new Row("Bonus", "-"));
+        data.add(new Row("Pair", "-"));
+        data.add(new Row("Two pairs", "-"));
+        data.add(new Row("3 of a kind", "-"));
+        data.add(new Row("4 of a kind", "-"));
+        data.add(new Row("Full house", "-"));
+        data.add(new Row("Small straight", "-"));
+        data.add(new Row("Large straight", "-"));
+        data.add(new Row("Yahtzee", "-"));
+        data.add(new Row("Chance", "-"));
+        data.add(new Row("Total", "-"));
 
         scoreboard.setItems(data);
 
         scoreboard.getColumns().add(combinationColumn);
         scoreboard.getColumns().add(playerColumn);
-
-        CombinationManager combinationManager = new CombinationManager(scoreboard, dice, images, thrower);
-
-        Reset reset = new Reset(combinationManager, thrower, count, dice);
 
         Pane layout = new Pane();
 
@@ -160,17 +192,6 @@ public class YahtzeeUI extends Application {
         combinationArea.setArcWidth(20);
         combinationArea.setArcHeight(20);
 
-        slot1.getSlot().setLayoutX(650);
-        slot1.getSlot().setLayoutY(250);
-        slot2.getSlot().setLayoutX(750);
-        slot2.getSlot().setLayoutY(250);
-        slot3.getSlot().setLayoutX(850);
-        slot3.getSlot().setLayoutY(250);
-        slot4.getSlot().setLayoutX(700);
-        slot4.getSlot().setLayoutY(350);
-        slot5.getSlot().setLayoutX(800);
-        slot5.getSlot().setLayoutY(350);
-
         scoreboard.setLayoutX(100);
         scoreboard.setLayoutY(150);
         scoreboard.setMinHeight(440);
@@ -178,52 +199,53 @@ public class YahtzeeUI extends Application {
         button.setLayoutX(800);
         button.setLayoutY(450);
 
-        slot1.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        views.get(0).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mover1.move();
+                dice.get(0).pick();
             }
         });
 
-        slot2.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        views.get(1).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mover2.move();
+                dice.get(1).pick();
             }
         });
 
-        slot3.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        views.get(2).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mover3.move();
+                dice.get(2).pick();
             }
         });
 
-        slot4.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        views.get(3).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mover4.move();
+                dice.get(3).pick();
             }
         });
 
-        slot5.getSlot().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        views.get(4).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mover5.move();
+                dice.get(4).pick();
             }
         });
 
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                combinationManager.scoreCombination(reset);
+                Row row = (Row) scoreboard.getSelectionModel().getSelectedItem();
+                combinationManager.scoreCombination(row.getCombination());
             }
         });
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                thrower.throwDice(count);
+                thrower.throwDice();
             }
         });
 
@@ -233,11 +255,11 @@ public class YahtzeeUI extends Application {
         layout.getChildren().add(throwingArea);
         layout.getChildren().add(combinationArea);
 
-        layout.getChildren().add(slot1.getSlot());
-        layout.getChildren().add(slot2.getSlot());
-        layout.getChildren().add(slot3.getSlot());
-        layout.getChildren().add(slot4.getSlot());
-        layout.getChildren().add(slot5.getSlot());
+        layout.getChildren().add(views.get(0));
+        layout.getChildren().add(views.get(1));
+        layout.getChildren().add(views.get(2));
+        layout.getChildren().add(views.get(3));
+        layout.getChildren().add(views.get(4));
 
         layout.getChildren().add(button);
 
@@ -246,5 +268,90 @@ public class YahtzeeUI extends Application {
         Scene scene = new Scene(layout, 1200, 900);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    public void viewText(String text) {
+        count.setText(text);
+    }
+    
+    public void viewImage(int order, DieImage image) {
+        views.get(order).setImage(image.getImage());
+    }
+    
+    public void moveImage(int x, int y, int order) {
+        views.get(order).setLayoutX(x);
+        views.get(order).setLayoutY(y);
+    }
+
+    public void refreshRound() {
+        this.scoreboard.getSelectionModel().clearSelection();
+        this.scoreboard.refresh();
+        this.reset.resetNow();
+    }
+    
+    public void refreshThisCell(String points) {
+        Row row = (Row) this.scoreboard.getSelectionModel().getSelectedItem();
+        row.setPoints(points);
+    }
+    
+    public void refreshOtherCell(String points, int whichRow) {
+        Row row = (Row) scoreboard.getItems().get(whichRow);
+        row.setPoints(points);
+    }
+
+    public ArrayList<DieImage> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<DieImage> images) {
+        this.images = images;
+    }
+
+    public ArrayList<Die> getDice() {
+        return dice;
+    }
+
+    public void setDice(ArrayList<Die> dice) {
+        this.dice = dice;
+    }
+
+    public DiceThrower getThrower() {
+        return thrower;
+    }
+
+    public void setThrower(DiceThrower thrower) {
+        this.thrower = thrower;
+    }
+
+    public TableView getScoreboard() {
+        return scoreboard;
+    }
+
+    public void setScoreboard(TableView scoreboard) {
+        this.scoreboard = scoreboard;
+    }
+
+    public CombinationManager getCombinationManager() {
+        return combinationManager;
+    }
+
+    public void setCombinationManager(CombinationManager combinationManager) {
+        this.combinationManager = combinationManager;
+    }
+
+    public Label getCount() {
+        return count;
+    }
+
+    public void setCount(Label count) {
+        this.count = count;
+    }
+
+    public Reset getReset() {
+        return reset;
+    }
+
+    public void setReset(Reset reset) {
+        this.reset = reset;
     }
 }

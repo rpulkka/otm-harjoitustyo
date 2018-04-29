@@ -1,20 +1,21 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
-import javafx.scene.control.Label;
+import yahtzee.ui.YahtzeeUI;
 
 // @author rpulkka
 public class DiceThrower {
 
+    private YahtzeeUI ui;
     private ArrayList<Die> dice;
     private int timesThrown;
 
-    public DiceThrower(ArrayList<Die> dice) {
-        this.dice = dice;
+    public DiceThrower(YahtzeeUI ui) {
+        this.ui = ui;
         this.timesThrown = 0;
     }
 
-    public void throwDice(Label label) {
+    public void throwDice() {
         if (timesThrown < 3) {
             for (Die die : dice) {
                 if (timesThrown == 0) {
@@ -26,7 +27,8 @@ public class DiceThrower {
                 }
             }
             timesThrown++;
-            label.setText("Times thrown: " + timesThrown + "/3");
+            String text = ("Times thrown: " + timesThrown + "/3");
+            ui.viewText(text);
         }
 
     }
@@ -37,5 +39,9 @@ public class DiceThrower {
 
     public void setTimesThrown(int a) {
         timesThrown = a;
+    }
+
+    public void setDice(ArrayList<Die> dice) {
+        this.dice = dice;
     }
 }

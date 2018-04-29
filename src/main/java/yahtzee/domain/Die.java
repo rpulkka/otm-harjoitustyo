@@ -1,24 +1,36 @@
 package yahtzee.domain;
 
 // @author rpulkka
+import yahtzee.ui.DieImage;
 import java.util.ArrayList;
-import javafx.scene.image.ImageView;
+import yahtzee.ui.YahtzeeUI;
 
 public class Die {
 
+    private YahtzeeUI ui;
     private int value;
-    private ImageView slot;
     private DieImage valueImage;
     private ArrayList<DieImage> imageOptions;
     private boolean chosen;
+    private int x;
+    private int y;
+    private int x2;
+    private int y2;
+    private DiceThrower thr;
+    private final int order;
 
-    public Die(ArrayList<DieImage> images) {
+    public Die(YahtzeeUI ui, int x, int y, int x2, int y2, int order) {
+        this.ui = ui;
         this.value = 1;
-        this.slot = new ImageView();
-        this.valueImage = images.get(0);
-        this.slot.setImage(images.get(0).getImage());
-        this.imageOptions = images;
+        this.valueImage = ui.getImages().get(0);
+        this.imageOptions = ui.getImages();
         this.chosen = false;
+        this.x = x;
+        this.y = y;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.thr = ui.getThrower();
+        this.order = order;
     }
 
     public int getValue() {
@@ -28,58 +40,88 @@ public class Die {
     public void setValue(int value) {
         if (value >= 0 && value <= 6) {
             this.value = value;
+            //ui.viewImage(order);
             changeImage(value);
         }
     }
-
+    
     public void changeImage(int value) {
         switch (value) {
             case 1:
                 valueImage = imageOptions.get(0);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             case 2:
                 valueImage = imageOptions.get(1);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             case 3:
                 valueImage = imageOptions.get(2);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             case 4:
                 valueImage = imageOptions.get(3);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             case 5:
                 valueImage = imageOptions.get(4);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             case 6:
                 valueImage = imageOptions.get(5);
-                slot.setImage(valueImage.getImage());
+                ui.viewImage(order, valueImage);
                 break;
             default:
                 break;
         }
     }
 
+    public void move(int x, int y) {
+        this.x = x;
+        this.y = y;
+        ui.moveImage(this.x, this.y, order);
+    }
+
+    public void pick() {
+        if (thr.getTimesThrown() != 0) {
+            if (this.chosen == false) {
+                this.x = x2;
+                this.y = y2;
+                this.move(x, y);
+                this.chosen = true;
+            }
+        }
+    }
+
     public DieImage getImage() {
         return this.valueImage;
     }
-
-    public ImageView getSlot() {
-        return slot;
-    }
-
-    public void setSlot(ImageView slot) {
-        this.slot = slot;
-    }
-
+    
     public boolean getChosen() {
         return chosen;
     }
 
     public void setChosen(boolean boo) {
         chosen = boo;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setThr(DiceThrower thr) {
+        this.thr = thr;
     }
 }

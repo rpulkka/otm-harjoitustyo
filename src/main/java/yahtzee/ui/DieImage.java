@@ -1,4 +1,4 @@
-package yahtzee.domain;
+package yahtzee.ui;
 
 import java.io.IOException;
 import java.io.InputStream;

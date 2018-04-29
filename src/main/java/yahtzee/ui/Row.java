@@ -1,14 +1,14 @@
-package yahtzee.domain;
+package yahtzee.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 
 // @author rpulkka
-public class Score {
+public class Row {
 
     private SimpleStringProperty combination;
     private SimpleStringProperty points;
 
-    public Score(String combo, String number) {
+    public Row(String combo, String number) {
         super();
         this.combination = new SimpleStringProperty(combo);
         this.points = new SimpleStringProperty(number);

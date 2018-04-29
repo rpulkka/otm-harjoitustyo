@@ -1,5 +1,6 @@
 package yahtzee.domain;
 
+import yahtzee.ui.DieImage;
 import java.net.URL;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;

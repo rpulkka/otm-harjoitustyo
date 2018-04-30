@@ -16,4 +16,5 @@
 | 27.4. | 2h    | Ohjelman refaktoroinnin aloittaminen. |
 | 28.4. | 2h    | Ohjelman refaktorointi jatkuu: JavaFX poistettu logiikkaluokista. |
 | 29.4. | 4h    | Lisää refaktorointia: CombinationManager jaettu metodeihin. |
+| 30.4. | 5h    | Kombinaatioluokkien refaktoroiminen, JavaDoc viiteen luokkaan, käyttöohjeen laatiminen. |
 | yht   | 40h    | | 

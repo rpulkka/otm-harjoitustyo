@@ -250,7 +250,7 @@ public class YahtzeeUI extends Application {
         });
 
         layout.getChildren().add(count);
-        layout.getChildren().add(instr);
+        //layout.getChildren().add(instr);
 
         layout.getChildren().add(throwingArea);
         layout.getChildren().add(combinationArea);

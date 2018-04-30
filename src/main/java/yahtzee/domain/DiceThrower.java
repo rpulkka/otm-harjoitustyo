@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import yahtzee.ui.YahtzeeUI;
 
 // @author rpulkka
+
+/**
+ * A class that manages all the actions that will take place when the dice
+ * are being thrown. 
+ */
 public class DiceThrower {
 
     private YahtzeeUI ui;
@@ -15,6 +20,16 @@ public class DiceThrower {
         this.timesThrown = 0;
     }
 
+    /**
+     * Designed to be called once the dice are thrown. It checks
+     * if the conditions to throw the dice are met and and it checks which dice
+     * are already selected. It changes the values of the thrown dice by passing
+     * a suitable random number to Die class' setValue(int) method. It then calls
+     * writeTimesThrown().
+     *
+     * @see Die#changeValue(int) 
+     * @see DiceThrower#writeTimesThrown()
+     */
     public void throwDice() {
         if (timesThrown < 3) {
             for (Die die : dice) {
@@ -30,6 +45,10 @@ public class DiceThrower {
         }
     }
     
+    /**
+     * Adds the value of timesThrown counter and requests viewText(String)
+     * to show the amount of throws left.
+     */
     public void writeTimesThrown() {
         timesThrown++;
         String text = ("Times thrown: " + timesThrown + "/3");

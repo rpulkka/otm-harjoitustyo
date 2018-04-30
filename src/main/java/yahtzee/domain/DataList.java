@@ -1,9 +1,14 @@
 package yahtzee.domain;
 
-// @author rpulkka
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// @author rpulkka
+/**
+ * This class is meant to find all multiple instances of a value from the chosen
+ * dice. The class thus aids some of the combination handlers, such as XOfAKind
+ * and Pair to get their job done easier.
+ */
 public class DataList {
 
     private ArrayList<Die> dice;
@@ -20,6 +25,14 @@ public class DataList {
         map.put(6, 0);
     }
 
+    /**
+     * Makes a list based on values that have x instances in the list of chosen dice,
+     * x being the given parameter.
+     * 
+     * @param howMany The searched number of instances.
+     * 
+     * @return values List of values that show up in the original list of dice as many times as the parameter integer tells.
+     */
     public ArrayList<Integer> list(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();
         for (Die die : dice) {

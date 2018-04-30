@@ -22,6 +22,12 @@ import static yahtzee.domain.Combination.CombinationType.YAHTZEE;
 import yahtzee.ui.YahtzeeUI;
 
 // @author rpulkka
+
+/**
+ * This class is used to count points for combinations that the player forms in
+ * the combination area. It finds out which combination is being scored and then
+ * directs the dice to the right combination handler.
+ */
 public class CombinationManager {
 
     private YahtzeeUI ui;
@@ -115,6 +121,19 @@ public class CombinationManager {
         this.isFirstRound = true;
     }
 
+    /**
+     * This method is designed to be called when player wishes to score a
+     * combination. It checks the input to ignore invalid input and if input is
+     * valid, then it calls methods countPoints(), checkRound() and
+     * refreshRound().
+     *
+     * @param typeString String that contains data of combination type.
+     *
+     * @see CombinationManager#countPoints(Combination)
+     * @see CombinationManager#checkRound()
+     * @see CombinationManager#isIllegalCombination(CombinationType)
+     * @see CombinationManager#chosenDiceExist()
+     */
     public void scoreCombination(String typeString) {
         if (typeString == null) {
             return;
@@ -133,6 +152,13 @@ public class CombinationManager {
         ui.refreshRound();
     }
 
+    /**
+     * This method finds the right Combination by CombinationType.
+     *
+     * @param type CombinationType format.
+     *
+     * @return scoredCombination The corresponding combination.
+     */
     public Combination getCombination(CombinationType type) {
         Combination scoredCombination = null;
         for (Combination c : combinations) {
@@ -143,6 +169,16 @@ public class CombinationManager {
         return scoredCombination;
     }
 
+    /**
+     * A method that gives control to the right combination handler. It receives
+     * the score from the combination handler, then adds the score to total
+     * score and calls refreshThisCell(points) to update the scoreboard with the
+     * new points. Then it returns the score.
+     *
+     * @param combination Combination that is being scored.
+     *
+     * @return score The points from the combination.
+     */
     public int countPoints(Combination combination) {
         int score = combination.score();
         String points = "" + score;
@@ -151,6 +187,16 @@ public class CombinationManager {
         return score;
     }
 
+    /**
+     * This method keeps count on which stage the game currently is in. 
+     * It calls methods firstRoundIsOver(), gameIsOver(), beginSecondRound(), 
+     * and scoreBonus() in suitable situations to manage the flow of the game.
+     *
+     * @see CombinationManager#firstRoundIsOver()
+     * @see CombinationManager#gameIsOver()
+     * @see CombinationManager#beginSecondRound()
+     * @see CombinationManager#scoreBonus()
+     */
     public void checkRound() {
         if (this.isFirstRound == true) {
             if (firstRoundIsOver() == true) {
@@ -164,7 +210,12 @@ public class CombinationManager {
             }
         }
     }
-
+    
+    /**
+     * Checks if the first 6 combination have been scored and 
+     * second round, meaning the unlocking of the combinations 
+     * below "Bonus", has begun. 
+     */
     public boolean firstRoundIsOver() {
         boolean check = true;
         for (FirstRoundCombination combo : firstRound) {
@@ -175,6 +226,10 @@ public class CombinationManager {
         return check;
     }
 
+    /**
+     * Checks if the all combinations have been scored, meaning that the 
+     * game is over.
+     */
     public boolean gameIsOver() {
         boolean check = true;
         for (Combination combo : combinations) {
@@ -185,6 +240,9 @@ public class CombinationManager {
         return check;
     }
 
+    /**
+     * Starts the "second round" by unlocking all of the second round combinations.
+     */
     public void beginSecondRound() {
         for (Combination combo : combinations) {
             if (firstRound.contains(combo)) {
@@ -195,6 +253,11 @@ public class CombinationManager {
         }
     }
 
+    /**
+     * Checks if the player is privileged to receive bonus after the first round. 
+     * Then refreshOtherCell(String, int) function is called so that the scoreboard 
+     * will show the bonus or the lack of it.
+     */
     public void scoreBonus() {
         if (this.total >= 63) {
 
@@ -206,6 +269,11 @@ public class CombinationManager {
         }
     }
 
+    /**
+     * Checks if there is at least one die in the combination area to be scored.
+     * 
+     * @return check The check result as boolean.
+     */
     public boolean chosenDiceExist() {
         boolean check = false;
         for (Die die : dice) {
@@ -216,6 +284,13 @@ public class CombinationManager {
         return check;
     }
 
+    /**
+     * Checks that bonus or total are not being scored as combinations.
+     * 
+     * @param type The CombinationType of the combination that's being scored.
+     * 
+     * @return The check result as boolean.
+     */
     public boolean isIllegalCombination(CombinationType type) {
         if (type.equals(BONUS) || type.equals(TOTAL)) {
             return true;

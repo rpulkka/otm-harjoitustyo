@@ -21,25 +21,26 @@ public class YahtzeeCombo implements Combination {
 
     public int score() {
         this.isAvailable = false;
-
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
         if (dice.size() != 5) {
             return 0;
         }
-
+        if (validCombination() == true) {
+            return 50;
+        }
+        return 0;
+    }
+    
+    public boolean validCombination() {
         boolean validCombination = true;
-
         int number = dice.get(0).getValue();
         for (Die die : dice) {
             if (die.getValue() != number) {
                 validCombination = false;
             }
         }
-        if (validCombination == true) {
-            return 50;
-        }
-        return 0;
+        return validCombination;
     }
 
     public boolean getIsAvailable() {

@@ -19,29 +19,31 @@ public class XOfAKind implements Combination {
 
     public int score() {
         this.isAvailable = false;
-
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-
         DataList datalist = new DataList(dice);
-        ArrayList<Integer> value;
         if (type.equals(THREEOFAKIND)) {
-            value = datalist.list(3);
+            return threeOfAKindPoints(datalist);
+        } else if (type.equals(FOUROFAKIND)) {
+            return fourOfAKindPoints(datalist);
+        }
+        return 0;
+    }
+    
+    public int threeOfAKindPoints(DataList datalist) {
+        ArrayList<Integer> value = datalist.list(3);
             if (value.isEmpty() == false) {
                 return value.get(0) * 3;
-            } else {
-                return 0;
-            }
-        } else if (type.equals(FOUROFAKIND)) {
-            value = datalist.list(4);
+            } 
+            return 0;
+    }
+    
+    public int fourOfAKindPoints(DataList datalist) {
+        ArrayList<Integer> value = datalist.list(4);
             if (value.isEmpty() == false) {
                 return value.get(0) * 4;
-            } else {
-                return 0;
-            }
-        }
-
-        return 0;
+            } 
+            return 0;
     }
 
     public boolean getIsAvailable() {

@@ -17,15 +17,12 @@ public class FullHouse implements Combination {
 
     public int score() {
         this.isAvailable = false;
-
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-
         DataList datalist1 = new DataList(dice);
         ArrayList<Integer> tripleValue = datalist1.list(3);
         DataList datalist2 = new DataList(dice);
         ArrayList<Integer> pairValue = datalist2.list(2);
-
         if (tripleValue.isEmpty() || pairValue.isEmpty()) {
             return 0;
         } else {

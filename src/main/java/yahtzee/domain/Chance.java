@@ -17,16 +17,12 @@ public class Chance implements Combination {
 
     public int score() {
         this.isAvailable = false;
-
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-
         int sum = 0;
-
         for (Die die : dice) {
             sum += die.getValue();
         }
-
         return sum;
     }
 

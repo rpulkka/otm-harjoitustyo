@@ -26,11 +26,14 @@ public class DiceThrower {
                     die.setValue(random);
                 }
             }
-            timesThrown++;
-            String text = ("Times thrown: " + timesThrown + "/3");
-            ui.viewText(text);
+            writeTimesThrown();
         }
-
+    }
+    
+    public void writeTimesThrown() {
+        timesThrown++;
+        String text = ("Times thrown: " + timesThrown + "/3");
+        ui.viewText(text);
     }
 
     public int getTimesThrown() {

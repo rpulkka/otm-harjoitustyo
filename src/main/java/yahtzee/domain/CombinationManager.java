@@ -126,7 +126,7 @@ public class CombinationManager {
         Combination combination = getCombination(type);
         if (combination.getIsAvailable() == true) {
             countPoints(combination);
-        }else{
+        } else {
             return;
         }
         checkRound();
@@ -142,14 +142,13 @@ public class CombinationManager {
         }
         return scoredCombination;
     }
-    
-    public void countPoints(Combination combination) {
-        if (combination.getIsAvailable() == true) {
+
+    public int countPoints(Combination combination) {
         int score = combination.score();
-            String points = "" + score;
-            total += score;
-            ui.refreshThisCell(points);
-        }
+        String points = "" + score;
+        total += score;
+        ui.refreshThisCell(points);
+        return score;
     }
 
     public void checkRound() {

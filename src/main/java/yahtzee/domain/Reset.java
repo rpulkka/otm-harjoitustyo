@@ -24,16 +24,12 @@ public class Reset {
             die.setChosen(false);
             die.setValue(1);
         }
-
         thr.setTimesThrown(0);
-        
         dice.get(0).move(650, 250);
         dice.get(1).move(750, 250);
         dice.get(2).move(850, 250);
         dice.get(3).move(700, 350);
         dice.get(4).move(800, 350);
-
         lbl.setText("Times thrown: " + thr.getTimesThrown() + "/3");
-        //com.setScoredYet(false);
     }
 }

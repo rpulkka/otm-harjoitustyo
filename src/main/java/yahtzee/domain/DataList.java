@@ -22,11 +22,9 @@ public class DataList {
 
     public ArrayList<Integer> list(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();
-
         for (Die die : dice) {
             map.put(die.getValue(), map.get(die.getValue()) + 1);
         }
-
         for (Integer i : map.keySet()) {
             if (map.get(i) == howMany) {
                 values.add(i);

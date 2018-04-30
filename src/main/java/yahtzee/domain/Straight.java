@@ -22,50 +22,62 @@ public class Straight implements Combination {
 
     public int score() {
         this.isAvailable = false;
-
         ChosenDiceList correctDice = new ChosenDiceList();
-
         if (correctDice.chosenList(dice).size() != 5) {
             return 0;
         }
-
         dice = correctDice.chosenList(dice);
-
-        ArrayList<Integer> org = new ArrayList<Integer>();
-        ArrayList<Integer> req = new ArrayList<Integer>();
-
-        if (type.equals(LARGESTRAIGHT)) {
-            req.add(2);
-            req.add(3);
-            req.add(4);
-            req.add(5);
-            req.add(6);
-        } else if (type.equals(SMALLSTRAIGHT)) {
-            req.add(1);
-            req.add(2);
-            req.add(3);
-            req.add(4);
-            req.add(5);
-        }
-
-        org.add(dice.get(0).getValue());
-        org.add(dice.get(1).getValue());
-        org.add(dice.get(2).getValue());
-        org.add(dice.get(3).getValue());
-        org.add(dice.get(4).getValue());
-
-        Collections.sort(org);
-
+        ArrayList<Integer> org = originalList();
+        ArrayList<Integer> req = getRequirements();
         if (org.equals(req)) {
             if (type.equals(LARGESTRAIGHT)) {
                 return 20;
             } else if (type.equals(SMALLSTRAIGHT)) {
                 return 15;
             }
-        } else {
-            return 0;
-        }
+        } 
         return 0;
+    }
+    
+    public ArrayList<Integer> getRequirements() {
+        ArrayList<Integer> requirements = new ArrayList<Integer>();
+        if (type.equals(LARGESTRAIGHT)) {
+            requirements = largeStraightRequirements();
+        } else if (type.equals(SMALLSTRAIGHT)) {
+            requirements = smallStraightRequirements();
+        }
+        return requirements;
+    }
+
+    public ArrayList<Integer> largeStraightRequirements() {
+        ArrayList<Integer> requirements = new ArrayList<Integer>();
+        requirements.add(2);
+        requirements.add(3);
+        requirements.add(4);
+        requirements.add(5);
+        requirements.add(6);
+        return requirements;
+    }
+
+    public ArrayList<Integer> smallStraightRequirements() {
+        ArrayList<Integer> requirements = new ArrayList<Integer>();
+        requirements.add(1);
+        requirements.add(2);
+        requirements.add(3);
+        requirements.add(4);
+        requirements.add(5);
+        return requirements;
+    }
+
+    public ArrayList<Integer> originalList() {
+        ArrayList<Integer> original = new ArrayList<Integer>();
+        original.add(dice.get(0).getValue());
+        original.add(dice.get(1).getValue());
+        original.add(dice.get(2).getValue());
+        original.add(dice.get(3).getValue());
+        original.add(dice.get(4).getValue());
+        Collections.sort(original);
+        return original;
     }
 
     public boolean getIsAvailable() {

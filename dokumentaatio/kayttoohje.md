@@ -33,9 +33,9 @@ Tämä tapahtuu klikkaamalla haluamaasi noppaa heittoalueella (ympyröity aikais
 
 <h2>Kombinaatiot</h2>
 
-Kombinaatioalueelle
-siirretyistä nopista on tarkoitus muodostaa kombinaatioita. Alle olen listannut Yatzy -pelin kaikki pisteiden
-arvoiset kombinaatiot [wikipedia-artikkelista](https://github.com/rpulkka/otm-harjoitustyo/releases)
+Kombinaatioalueelle siirretyistä nopista on tarkoitus muodostaa kombinaatiota. Alle on listattu kaikki
+pisteytettävät kombinaatiot Yatzy pelissä. [Wikipedia](https://fi.wikipedia.org/wiki/Yatzy)
+
 ---
 Tulostaulukon yläosan yhdistelmät:
 

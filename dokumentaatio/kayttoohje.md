@@ -25,11 +25,17 @@ mukaan.
 
 ![GitHub Logo](tutorial2.png)
 
+<h2>Nopan valitseminen</h2>
+
 Voit siirtää haluamasi nopat aina kunkin heiton jälkeen kombinaatioalueelle, joka on ympyröitynä alla olevaan kuvaan.
-Tämä tapahtuu klikkaamalla haluamaasi noppaa heittoalueella (ympyröity aikaisemmassa kuvassa). Kombinaatioalueelle
+Tämä tapahtuu klikkaamalla haluamaasi noppaa heittoalueella (ympyröity aikaisemmassa kuvassa).
+![GitHub Logo](tutorial3.png)
+
+<h2>Kombinaatiot</h2>
+
+Kombinaatioalueelle
 siirretyistä nopista on tarkoitus muodostaa kombinaatioita. Alle olen listannut Yatzy -pelin kaikki pisteiden
 arvoiset kombinaatiot [wikipedia-artikkelista](https://github.com/rpulkka/otm-harjoitustyo/releases)
-
 ---
 Tulostaulukon yläosan yhdistelmät:
 
@@ -53,7 +59,7 @@ Tulostaulukon alaosan yhdistelmät:
     Yahtzee: kaikissa viidessä nopassa sama silmäluku: aina 50 pistettä.
 ---
 
-![GitHub Logo](tutorial3.png)
+<h2>Pisteytys</h2>
 
 Kerättyäsi johonkin kombinaatioon vaadittavat nopat kombinaatioalueelle (aiemmassa kuvassa) voit pisteyttää
 kombinaatiosi klikkaamalla tulostaulusta (ympäröity alla olevassa kuvassa sinisellä) haluamaasi kombinaatiota
@@ -63,6 +69,8 @@ sarakkeessa. Pisteytyksen myötä uusi kierros alkaa ja nopat siirtyvät takaisi
 pelataan noudattamalla samoja sääntöjä kuin pelaamamme esimerkkikierros. 
 
 ![GitHub Logo](tutorial4.png)
+
+<h2>Pelin kulku</h2>
 
 Aiemmin mainittu mahdollisten
 kombinaatioiden lista jakautuu "ylä- ja alaosan" yhdistelmiin, jotka viittaavat siihen, että yläosan, eli bonus

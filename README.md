@@ -7,6 +7,8 @@ kilpailla yksin tavoitellen omaa ennätystä.
 
 <h2>Dokumentaatio</h2>
 
+[Käyttöohje](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 [Vaativuusmäärittely](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/vaativuusmaarittely.md)
 
 [Tuntikirjanpito](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)

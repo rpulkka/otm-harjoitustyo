@@ -18,7 +18,8 @@ public class Controller {
     }
 
     public void handleDiePicked(int order) {
-        if (ui.getDice().get(order).pick() == true) {
+        if (ui.getThrower().getTimesThrown() != 0) {
+            ui.getDice().get(order).pick();
             moveImage(ui.getDice().get(order).getX(), ui.getDice().get(order).getY(), order);
         }
     }

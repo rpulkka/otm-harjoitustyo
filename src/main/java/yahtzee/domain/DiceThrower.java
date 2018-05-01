@@ -11,12 +11,10 @@ import yahtzee.ui.YahtzeeUI;
  */
 public class DiceThrower {
 
-    private YahtzeeUI ui;
     private ArrayList<Die> dice;
     private int timesThrown;
 
-    public DiceThrower(YahtzeeUI ui) {
-        this.ui = ui;
+    public DiceThrower() {
         this.timesThrown = 0;
     }
 

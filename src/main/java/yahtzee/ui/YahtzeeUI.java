@@ -68,7 +68,7 @@ public class YahtzeeUI extends Application {
         DieImage six = new DieImage(urlSix);
         images.add(six);
         
-        thrower = new DiceThrower(this);
+        thrower = new DiceThrower();
 
         views = new ArrayList<ImageView>();
         
@@ -97,22 +97,22 @@ public class YahtzeeUI extends Application {
         
         dice = new ArrayList<Die>();
 
-        Die die1 = new Die(this, 650, 250, 380, 720, 0);
+        Die die1 = new Die(650, 250, 380, 720);
         dice.add(die1);
-        Die die2 = new Die(this, 750, 250, 480, 720, 1);
+        Die die2 = new Die(750, 250, 480, 720);
         dice.add(die2);
-        Die die3 = new Die(this, 850, 250, 580, 720, 2);
+        Die die3 = new Die(850, 250, 580, 720);
         dice.add(die3);
-        Die die4 = new Die(this, 700, 350, 680, 720, 3);
+        Die die4 = new Die(700, 350, 680, 720);
         dice.add(die4);
-        Die die5 = new Die(this, 800, 350, 780, 720, 4);
+        Die die5 = new Die(800, 350, 780, 720);
         dice.add(die5);
         
         thrower.setDice(dice);
 
-        combinationManager = new CombinationManager(this);
+        combinationManager = new CombinationManager(dice);
 
-        reset = new Reset(this);
+        reset = new Reset(dice);
     }
 
     @Override

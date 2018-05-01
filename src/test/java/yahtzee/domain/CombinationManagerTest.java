@@ -14,16 +14,14 @@ import yahtzee.ui.YahtzeeUI;
 // @author rpulkka
 public class CombinationManagerTest {
 
-    private YahtzeeUI ui;
     private CombinationManager combinationManager;
 
     public CombinationManagerTest() {
     }
 
     @Before
-    public void setUp() throws IOException {
-        this.ui = new YahtzeeUI();
-        this.combinationManager = new CombinationManager(ui);
+    public void setUp() {
+        this.combinationManager = new CombinationManager();
     }
 
     @Test

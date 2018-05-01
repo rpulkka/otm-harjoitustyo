@@ -1,6 +1,6 @@
 package yahtzee.domain;
 
-import yahtzee.ui.YahtzeeUI;
+import java.util.ArrayList;
 
 // @author rpulkka
 
@@ -17,10 +17,10 @@ import yahtzee.ui.YahtzeeUI;
  */
 public class Reset {
 
-    YahtzeeUI ui;
+    private ArrayList<Die> dice;
 
-    public Reset(YahtzeeUI ui) {
-        this.ui = ui;
+    public Reset(ArrayList<Die> dice) {
+        this.dice = dice;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Reset {
      * @see DiceThrower#getTimesThrown()
      */
     public void resetNow() {
-        for (Die die : ui.getDice()) {
+        for (Die die : dice) {
             die.setChosen(false);
             die.setValue(1);
         }

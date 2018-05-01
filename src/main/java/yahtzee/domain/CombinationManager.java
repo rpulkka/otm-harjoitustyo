@@ -30,8 +30,6 @@ import yahtzee.ui.YahtzeeUI;
  */
 public class CombinationManager {
 
-    private YahtzeeUI ui;
-
     private final ArrayList<Die> dice;
 
     private int total;
@@ -65,10 +63,8 @@ public class CombinationManager {
     
     private Combination currentCombination;
 
-    public CombinationManager(YahtzeeUI ui) {
-        this.ui = ui;
-
-        this.dice = ui.getDice();
+    public CombinationManager(ArrayList<Die> dice) {
+        this.dice = dice;
 
         this.total = 0;
 

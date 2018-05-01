@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 //author rpulkka
 public class YahtzeeUI extends Application {
 
+    private Controller controller;
     private Label count;
     private Label instr;
     private ArrayList<DieImage> images;
@@ -41,6 +42,8 @@ public class YahtzeeUI extends Application {
     }
 
     public YahtzeeUI() throws IOException {
+        controller = new Controller(this);
+        
         count = new Label();
         instr = new Label();
 
@@ -86,11 +89,11 @@ public class YahtzeeUI extends Application {
         views.add(view4);
         views.add(view5);
         
-        moveImage(650, 250, 0);
-        moveImage(750, 250, 1);
-        moveImage(850, 250, 2);
-        moveImage(700, 350, 3);
-        moveImage(800, 350, 4);
+        controller.moveImage(650, 250, 0);
+        controller.moveImage(750, 250, 1);
+        controller.moveImage(850, 250, 2);
+        controller.moveImage(700, 350, 3);
+        controller.moveImage(800, 350, 4);
         
         dice = new ArrayList<Die>();
 
@@ -202,55 +205,53 @@ public class YahtzeeUI extends Application {
         views.get(0).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                dice.get(0).pick();
+                controller.handleDiePicked(0);
             }
         });
 
         views.get(1).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                dice.get(1).pick();
+                controller.handleDiePicked(1);
             }
         });
 
         views.get(2).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                dice.get(2).pick();
+                controller.handleDiePicked(2);
             }
         });
 
         views.get(3).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                dice.get(3).pick();
+                controller.handleDiePicked(3);
             }
         });
 
         views.get(4).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                dice.get(4).pick();
+                controller.handleDiePicked(4);
             }
         });
 
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Row row = (Row) scoreboard.getSelectionModel().getSelectedItem();
-                combinationManager.scoreCombination(row.getCombination());
+                controller.handleCombinationScored();
             }
         });
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                thrower.throwDice();
+                controller.handleDiceThrow();
             }
         });
 
         layout.getChildren().add(count);
-        //layout.getChildren().add(instr);
 
         layout.getChildren().add(throwingArea);
         layout.getChildren().add(combinationArea);
@@ -270,37 +271,16 @@ public class YahtzeeUI extends Application {
         primaryStage.show();
     }
     
-    public void viewText(String text) {
-        count.setText(text);
-    }
-    
-    public void viewImage(int order, DieImage image) {
-        views.get(order).setImage(image.getImage());
-    }
-    
-    public void moveImage(int x, int y, int order) {
-        views.get(order).setLayoutX(x);
-        views.get(order).setLayoutY(y);
-    }
-
-    public void refreshRound() {
-        this.scoreboard.getSelectionModel().clearSelection();
-        this.scoreboard.refresh();
-        this.reset.resetNow();
-    }
-    
-    public void refreshThisCell(String points) {
-        Row row = (Row) this.scoreboard.getSelectionModel().getSelectedItem();
-        row.setPoints(points);
-    }
-    
-    public void refreshOtherCell(String points, int whichRow) {
-        Row row = (Row) scoreboard.getItems().get(whichRow);
-        row.setPoints(points);
-    }
-
     public ArrayList<DieImage> getImages() {
         return images;
+    }
+
+    public ArrayList<ImageView> getViews() {
+        return views;
+    }
+
+    public void setViews(ArrayList<ImageView> views) {
+        this.views = views;
     }
 
     public void setImages(ArrayList<DieImage> images) {

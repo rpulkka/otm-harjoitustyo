@@ -41,12 +41,5 @@ public class Reset {
             die.setChosen(false);
             die.setValue(1);
         }
-        ui.getThrower().setTimesThrown(0);
-        ui.getDice().get(0).move(650, 250);
-        ui.getDice().get(1).move(750, 250);
-        ui.getDice().get(2).move(850, 250);
-        ui.getDice().get(3).move(700, 350);
-        ui.getDice().get(4).move(800, 350);
-        ui.viewText("Times thrown: " + ui.getThrower().getTimesThrown() + "/3");
     }
 }

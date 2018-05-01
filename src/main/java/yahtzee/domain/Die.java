@@ -15,8 +15,8 @@ public class Die {
 
     private YahtzeeUI ui;
     private int value;
-    private DieImage valueImage;
-    private ArrayList<DieImage> imageOptions;
+    //private DieImage valueImage;
+    //private ArrayList<DieImage> imageOptions;
     private boolean chosen;
     private int x;
     private int y;
@@ -28,8 +28,8 @@ public class Die {
     public Die(YahtzeeUI ui, int x, int y, int x2, int y2, int order) {
         this.ui = ui;
         this.value = 1;
-        this.valueImage = ui.getImages().get(0);
-        this.imageOptions = ui.getImages();
+        //this.valueImage = ui.getImages().get(0);
+        //this.imageOptions = ui.getImages();
         this.chosen = false;
         this.x = x;
         this.y = y;
@@ -54,7 +54,6 @@ public class Die {
     public void setValue(int value) {
         if (value >= 0 && value <= 6) {
             this.value = value;
-            changeImage(value);
         }
     }
     
@@ -69,10 +68,10 @@ public class Die {
      * @see CombinationManager#isIllegalCombination(CombinationType)
      * @see CombinationManager#chosenDiceExist()
      */
-    public void changeImage(int value) {
-        valueImage = imageOptions.get(value-1);
-        ui.viewImage(order, valueImage);
-    }
+    //public void changeImage(int value) {
+    //    valueImage = imageOptions.get(value-1);
+    //    ui.viewImage(order, valueImage);
+    //}
 
     /**
      * Changes the x and y coordinates of the die and calls moveImage(int, int)
@@ -84,7 +83,6 @@ public class Die {
     public void move(int x, int y) {
         this.x = x;
         this.y = y;
-        ui.moveImage(this.x, this.y, order);
     }
 
     /**
@@ -92,19 +90,16 @@ public class Die {
      * function to move the die to the combination area and changes boolean chosen
      * to true, meaning that the die is selected now.
      */
-    public void pick() {
+    public boolean pick() {
         if (thr.getTimesThrown() != 0) {
             if (this.chosen == false) {
                 this.x = x2;
                 this.y = y2;
-                this.move(x, y);
                 this.chosen = true;
+                return true;
             }
         }
-    }
-
-    public DieImage getImage() {
-        return this.valueImage;
+        return false;
     }
     
     public boolean getChosen() {

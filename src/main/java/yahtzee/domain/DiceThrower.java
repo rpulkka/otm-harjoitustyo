@@ -30,7 +30,7 @@ public class DiceThrower {
      * @see Die#changeValue(int) 
      * @see DiceThrower#writeTimesThrown()
      */
-    public void throwDice() {
+    public String throwDice() {
         if (timesThrown < 3) {
             for (Die die : dice) {
                 if (timesThrown == 0) {
@@ -41,18 +41,19 @@ public class DiceThrower {
                     die.setValue(random);
                 }
             }
-            writeTimesThrown();
+            return writeTimesThrown();
         }
+        return null;
     }
     
     /**
      * Adds the value of timesThrown counter and requests viewText(String)
      * to show the amount of throws left.
      */
-    public void writeTimesThrown() {
+    public String writeTimesThrown() {
         timesThrown++;
         String text = ("Times thrown: " + timesThrown + "/3");
-        ui.viewText(text);
+        return text;
     }
 
     public int getTimesThrown() {

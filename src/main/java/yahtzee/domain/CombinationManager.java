@@ -62,6 +62,8 @@ public class CombinationManager {
     private final ArrayList<Combination> combinations;
 
     private boolean isFirstRound;
+    
+    private Combination currentCombination;
 
     public CombinationManager(YahtzeeUI ui) {
         this.ui = ui;
@@ -119,6 +121,28 @@ public class CombinationManager {
         this.combinations.add(yahtzee);
 
         this.isFirstRound = true;
+        
+        this.currentCombination = new Combination() {
+            @Override
+            public int score() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean getIsAvailable() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setIsAvailable(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public CombinationType getCombinationType() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
     }
 
     /**
@@ -134,22 +158,20 @@ public class CombinationManager {
      * @see CombinationManager#isIllegalCombination(CombinationType)
      * @see CombinationManager#chosenDiceExist()
      */
-    public void scoreCombination(String typeString) {
+    public boolean scoreCombination(String typeString) {
         if (typeString == null) {
-            return;
+            return false;
         }
         CombinationType type = CombinationType.valueOf(typeString.toUpperCase().replaceAll("\\s+", ""));
         if (!chosenDiceExist() || isIllegalCombination(type)) {
-            return;
+            return false;
         }
-        Combination combination = getCombination(type);
-        if (combination.getIsAvailable() == true) {
-            countPoints(combination);
+        currentCombination = getCombination(type);
+        if (currentCombination.getIsAvailable() == true) {
+            return true;
         } else {
-            return;
+            return false;
         }
-        checkRound();
-        ui.refreshRound();
     }
 
     /**
@@ -179,11 +201,10 @@ public class CombinationManager {
      *
      * @return score The points from the combination.
      */
-    public int countPoints(Combination combination) {
-        int score = combination.score();
+    public int countPoints() {
+        int score = currentCombination.score();
         String points = "" + score;
         total += score;
-        ui.refreshThisCell(points);
         return score;
     }
 
@@ -197,7 +218,7 @@ public class CombinationManager {
      * @see CombinationManager#beginSecondRound()
      * @see CombinationManager#scoreBonus()
      */
-    public void checkRound() {
+    /*public void checkRound() {
         if (this.isFirstRound == true) {
             if (firstRoundIsOver() == true) {
                 beginSecondRound();
@@ -258,7 +279,7 @@ public class CombinationManager {
      * Then refreshOtherCell(String, int) function is called so that the scoreboard 
      * will show the bonus or the lack of it.
      */
-    public void scoreBonus() {
+    /*public void scoreBonus() {
         if (this.total >= 63) {
 
             ui.refreshOtherCell("50", 6);
@@ -297,4 +318,24 @@ public class CombinationManager {
         }
         return false;
     }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+    
+    
+
+    public boolean isIsFirstRound() {
+        return isFirstRound;
+    }
+
+    public void setIsFirstRound(boolean isFirstRound) {
+        this.isFirstRound = isFirstRound;
+    }
+    
+    
 }

@@ -1,6 +1,7 @@
 package yahtzee.domain;
 
 // @author rpulkka
+
 /**
  * This class represents one die of the dice being thrown in the game. It has
  * functionality like moving and picking the die and it allows other classes to

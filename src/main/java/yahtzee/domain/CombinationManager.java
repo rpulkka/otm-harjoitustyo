@@ -149,7 +149,7 @@ public class CombinationManager {
      *
      * @return Returns boolean true, if the combination can be scored.
      */
-    public boolean scoreCombination(String typeString) {
+    public boolean combinationIsValid(String typeString) {
         if (typeString == null) {
             return false;
         }
@@ -292,7 +292,7 @@ public class CombinationManager {
      * @see die#setChosen(boolean)
      * @see die#setValue(int)
      */
-    public void resetNow() {
+    public void resetDice() {
         for (Die die : dice) {
             die.setChosen(false);
             die.setValue(1);
@@ -306,10 +306,8 @@ public class CombinationManager {
     public void setTotal(int total) {
         this.total = total;
     }
-    
-    
 
-    public boolean isIsFirstRound() {
+    public boolean isFirstRound() {
         return isFirstRound;
     }
 

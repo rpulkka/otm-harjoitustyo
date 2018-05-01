@@ -31,7 +31,7 @@ public class DataList {
      * 
      * @param howMany The searched number of instances.
      * 
-     * @return values List of values that show up in the original list of dice as many times as the parameter integer tells.
+     * @return values List of values that show up in the original list of dice as many times as the parameter howMany tells.
      */
     public ArrayList<Integer> list(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();

@@ -2,23 +2,7 @@ package yahtzee.domain;
 
 import java.util.ArrayList;
 import yahtzee.domain.Combination.CombinationType;
-import static yahtzee.domain.Combination.CombinationType.ACES;
-import static yahtzee.domain.Combination.CombinationType.BONUS;
-import static yahtzee.domain.Combination.CombinationType.CHANCE;
-import static yahtzee.domain.Combination.CombinationType.FIVES;
-import static yahtzee.domain.Combination.CombinationType.FOUROFAKIND;
-import static yahtzee.domain.Combination.CombinationType.FOURS;
-import static yahtzee.domain.Combination.CombinationType.FULLHOUSE;
-import static yahtzee.domain.Combination.CombinationType.LARGESTRAIGHT;
-import static yahtzee.domain.Combination.CombinationType.PAIR;
-import static yahtzee.domain.Combination.CombinationType.SIXES;
-import static yahtzee.domain.Combination.CombinationType.SMALLSTRAIGHT;
-import static yahtzee.domain.Combination.CombinationType.THREEOFAKIND;
-import static yahtzee.domain.Combination.CombinationType.THREES;
-import static yahtzee.domain.Combination.CombinationType.TOTAL;
-import static yahtzee.domain.Combination.CombinationType.TWOPAIRS;
-import static yahtzee.domain.Combination.CombinationType.TWOS;
-import static yahtzee.domain.Combination.CombinationType.YAHTZEE;
+import static yahtzee.domain.Combination.CombinationType.*;
 
 // @author rpulkka
 
@@ -141,12 +125,14 @@ public class CombinationManager {
     }
 
     /**
-     * This method is designed to be called when player wishes to score a
+     * This method is designed to be called when the player wishes to score a
      * combination. It checks the input to ignore invalid input and if input is
      * valid, it returns true.
      *
      * @param typeString String that contains data of combination type.
      * 
+     * @see CombinationManager#isIllegalCombination(yahtzee.domain.Combination.CombinationType) 
+     * @see CombinationManager#chosenDiceExist() 
      * @see CombinationManager#findCombination(yahtzee.domain.Combination.CombinationType) 
      *
      * @return Returns boolean true, if the combination can be scored.
@@ -198,9 +184,11 @@ public class CombinationManager {
     }
     
     /**
-     * Checks if the first 6 combination have been scored and 
+     * Checks if the first 6 combinations have been scored and 
      * second round, meaning the unlocking of the combinations 
      * below "Bonus", has begun. 
+     * 
+     * @return Returns true if first round combinations have been scored already.
      */
     public boolean firstRoundIsOver() {
         boolean check = true;
@@ -215,6 +203,8 @@ public class CombinationManager {
     /**
      * Checks if the all combinations have been scored, meaning that the 
      * game is over.
+     * 
+     * @return Returns true if all combinations have been scored.
      */
     public boolean gameIsOver() {
         boolean check = true;
@@ -228,7 +218,7 @@ public class CombinationManager {
 
     /**
      * Starts the "second round" by unlocking all of the second round combinations
-     * and setting isFirstRound to false.
+     * and setting variable boolean isFirstRound to false.
      */
     public void beginSecondRound() {
         for (Combination combo : combinations) {
@@ -242,7 +232,8 @@ public class CombinationManager {
     }
 
     /**
-     * Checks if the player is privileged to receive bonus after the first round.
+     * Checks if the player is privileged to receive bonus after the first round
+     * and sums bonus to total if true.
      * 
      * @return Returns true if player receives bonus.
      */
@@ -286,11 +277,10 @@ public class CombinationManager {
     
     /**
      * Designed to be called after scoring the combination to return the dice
-     * to their original state by setting setChosen(boolean) to false and
-     * setting setValue(int) to 1 for each die.
+     * to their original state and setting every die's value to one.
      * 
-     * @see die#setChosen(boolean)
-     * @see die#setValue(int)
+     * @see Die#setChosen(boolean) 
+     * @see Die#setValue(int) 
      */
     public void resetDice() {
         for (Die die : dice) {

@@ -38,8 +38,8 @@ public class Controller {
      * then it calls controller's moveImage(int, int, int) to move the die to
      * the combination area.
      *
-     * @see domain.Die#pick()
-     * @see Controller#moveImage(int, int, int)
+     * @see yahtzee.domain.Die#pick() 
+     * @see Controller#moveImage(int, int, int) 
      */
     public void handleDiePicked(int order) {
         if (ui.getThrower().getTimesThrown() != 0) {

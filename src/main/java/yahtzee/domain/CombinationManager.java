@@ -146,6 +146,8 @@ public class CombinationManager {
      * valid, it returns true.
      *
      * @param typeString String that contains data of combination type.
+     * 
+     * @see CombinationManager#findCombination(yahtzee.domain.Combination.CombinationType) 
      *
      * @return Returns boolean true, if the combination can be scored.
      */
@@ -157,7 +159,7 @@ public class CombinationManager {
         if (!chosenDiceExist() || isIllegalCombination(type)) {
             return false;
         }
-        currentCombination = getCombination(type);
+        currentCombination = findCombination(type);
         if (currentCombination.getIsAvailable() == true) {
             return true;
         } else {
@@ -172,7 +174,7 @@ public class CombinationManager {
      *
      * @return scoredCombination The corresponding combination.
      */
-    public Combination getCombination(CombinationType type) {
+    public Combination findCombination(CombinationType type) {
         Combination scoredCombination = null;
         for (Combination c : combinations) {
             if (c.getCombinationType().equals(type)) {
@@ -186,8 +188,6 @@ public class CombinationManager {
      * A method that gives control to the right combination handler. It receives
      * the score from the combination handler, then adds the score to total
      * score and returns the score.
-     *
-     * @param combination Combination that is being scored.
      *
      * @return score The points from the combination.
      */
@@ -313,6 +313,90 @@ public class CombinationManager {
 
     public void setIsFirstRound(boolean isFirstRound) {
         this.isFirstRound = isFirstRound;
+    }
+
+    public Combination getCurrentCombination() {
+        return currentCombination;
+    }
+
+    public void setCurrentCombination(Combination currentCombination) {
+        this.currentCombination = currentCombination;
+    }
+
+    public ArrayList<Die> getDice() {
+        return dice;
+    }
+
+    public FirstRoundCombination getAces() {
+        return aces;
+    }
+
+    public FirstRoundCombination getTwos() {
+        return twos;
+    }
+
+    public FirstRoundCombination getThrees() {
+        return threes;
+    }
+
+    public FirstRoundCombination getFours() {
+        return fours;
+    }
+
+    public FirstRoundCombination getFives() {
+        return fives;
+    }
+
+    public FirstRoundCombination getSixes() {
+        return sixes;
+    }
+
+    public Pair getPair() {
+        return pair;
+    }
+
+    public Pair getTwoPairs() {
+        return twoPairs;
+    }
+
+    public XOfAKind getThreeOfAKind() {
+        return threeOfAKind;
+    }
+
+    public XOfAKind getFourOfAKind() {
+        return fourOfAKind;
+    }
+
+    public FullHouse getFullHouse() {
+        return fullHouse;
+    }
+
+    public Straight getSmallStraight() {
+        return smallStraight;
+    }
+
+    public Straight getLargeStraight() {
+        return largeStraight;
+    }
+
+    public Chance getChance() {
+        return chance;
+    }
+
+    public YahtzeeCombo getYahtzee() {
+        return yahtzee;
+    }
+
+    public ArrayList<FirstRoundCombination> getFirstRound() {
+        return firstRound;
+    }
+
+    public ArrayList<Combination> getCombinations() {
+        return combinations;
+    }
+
+    public boolean isIsFirstRound() {
+        return isFirstRound;
     }
     
     

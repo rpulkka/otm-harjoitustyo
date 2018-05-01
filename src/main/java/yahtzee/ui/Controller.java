@@ -26,23 +26,14 @@ public class Controller {
 
     public void handleCombinationScored() {
         Row row = (Row) ui.getScoreboard().getSelectionModel().getSelectedItem();
-        if (ui.getCombinationManager().scoreCombination(row.getCombination()) == true) {
+        if (ui.getCombinationManager().scoreCombination(row.getCombination())) {
             refreshThisCell("" + ui.getCombinationManager().countPoints());
-            if (ui.getCombinationManager().isIsFirstRound() == true) {
-                if (ui.getCombinationManager().firstRoundIsOver() == true) {
-                    ui.getCombinationManager().beginSecondRound();
-                    if (ui.getCombinationManager().getTotal() >= 63) {
-
-                        refreshOtherCell("50", 6);
-                        ui.getCombinationManager().setTotal(ui.getCombinationManager().getTotal() + 50);
-                    } else {
-
-                        refreshOtherCell("0", 6);
-                    }
-                    ui.getCombinationManager().setIsFirstRound(false);
+            if (ui.getCombinationManager().isIsFirstRound()) {
+                if (ui.getCombinationManager().firstRoundIsOver()) {
+                    changeRound();
                 }
             } else {
-                if (ui.getCombinationManager().gameIsOver() == true) {
+                if (ui.getCombinationManager().gameIsOver()) {
                     refreshOtherCell("" + ui.getCombinationManager().getTotal(), 16);
                 }
             }
@@ -51,7 +42,7 @@ public class Controller {
     }
 
     public void resetNow() {
-        ui.getReset().resetNow();
+        ui.getCombinationManager().resetNow();
         viewAllImages();
         ui.getThrower().setTimesThrown(0);
         moveImage(650, 250, 0);
@@ -62,6 +53,15 @@ public class Controller {
         viewText("Times thrown: " + ui.getThrower().getTimesThrown() + "/3");
     }
 
+    public void changeRound() {
+        ui.getCombinationManager().beginSecondRound();
+        if (ui.getCombinationManager().scoreBonus()) {
+            refreshOtherCell("50", 6);
+        } else {
+            refreshOtherCell("0", 6);
+        }
+    }
+
     public void viewText(String text) {
         ui.getCount().setText(text);
     }
@@ -69,7 +69,7 @@ public class Controller {
     public void viewImage(int order, int value) {
         ui.getViews().get(order).setImage(ui.getImages().get(value - 1).getImage());
     }
-    
+
     public void viewAllImages() {
         viewImage(0, ui.getDice().get(0).getValue());
         viewImage(1, ui.getDice().get(1).getValue());

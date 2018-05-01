@@ -10,8 +10,6 @@ package yahtzee.domain;
 public class Die {
 
     private int value;
-    //private DieImage valueImage;
-    //private ArrayList<DieImage> imageOptions;
     private boolean chosen;
     private int x;
     private int y;
@@ -32,37 +30,18 @@ public class Die {
     }
 
     /**
-     * Changes the value of the die and calls changeImage(int) so that the right
-     * image of the die will be shown to the player.
+     * Changes the value of the die.
      *
      * @param value The new value of the die.
-     *
-     * @see Die#changeImage(int)
      */
     public void setValue(int value) {
         if (value >= 0 && value <= 6) {
             this.value = value;
         }
     }
-
+    
     /**
-     * Calls viewImage(int, int) method to change the image to fit the new value
-     * of the die.
-     *
-     * @param value The new value of the die.
-     *
-     * @see CombinationManager#countPoints(Combination)
-     * @see CombinationManager#checkRound()
-     * @see CombinationManager#isIllegalCombination(CombinationType)
-     * @see CombinationManager#chosenDiceExist()
-     */
-    //public void changeImage(int value) {
-    //    valueImage = imageOptions.get(value-1);
-    //    ui.viewImage(order, valueImage);
-    //}
-    /**
-     * Changes the x and y coordinates of the die and calls moveImage(int, int)
-     * to change the image location on screen.
+     * Changes the x and y coordinates of the die.
      *
      * @param x Coordinate X.
      * @param y Coordinate Y.
@@ -73,8 +52,8 @@ public class Die {
     }
 
     /**
-     * Designed to be called when a die is being selected. Calls move(int, int)
-     * function to move the die to the combination area and changes boolean
+     * Designed to be called when a die is being selected. 
+     * Changes coordinates to combination area and changes boolean
      * chosen to true, meaning that the die is selected now.
      */
     public boolean pick() {

@@ -19,7 +19,6 @@ import static yahtzee.domain.Combination.CombinationType.TOTAL;
 import static yahtzee.domain.Combination.CombinationType.TWOPAIRS;
 import static yahtzee.domain.Combination.CombinationType.TWOS;
 import static yahtzee.domain.Combination.CombinationType.YAHTZEE;
-import yahtzee.ui.YahtzeeUI;
 
 // @author rpulkka
 
@@ -144,15 +143,11 @@ public class CombinationManager {
     /**
      * This method is designed to be called when player wishes to score a
      * combination. It checks the input to ignore invalid input and if input is
-     * valid, then it calls methods countPoints(), checkRound() and
-     * refreshRound().
+     * valid, it returns true.
      *
      * @param typeString String that contains data of combination type.
      *
-     * @see CombinationManager#countPoints(Combination)
-     * @see CombinationManager#checkRound()
-     * @see CombinationManager#isIllegalCombination(CombinationType)
-     * @see CombinationManager#chosenDiceExist()
+     * @return Returns boolean true, if the combination can be scored.
      */
     public boolean scoreCombination(String typeString) {
         if (typeString == null) {
@@ -190,8 +185,7 @@ public class CombinationManager {
     /**
      * A method that gives control to the right combination handler. It receives
      * the score from the combination handler, then adds the score to total
-     * score and calls refreshThisCell(points) to update the scoreboard with the
-     * new points. Then it returns the score.
+     * score and returns the score.
      *
      * @param combination Combination that is being scored.
      *
@@ -199,33 +193,8 @@ public class CombinationManager {
      */
     public int countPoints() {
         int score = currentCombination.score();
-        String points = "" + score;
         total += score;
         return score;
-    }
-
-    /**
-     * This method keeps count on which stage the game currently is in. 
-     * It calls methods firstRoundIsOver(), gameIsOver(), beginSecondRound(), 
-     * and scoreBonus() in suitable situations to manage the flow of the game.
-     *
-     * @see CombinationManager#firstRoundIsOver()
-     * @see CombinationManager#gameIsOver()
-     * @see CombinationManager#beginSecondRound()
-     * @see CombinationManager#scoreBonus()
-     */
-    /*public void checkRound() {
-        if (this.isFirstRound == true) {
-            if (firstRoundIsOver() == true) {
-                beginSecondRound();
-                scoreBonus();
-                this.isFirstRound = false;
-            }
-        } else {
-            if (gameIsOver() == true) {
-                ui.refreshOtherCell("" + total, 16);
-            }
-        }
     }
     
     /**
@@ -258,7 +227,8 @@ public class CombinationManager {
     }
 
     /**
-     * Starts the "second round" by unlocking all of the second round combinations.
+     * Starts the "second round" by unlocking all of the second round combinations
+     * and setting isFirstRound to false.
      */
     public void beginSecondRound() {
         for (Combination combo : combinations) {
@@ -268,21 +238,20 @@ public class CombinationManager {
                 combo.setIsAvailable(true);
             }
         }
+        isFirstRound = false;
     }
 
     /**
-     * Checks if the player is privileged to receive bonus after the first round. 
-     * Then refreshOtherCell(String, int) function is called so that the scoreboard 
-     * will show the bonus or the lack of it.
+     * Checks if the player is privileged to receive bonus after the first round.
+     * 
+     * @return Returns true if player receives bonus.
      */
-    /*public void scoreBonus() {
+    public boolean scoreBonus() {
         if (this.total >= 63) {
-
-            ui.refreshOtherCell("50", 6);
             this.total += 50;
+            return true;
         } else {
-
-            ui.refreshOtherCell("0", 6);
+            return false;
         }
     }
 
@@ -313,6 +282,21 @@ public class CombinationManager {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Designed to be called after scoring the combination to return the dice
+     * to their original state by setting setChosen(boolean) to false and
+     * setting setValue(int) to 1 for each die.
+     * 
+     * @see die#setChosen(boolean)
+     * @see die#setValue(int)
+     */
+    public void resetNow() {
+        for (Die die : dice) {
+            die.setChosen(false);
+            die.setValue(1);
+        }
     }
 
     public int getTotal() {

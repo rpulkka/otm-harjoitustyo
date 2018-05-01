@@ -35,7 +35,6 @@ public class YahtzeeUI extends Application {
     private DiceThrower thrower;
     private TableView scoreboard;
     private CombinationManager combinationManager;
-    private Reset reset;
 
     public static void main(String[] args) {
         launch(args);
@@ -111,8 +110,6 @@ public class YahtzeeUI extends Application {
         thrower.setDice(dice);
 
         combinationManager = new CombinationManager(dice);
-
-        reset = new Reset(dice);
     }
 
     @Override
@@ -325,13 +322,5 @@ public class YahtzeeUI extends Application {
 
     public void setCount(Label count) {
         this.count = count;
-    }
-
-    public Reset getReset() {
-        return reset;
-    }
-
-    public void setReset(Reset reset) {
-        this.reset = reset;
     }
 }

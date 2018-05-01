@@ -45,8 +45,8 @@ public class DiceThrower {
     }
     
     /**
-     * Adds the value of timesThrown counter and requests viewText(String)
-     * to show the amount of throws left.
+     * Adds the value of timesThrown counter and creates the text from it,
+     * which can be viewed on screen.
      */
     public String writeTimesThrown() {
         timesThrown++;

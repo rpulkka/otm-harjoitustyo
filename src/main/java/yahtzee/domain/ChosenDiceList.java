@@ -4,11 +4,6 @@ import java.util.ArrayList;
 
 // @author rpulkka
 
-/**
- * This class is used to count points for combinations that the player forms in
- * the combination area. It finds out which combination is being scored and then
- * directs the dice to the right combination handler.
- */
 public class ChosenDiceList {
 
     public ChosenDiceList() {

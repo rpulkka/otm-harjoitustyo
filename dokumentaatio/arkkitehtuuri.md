@@ -10,12 +10,22 @@ Alla olevassa kaaviossa on kuvattu ohjelman pakkausrakenne, joka koostuu käytt�
 
 <h2>Sovelluslogiikka</h2>
 
-Alla olevassa kaaviossa on kuvattu ohjelman luokkakaavio, joka koostuu käyttöliittymäluokasta YahtzeeUI, noppien
-arvoja ja niihin liittyviä kuvia käsittelevästä luokasta Die, noppien heittoa käsittelevästä luokasta DiceThrower
-sekä toistaiseksi puuttuvasta luokasta Combination, joka tulee käsittelemään kombinaatioiden pisteytystä, jonka
-toisaalta voisi vaihtoehtoisesti toteuttaa monena luokkana eri kombinaatioita varten. Keltainen tausta tarkoittaa,
-että luokka sisältyy pakkaukseen yahtzee.ui, valkoinen puolestaan pakkaukseen yahtzee.domain ja vihreä yahtzee.dao.
-Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia sovelluslogiikan näkökulmasta.
+Alla olevassa kaaviossa on kuvattu ohjelman luokkakaavio. Sen perustana on käyttöliittymäluokka YahtzeeUI. 
+Controller -luokan tehtävänä on toimia liitoskappaleena käyttöliittymän ja sovelluslogiikan välillä ja se kutsuu
+sovellusluokkien metodeja silloin, jos käyttöliittymäluokan tapahtumakäsittelijät eli event handlerit ilmoittavat
+tapahtumasta. 
+
+Sovelluslogiikan olennaisimmat luokat ovat noppien arvoja ja tiloja käsittelevä luokka Die, noppien heittoa
+käsittelevä luokka DiceThrower, sekä CombinationManager, joka hallinnoi kombinaatioiden pisteytystä ja niiiden
+rajoituksia. 
+
+CombinationManager sisältää oliot kaikista eri kombinaatioluokista, joita on lukuisia ja kuvassa on
+niistä vain pari mallina. Kombinaatioluokkien tehtävä on siis laskea kyseisen kombinaation tuottamat pisteet. 
+Kombinaatioluokkia tukevia luokkia ovat ChosenDiceList, joka antaa valitut, eli pisteytykseen osallistuvat nopat,
+sekä DataList, joka tarjoaa dataa saman arvon ilmentymistä noppien joukossa, esim. onko noppien joukossa kolmen
+saman joukkoa, ja mitä arvoa ne ovat (kuutosia?, kolmosia?..). 
+
+Keltainen tausta tarkoittaa, että luokka sisältyy pakkaukseen yahtzee.ui, valkoinen puolestaan pakkaukseen yahtzee.domain ja vihreä yahtzee.dao.
 
  ![GitHub Logo](classdiagram.jpg)
  

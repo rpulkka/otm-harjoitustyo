@@ -18,7 +18,11 @@ kilpailla yksin tavoitellen omaa ennätystä.
 
 <h2>Releaset</h2>
 
-[Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases)
+[Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko5)
+
+[Yahtzee_v01_2](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko6)
+
+Ei ulkoisia muutoksia edelliseen, mutta ohjelma on refaktoroitu. Huomaa, että JavaDoc on myös Controller -luokalle.
 
 <h2>Komentorivitoiminnot</h2>
 

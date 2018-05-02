@@ -18,4 +18,5 @@
 | 29.4. | 4h    | Lisää refaktorointia: CombinationManager jaettu metodeihin. |
 | 30.4. | 5h    | Kombinaatioluokkien refaktoroiminen, JavaDoc viiteen luokkaan, käyttöohjeen laatiminen. |
 | 1.5. | 5h    | Controller -luokan toteutus ja sen JavaDoc. |
-| yht   | 50h    | | 
+| 2.5. | 3h    | Arkkitehtuurikuvaus ja sen sekvenssikaavioiden päivittäminen, toinen release. |
+| yht   | 53h    | | 

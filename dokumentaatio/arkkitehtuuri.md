@@ -48,7 +48,7 @@ Projekti sisältää toki myös muita luokkia, mutta ne eivät ole oleellisia so
  muuttaa sen x ja y koordinaatit Die -olion vastaaviksi Die:n gettereiden perusteella, jolloin käyttäjä voi nähdä
  nopan siirtyneen heittoalueelta kombinaatioalueelle.
  
-  ![GitHub Logo](DieSelection.png)
+  ![GitHub Logo](Die Selection.png)
   
  <h3>Kombinaation pisteytys</h3>
  

@@ -16,6 +16,6 @@ public interface Combination {
     public boolean getIsAvailable();
 
     public void setIsAvailable(boolean b);
-    
+
     public CombinationType getCombinationType();
 }

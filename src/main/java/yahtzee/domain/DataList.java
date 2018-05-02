@@ -26,12 +26,13 @@ public class DataList {
     }
 
     /**
-     * Makes a list based on values that have x instances in the list of chosen dice,
-     * x being the given parameter.
-     * 
+     * Makes a list based on values that have x instances in the list of chosen
+     * dice, x being the given parameter.
+     *
      * @param howMany The searched number of instances.
-     * 
-     * @return values List of values that show up in the original list of dice as many times as the parameter howMany tells.
+     *
+     * @return values List of values that show up in the original list of dice
+     * as many times as the parameter howMany tells.
      */
     public ArrayList<Integer> list(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();

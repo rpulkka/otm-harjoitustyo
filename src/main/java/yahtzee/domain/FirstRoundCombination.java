@@ -27,16 +27,23 @@ public class FirstRoundCombination implements Combination {
         }
         return sum;
     }
-    
+
     public int wantedValue() {
-        switch(type) {
-            case ACES: return 1;
-            case TWOS: return 2;
-            case THREES: return 3;
-            case FOURS: return 4;
-            case FIVES: return 5;
-            case SIXES: return 6;
-            default: return 0;
+        switch (type) {
+            case ACES:
+                return 1;
+            case TWOS:
+                return 2;
+            case THREES:
+                return 3;
+            case FOURS:
+                return 4;
+            case FIVES:
+                return 5;
+            case SIXES:
+                return 6;
+            default:
+                return 0;
         }
     }
 

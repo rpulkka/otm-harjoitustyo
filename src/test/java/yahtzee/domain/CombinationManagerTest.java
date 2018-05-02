@@ -41,7 +41,7 @@ public class CombinationManagerTest {
         boolean nullNotRejected = combinationManager.combinationIsValid(null);
         assertEquals(nullNotRejected, false);
     }
-    
+
     @Test
     public void identifiesRightCombination() {
         Combination combination = combinationManager.findCombination(ACES);
@@ -59,7 +59,7 @@ public class CombinationManagerTest {
         int points = combinationManager.countPoints();
         assertEquals(points, 3);
     }
-    
+
     @Test
     public void scoresTwos() {
         dice.get(0).setValue(2);
@@ -70,8 +70,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(TWOS));
         int points = combinationManager.countPoints();
         assertEquals(points, 4);
-    } 
-    
+    }
+
     @Test
     public void scoresThrees() {
         dice.get(0).setValue(3);
@@ -82,8 +82,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(THREES));
         int points = combinationManager.countPoints();
         assertEquals(points, 9);
-    } 
-    
+    }
+
     @Test
     public void scoresFours() {
         dice.get(0).setValue(3);
@@ -94,8 +94,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(FOURS));
         int points = combinationManager.countPoints();
         assertEquals(points, 8);
-    } 
-    
+    }
+
     @Test
     public void scoresFives() {
         dice.get(0).setValue(5);
@@ -106,8 +106,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(FIVES));
         int points = combinationManager.countPoints();
         assertEquals(points, 10);
-    } 
-    
+    }
+
     @Test
     public void scoresSixes() {
         dice.get(0).setValue(6);
@@ -118,8 +118,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(SIXES));
         int points = combinationManager.countPoints();
         assertEquals(points, 24);
-    } 
-    
+    }
+
     @Test
     public void scoresPair() {
         dice.get(0).setValue(6);
@@ -130,8 +130,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(PAIR));
         int points = combinationManager.countPoints();
         assertEquals(points, 12);
-    } 
-    
+    }
+
     @Test
     public void scoresTwoPairs() {
         dice.get(0).setValue(6);
@@ -142,8 +142,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(TWOPAIRS));
         int points = combinationManager.countPoints();
         assertEquals(points, 16);
-    } 
-    
+    }
+
     @Test
     public void scoresThreeOfAKind() {
         dice.get(0).setValue(6);
@@ -154,8 +154,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(THREEOFAKIND));
         int points = combinationManager.countPoints();
         assertEquals(points, 18);
-    } 
-    
+    }
+
     @Test
     public void scoresFourOfAKind() {
         dice.get(0).setValue(6);
@@ -166,8 +166,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(FOUROFAKIND));
         int points = combinationManager.countPoints();
         assertEquals(points, 24);
-    } 
-    
+    }
+
     @Test
     public void scoresFullHouse() {
         dice.get(0).setValue(6);
@@ -178,8 +178,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(FULLHOUSE));
         int points = combinationManager.countPoints();
         assertEquals(points, 24);
-    } 
-    
+    }
+
     @Test
     public void scoresSmallStraight() {
         dice.get(0).setValue(5);
@@ -190,8 +190,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(SMALLSTRAIGHT));
         int points = combinationManager.countPoints();
         assertEquals(points, 15);
-    } 
-    
+    }
+
     @Test
     public void scoresLargeStraight() {
         dice.get(0).setValue(5);
@@ -202,8 +202,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(LARGESTRAIGHT));
         int points = combinationManager.countPoints();
         assertEquals(points, 20);
-    } 
-    
+    }
+
     @Test
     public void scoresChance() {
         dice.get(0).setValue(5);
@@ -214,8 +214,8 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(CHANCE));
         int points = combinationManager.countPoints();
         assertEquals(points, 18);
-    } 
-    
+    }
+
     @Test
     public void scoresYahtzee() {
         dice.get(0).setValue(1);
@@ -226,14 +226,13 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(YAHTZEE));
         int points = combinationManager.countPoints();
         assertEquals(points, 50);
-    } 
-    
-    
+    }
+
     @Test
     public void firstRoundContinues() {
         assertEquals(combinationManager.firstRoundIsOver(), false);
     }
-    
+
     @Test
     public void firstRoundEnds() {
         combinationManager.getAces().setIsAvailable(false);
@@ -244,20 +243,20 @@ public class CombinationManagerTest {
         combinationManager.getSixes().setIsAvailable(false);
         assertEquals(combinationManager.firstRoundIsOver(), true);
     }
-    
+
     @Test
     public void gameContinues() {
         assertEquals(combinationManager.gameIsOver(), false);
     }
-    
+
     @Test
     public void gameEnds() {
-        for(Combination combination : combinationManager.getCombinations()) {
+        for (Combination combination : combinationManager.getCombinations()) {
             combination.setIsAvailable(false);
         }
         assertEquals(combinationManager.gameIsOver(), true);
     }
-    
+
     @Test
     public void roundChanges() {
         combinationManager.beginSecondRound();
@@ -271,19 +270,19 @@ public class CombinationManagerTest {
         assertEquals(combinationManager.getChance().getIsAvailable(), true);
         assertEquals(combinationManager.getYahtzee().getIsAvailable(), true);
     }
-    
+
     @Test
     public void bonusIsDenied() {
         combinationManager.setTotal(50);
         assertEquals(combinationManager.scoreBonus(), false);
     }
-    
+
     @Test
     public void bonusIsGiven() {
         combinationManager.setTotal(70);
         assertEquals(combinationManager.scoreBonus(), true);
     }
-    
+
     @Test
     public void noChosenSpotted() {
         combinationManager.getDice().get(0).setChosen(false);
@@ -293,23 +292,23 @@ public class CombinationManagerTest {
         combinationManager.getDice().get(4).setChosen(false);
         assertEquals(combinationManager.chosenDiceExist(), false);
     }
-    
+
     @Test
     public void chosenSpotted() {
         combinationManager.getDice().get(0).setChosen(true);
         assertEquals(combinationManager.chosenDiceExist(), true);
     }
-    
+
     @Test
     public void clickOnBonusIgnored() {
         assertEquals(combinationManager.isIllegalCombination(BONUS), true);
     }
-    
+
     @Test
     public void clickOnTotalIgnored() {
         assertEquals(combinationManager.isIllegalCombination(TOTAL), true);
     }
-    
+
     @Test
     public void diceAreReset() {
         combinationManager.resetDice();

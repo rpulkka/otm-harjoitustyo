@@ -1,7 +1,6 @@
 package yahtzee.ui;
 
 // @author rpulkka
-
 /**
  * Controller is the bridge between YahtzeeUI and domain classes. It is called
  * directing tasks to domain classes once an event is triggered in the UI/main
@@ -38,8 +37,8 @@ public class Controller {
      * then it calls controller's moveImage(int, int, int) to move the die to
      * the combination area.
      *
-     * @see yahtzee.domain.Die#pick() 
-     * @see Controller#moveImage(int, int, int) 
+     * @see yahtzee.domain.Die#pick()
+     * @see Controller#moveImage(int, int, int)
      */
     public void handleDiePicked(int order) {
         if (ui.getThrower().getTimesThrown() != 0) {
@@ -56,8 +55,8 @@ public class Controller {
      *
      * @see domain.CombinationManager#combinationIsValid()
      * @see domain.CombinationManager#countPoints()
-     * @see Controller#checkRound() 
-     * @see Controller#refreshRound() 
+     * @see Controller#checkRound()
+     * @see Controller#refreshRound()
      */
     public void handleCombinationScored() {
         Row row = (Row) ui.getScoreboard().getSelectionModel().getSelectedItem();
@@ -69,10 +68,10 @@ public class Controller {
     }
 
     /**
-     * Resets the dice back to their original places by calling moveImage(int, int, int)
-     * for each die to get them back to throwing area and by calling CombinationManager's
-     * resetDice() to reset dice values and by calling DiceThrower's setTimesThrown(int) to
-     * reset throwing counter.
+     * Resets the dice back to their original places by calling moveImage(int,
+     * int, int) for each die to get them back to throwing area and by calling
+     * CombinationManager's resetDice() to reset dice values and by calling
+     * DiceThrower's setTimesThrown(int) to reset throwing counter.
      *
      * @see domain.CombinationManager#resetDice()
      * @see domain.DiceThrower#getTimesThrown()
@@ -92,10 +91,10 @@ public class Controller {
     }
 
     /**
-     * Checks if it's first round by calling isFirstRound() and
-     * calls firstRoundIsOver and changeRound() if that's true.
-     * Also checks if game's over by calling gameIsOver() and if true,
-     * then refreshOtherCell(String, int) is called to view total score.
+     * Checks if it's first round by calling isFirstRound() and calls
+     * firstRoundIsOver and changeRound() if that's true. Also checks if game's
+     * over by calling gameIsOver() and if true, then refreshOtherCell(String,
+     * int) is called to view total score.
      *
      * @see domain.CombinationManager#isFirstRound()
      * @see domain.CombinationManager#firstRoundIsOver()
@@ -111,14 +110,16 @@ public class Controller {
         } else {
             if (ui.getCombinationManager().gameIsOver()) {
                 refreshOtherCell("" + ui.getCombinationManager().getTotal(), 16);
+                //ui.getGameOver().setContentText("Your score: " + ui.getCombinationManager().getTotal());
+                //ui.getGameOver().show();
             }
         }
     }
 
     /**
      * Changes round by calling beginSecondRound() and then it calls
-     * scoreBonus() to know which parameter to give to refreshOtherCell(String, int)
-     * which updates the points in the bonus cell. 
+     * scoreBonus() to know which parameter to give to refreshOtherCell(String,
+     * int) which updates the points in the bonus cell.
      *
      * @see domain.CombinationManager#beginSecondRound()
      * @see domain.CombinationManager#scoreBonus()
@@ -135,7 +136,7 @@ public class Controller {
 
     /**
      * Changes the throwing counter text on screen.
-     * 
+     *
      * @param text The text that will be shown on screen.
      */
     public void viewText(String text) {
@@ -144,7 +145,7 @@ public class Controller {
 
     /**
      * Changes the image of a die's value on screen.
-     * 
+     *
      * @param order The dice that is referred.
      * @param value New value of the dice.
      */
@@ -154,8 +155,8 @@ public class Controller {
 
     /**
      * Calls viewImage(int, int) for all of the dice.
-     * 
-     * @see Controller#viewImage(int, int) 
+     *
+     * @see Controller#viewImage(int, int)
      */
     public void viewAllImages() {
         viewImage(0, ui.getDice().get(0).getValue());
@@ -167,7 +168,7 @@ public class Controller {
 
     /**
      * Moves the dice on the screen.
-     * 
+     *
      * @param x The new x coordinate.
      * @param y The new y coordinate.
      * @param order The dice being referred.
@@ -179,8 +180,8 @@ public class Controller {
 
     /**
      * Refreshes the scoreboard and calls resetNow()
-     * 
-     * @see Controller#resetNow() 
+     *
+     * @see Controller#resetNow()
      */
     public void refreshRound() {
         ui.getScoreboard().getSelectionModel().clearSelection();
@@ -189,11 +190,11 @@ public class Controller {
     }
 
     /**
-     * Updates a new value to the table cell that's being selected
-     * by calling Row's setPoints().
-     * 
-     * @see Row#setPoints(java.lang.String) 
-     * 
+     * Updates a new value to the table cell that's being selected by calling
+     * Row's setPoints().
+     *
+     * @see Row#setPoints(java.lang.String)
+     *
      * @param points The string that will be shown on screen as points.
      */
     public void refreshThisCell(String points) {
@@ -201,12 +202,11 @@ public class Controller {
         row.setPoints(points);
     }
 
-     /**
-     * Updates a new value to total or bonus cell
-     * by calling Row's setPoints().
-     * 
-     * @see Row#setPoints(java.lang.String) 
-     * 
+    /**
+     * Updates a new value to total or bonus cell by calling Row's setPoints().
+     *
+     * @see Row#setPoints(java.lang.String)
+     *
      * @param points The string that will be shown on screen as points.
      */
     public void refreshOtherCell(String points, int whichRow) {

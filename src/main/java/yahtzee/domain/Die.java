@@ -1,12 +1,10 @@
 package yahtzee.domain;
 
 // @author rpulkka
-
 /**
- * This class represents one die of the dice being thrown in the game. 
- * It allows other classes to manipulate the value and coordinates of the die.
+ * This class represents one die of the dice being thrown in the game. It allows
+ * other classes to manipulate the value and coordinates of the die.
  */
-
 public class Die {
 
     private int value;
@@ -39,7 +37,7 @@ public class Die {
             this.value = value;
         }
     }
-    
+
     /**
      * Changes the x and y coordinates of the die.
      *
@@ -52,9 +50,9 @@ public class Die {
     }
 
     /**
-     * Designed to be called when a die is being selected. 
-     * Changes coordinates to combination area and changes boolean
-     * chosen to true, meaning that the die is selected now.
+     * Designed to be called when a die is being selected. Changes coordinates
+     * to combination area and changes boolean chosen to true, meaning that the
+     * die is selected now.
      */
     public boolean pick() {
 

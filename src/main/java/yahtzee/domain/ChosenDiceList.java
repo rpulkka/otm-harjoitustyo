@@ -3,7 +3,6 @@ package yahtzee.domain;
 import java.util.ArrayList;
 
 // @author rpulkka
-
 public class ChosenDiceList {
 
     public ChosenDiceList() {

@@ -35,10 +35,10 @@ public class Straight implements Combination {
             } else if (type.equals(SMALLSTRAIGHT)) {
                 return 15;
             }
-        } 
+        }
         return 0;
     }
-    
+
     public ArrayList<Integer> getRequirements() {
         ArrayList<Integer> requirements = new ArrayList<Integer>();
         if (type.equals(LARGESTRAIGHT)) {

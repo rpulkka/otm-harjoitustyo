@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,13 +30,13 @@ public class YahtzeeUI extends Application {
 
     private Controller controller;
     private Label count;
-    private Label instr;
     private ArrayList<DieImage> images;
     private ArrayList<ImageView> views;
     private ArrayList<Die> dice;
     private DiceThrower thrower;
     private TableView scoreboard;
     private CombinationManager combinationManager;
+    //private Alert gameOver;
 
     public static void main(String[] args) {
         launch(args);
@@ -42,10 +44,10 @@ public class YahtzeeUI extends Application {
 
     public YahtzeeUI() throws IOException {
         controller = new Controller(this);
-        
-        count = new Label();
-        instr = new Label();
 
+        count = new Label();
+
+        //gameOver = new Alert(AlertType.NONE, "Your score: ");
         URL urlOne = this.getClass().getResource("/images/one.png");
         URL urlTwo = this.getClass().getResource("/images/two.png");
         URL urlThree = this.getClass().getResource("/images/three.png");
@@ -66,11 +68,11 @@ public class YahtzeeUI extends Application {
         images.add(five);
         DieImage six = new DieImage(urlSix);
         images.add(six);
-        
+
         thrower = new DiceThrower();
 
         views = new ArrayList<ImageView>();
-        
+
         ImageView view1 = new ImageView();
         view1.setImage(one.getImage());
         ImageView view2 = new ImageView();
@@ -81,19 +83,19 @@ public class YahtzeeUI extends Application {
         view4.setImage(one.getImage());
         ImageView view5 = new ImageView();
         view5.setImage(one.getImage());
-        
+
         views.add(view1);
         views.add(view2);
         views.add(view3);
         views.add(view4);
         views.add(view5);
-        
+
         controller.moveImage(650, 250, 0);
         controller.moveImage(750, 250, 1);
         controller.moveImage(850, 250, 2);
         controller.moveImage(700, 350, 3);
         controller.moveImage(800, 350, 4);
-        
+
         dice = new ArrayList<Die>();
 
         Die die1 = new Die(650, 250, 380, 720);
@@ -106,7 +108,7 @@ public class YahtzeeUI extends Application {
         dice.add(die4);
         Die die5 = new Die(800, 350, 780, 720);
         dice.add(die5);
-        
+
         thrower.setDice(dice);
 
         combinationManager = new CombinationManager(dice);
@@ -165,18 +167,6 @@ public class YahtzeeUI extends Application {
         count.setLayoutY(510);
         count.setText("Times thrown: " + thrower.getTimesThrown() + "/3");
         count.setFont(Font.font("Cambria", 18));
-
-        instr.setLayoutX(100);
-        instr.setLayoutY(600);
-        instr.setText("INSTRUCTIONS: Press the button 'Throw The Dice' to throw the dice. Move a die into combination area by clicking after a throw. "
-                + "Click a combination name\nfrom the scoreboard to score that combination. The combination of dice that the player wishes to score"
-                + " must be found from the combination area.\n"
-                + "Points will be added to scoreboard, if the dice of the combination area meet the requirements of combination that is selected from "
-                + "the scoreboard. "
-                + "After\nscoring, dice will be reset, and a new turn starts. Check the combination requirements from Yahtzee wikipedia page until"
-                + " in-game instructions are finished.\nNotification: you must fill the combinations above 'Bonus' before the other combinations"
-                + " will be unlocked, like in the real game. Close the window to quit,\nbetter solution is under work.");
-        instr.setFont(Font.font("Cambria", 14));
 
         throwingArea.setX(600);
         throwingArea.setY(200);
@@ -267,7 +257,7 @@ public class YahtzeeUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    
+
     public ArrayList<DieImage> getImages() {
         return images;
     }
@@ -323,4 +313,11 @@ public class YahtzeeUI extends Application {
     public void setCount(Label count) {
         this.count = count;
     }
+
+    //public Alert getGameOver() {
+    //    return gameOver;
+    //}
+    //public void setGameOver(Alert gameOver) {
+    //    this.gameOver = gameOver;
+    //}
 }

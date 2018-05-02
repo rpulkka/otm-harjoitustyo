@@ -1,10 +1,8 @@
-
 package yahtzee.domain;
 
 import java.util.ArrayList;
 
 // @author rpulkka
-
 public class YahtzeeCombo implements Combination {
 
     private ArrayList<Die> dice;
@@ -29,7 +27,7 @@ public class YahtzeeCombo implements Combination {
         }
         return 0;
     }
-    
+
     public boolean validCombination() {
         boolean validCombination = true;
         int number = dice.get(0).getValue();
@@ -48,7 +46,7 @@ public class YahtzeeCombo implements Combination {
     public void setIsAvailable(boolean b) {
         this.isAvailable = b;
     }
-    
+
     @Override
     public CombinationType getCombinationType() {
         return this.type;

@@ -5,7 +5,6 @@ import yahtzee.domain.Combination.CombinationType;
 import static yahtzee.domain.Combination.CombinationType.*;
 
 // @author rpulkka
-
 /**
  * This class is used to count points for combinations that the player forms in
  * the combination area. It finds out which combination is being scored and then
@@ -43,7 +42,7 @@ public class CombinationManager {
     private final ArrayList<Combination> combinations;
 
     private boolean isFirstRound;
-    
+
     private Combination currentCombination;
 
     public CombinationManager(ArrayList<Die> dice) {
@@ -100,7 +99,7 @@ public class CombinationManager {
         this.combinations.add(yahtzee);
 
         this.isFirstRound = true;
-        
+
         this.currentCombination = new Combination() {
             @Override
             public int score() {
@@ -130,10 +129,12 @@ public class CombinationManager {
      * valid, it returns true.
      *
      * @param typeString String that contains data of combination type.
-     * 
-     * @see CombinationManager#isIllegalCombination(yahtzee.domain.Combination.CombinationType) 
-     * @see CombinationManager#chosenDiceExist() 
-     * @see CombinationManager#findCombination(yahtzee.domain.Combination.CombinationType) 
+     *
+     * @see
+     * CombinationManager#isIllegalCombination(yahtzee.domain.Combination.CombinationType)
+     * @see CombinationManager#chosenDiceExist()
+     * @see
+     * CombinationManager#findCombination(yahtzee.domain.Combination.CombinationType)
      *
      * @return Returns boolean true, if the combination can be scored.
      */
@@ -182,13 +183,13 @@ public class CombinationManager {
         total += score;
         return score;
     }
-    
+
     /**
-     * Checks if the first 6 combinations have been scored and 
-     * second round, meaning the unlocking of the combinations 
-     * below "Bonus", has begun. 
-     * 
-     * @return Returns true if first round combinations have been scored already.
+     * Checks if the first 6 combinations have been scored and second round,
+     * meaning the unlocking of the combinations below "Bonus", has begun.
+     *
+     * @return Returns true if first round combinations have been scored
+     * already.
      */
     public boolean firstRoundIsOver() {
         boolean check = true;
@@ -201,9 +202,9 @@ public class CombinationManager {
     }
 
     /**
-     * Checks if the all combinations have been scored, meaning that the 
-     * game is over.
-     * 
+     * Checks if the all combinations have been scored, meaning that the game is
+     * over.
+     *
      * @return Returns true if all combinations have been scored.
      */
     public boolean gameIsOver() {
@@ -217,8 +218,8 @@ public class CombinationManager {
     }
 
     /**
-     * Starts the "second round" by unlocking all of the second round combinations
-     * and setting variable boolean isFirstRound to false.
+     * Starts the "second round" by unlocking all of the second round
+     * combinations and setting variable boolean isFirstRound to false.
      */
     public void beginSecondRound() {
         for (Combination combo : combinations) {
@@ -234,7 +235,7 @@ public class CombinationManager {
     /**
      * Checks if the player is privileged to receive bonus after the first round
      * and sums bonus to total if true.
-     * 
+     *
      * @return Returns true if player receives bonus.
      */
     public boolean scoreBonus() {
@@ -248,7 +249,7 @@ public class CombinationManager {
 
     /**
      * Checks if there is at least one die in the combination area to be scored.
-     * 
+     *
      * @return check The check result as boolean.
      */
     public boolean chosenDiceExist() {
@@ -263,9 +264,9 @@ public class CombinationManager {
 
     /**
      * Checks that bonus or total are not being scored as combinations.
-     * 
+     *
      * @param type The CombinationType of the combination that's being scored.
-     * 
+     *
      * @return The check result as boolean.
      */
     public boolean isIllegalCombination(CombinationType type) {
@@ -274,13 +275,13 @@ public class CombinationManager {
         }
         return false;
     }
-    
+
     /**
-     * Designed to be called after scoring the combination to return the dice
-     * to their original state and setting every die's value to one.
-     * 
-     * @see Die#setChosen(boolean) 
-     * @see Die#setValue(int) 
+     * Designed to be called after scoring the combination to return the dice to
+     * their original state and setting every die's value to one.
+     *
+     * @see Die#setChosen(boolean)
+     * @see Die#setValue(int)
      */
     public void resetDice() {
         for (Die die : dice) {
@@ -388,6 +389,5 @@ public class CombinationManager {
     public boolean isIsFirstRound() {
         return isFirstRound;
     }
-    
-    
+
 }

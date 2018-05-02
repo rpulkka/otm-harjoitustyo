@@ -3,10 +3,9 @@ package yahtzee.domain;
 import java.util.ArrayList;
 
 // @author rpulkka
-
 /**
- * A class that manages all the actions that will take place when the dice
- * are being thrown. 
+ * A class that manages all the actions that will take place when the dice are
+ * being thrown.
  */
 public class DiceThrower {
 
@@ -18,14 +17,14 @@ public class DiceThrower {
     }
 
     /**
-     * Designed to be called once the dice are thrown. It checks
-     * if the conditions to throw the dice are met and and it checks which dice
-     * are already selected. It changes the values of the thrown dice by passing
-     * a suitable random number to Die class' setValue(int) method.
+     * Designed to be called once the dice are thrown. It checks if the
+     * conditions to throw the dice are met and and it checks which dice are
+     * already selected. It changes the values of the thrown dice by passing a
+     * suitable random number to Die class' setValue(int) method.
      *
-     * @see Die#setValue(int) 
-     * @see Die#setChosen(boolean) 
-     * @see DiceThrower#writeTimesThrown() 
+     * @see Die#setValue(int)
+     * @see Die#setChosen(boolean)
+     * @see DiceThrower#writeTimesThrown()
      */
     public String throwDice() {
         if (timesThrown < 3) {
@@ -42,10 +41,10 @@ public class DiceThrower {
         }
         return null;
     }
-    
+
     /**
-     * Adds the value of timesThrown counter and creates the text from it,
-     * which can be viewed on screen.
+     * Adds the value of timesThrown counter and creates the text from it, which
+     * can be viewed on screen.
      */
     public String writeTimesThrown() {
         timesThrown++;

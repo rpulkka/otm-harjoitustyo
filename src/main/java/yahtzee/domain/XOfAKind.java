@@ -29,21 +29,21 @@ public class XOfAKind implements Combination {
         }
         return 0;
     }
-    
+
     public int threeOfAKindPoints(DataList datalist) {
         ArrayList<Integer> value = datalist.list(3);
-            if (value.isEmpty() == false) {
-                return value.get(0) * 3;
-            } 
-            return 0;
+        if (value.isEmpty() == false) {
+            return value.get(0) * 3;
+        }
+        return 0;
     }
-    
+
     public int fourOfAKindPoints(DataList datalist) {
         ArrayList<Integer> value = datalist.list(4);
-            if (value.isEmpty() == false) {
-                return value.get(0) * 4;
-            } 
-            return 0;
+        if (value.isEmpty() == false) {
+            return value.get(0) * 4;
+        }
+        return 0;
     }
 
     public boolean getIsAvailable() {

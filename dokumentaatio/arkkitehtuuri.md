@@ -8,6 +8,16 @@ Alla olevassa kaaviossa on kuvattu ohjelman pakkausrakenne, joka koostuu käytt�
 
 ![GitHub Logo](packagediagram.jpg)
 
+<h2>Käyttöliittymä</h2>
+
+Käyttöliittymä sovelluksessa on toteutettu yksinkertaisesti yhtenä Java FX Scene -oliona. Pelilauta jakautuu
+heittoalueeseen (ympyröity sinisellä), kombinaatioalueeseen (ympyröity punaisella) ja tulostauluun (ympyröity
+vihreällä). Heittoalueen painiketta painamalla heitetään noppia ja sen alla on laskuri jäljellä olevista heitoista.
+Noppia klikkaamalla ne liikkuvat kombinaatioalueelle, joihin kombinaatiot muodostetaan. Tulostaulun riviä
+klikkaamalla rivin mukainen kombinaatio pisteytetään, laskuri nollataan ja uusi kierros alkaa. 
+
+![GitHub Logo](ui.png)
+
 <h2>Sovelluslogiikka</h2>
 
 Alla olevassa kaaviossa on kuvattu ohjelman luokkakaavio. Sen perustana on käyttöliittymäluokka YahtzeeUI. 

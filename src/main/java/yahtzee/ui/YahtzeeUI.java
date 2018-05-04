@@ -38,7 +38,6 @@ public class YahtzeeUI extends Application {
     private DiceThrower thrower;
     private TableView scoreboard;
     private CombinationManager combinationManager;
-    //private Alert gameOver;
 
     public static void main(String[] args) {
         launch(args);
@@ -49,7 +48,6 @@ public class YahtzeeUI extends Application {
 
         count = new Label();
 
-        //gameOver = new Alert(AlertType.NONE, "Your score: ");
         URL urlOne = this.getClass().getResource("/images/one.png");
         URL urlTwo = this.getClass().getResource("/images/two.png");
         URL urlThree = this.getClass().getResource("/images/three.png");
@@ -269,10 +267,14 @@ public class YahtzeeUI extends Application {
         
         Label endText = new Label();
         endText.setText(scoreText);
+        endText.setLayoutX(40);
+        endText.setLayoutY(10);
         layout.getChildren().add(endText);
         
         Button closeGame = new Button();
         closeGame.setText("Close the game.");
+        closeGame.setLayoutX(70);
+        closeGame.setLayoutY(100);
         layout.getChildren().add(closeGame);
         
         closeGame.setOnAction(new EventHandler<ActionEvent>() {
@@ -283,7 +285,7 @@ public class YahtzeeUI extends Application {
             }
         });
         
-        Scene scene = new Scene(layout);
+        Scene scene = new Scene(layout, 150, 150);
         endGame.setScene(scene);
         endGame.show();
     }
@@ -343,11 +345,4 @@ public class YahtzeeUI extends Application {
     public void setCount(Label count) {
         this.count = count;
     }
-
-    //public Alert getGameOver() {
-    //    return gameOver;
-    //}
-    //public void setGameOver(Alert gameOver) {
-    //    this.gameOver = gameOver;
-    //}
 }

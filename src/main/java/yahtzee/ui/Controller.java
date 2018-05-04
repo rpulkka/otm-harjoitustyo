@@ -94,13 +94,15 @@ public class Controller {
      * Checks if it's first round by calling isFirstRound() and calls
      * firstRoundIsOver and changeRound() if that's true. Also checks if game's
      * over by calling gameIsOver() and if true, then refreshOtherCell(String,
-     * int) is called to view total score.
+     * int) is called to show the total score on the scoreboard. UI class'
+     * endGame(String) method is then called.
      *
      * @see domain.CombinationManager#isFirstRound()
      * @see domain.CombinationManager#firstRoundIsOver()
      * @see Controller#changeRound()
      * @see domain.CombinationManager#gameIsOver()
      * @see Controller#refreshOtherCell()
+     * @see YahtzeeUI#endGame(java.lang.String) 
      */
     public void checkRound() {
         if (ui.getCombinationManager().isFirstRound()) {
@@ -110,8 +112,7 @@ public class Controller {
         } else {
             if (ui.getCombinationManager().gameIsOver()) {
                 refreshOtherCell("" + ui.getCombinationManager().getTotal(), 16);
-                //ui.getGameOver().setContentText("Your score: " + ui.getCombinationManager().getTotal());
-                //ui.getGameOver().show();
+                ui.endGame("Your total score: "+ui.getCombinationManager().getTotal());
             }
         }
     }

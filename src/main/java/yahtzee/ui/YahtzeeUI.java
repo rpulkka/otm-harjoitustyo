@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ import javafx.stage.Stage;
 public class YahtzeeUI extends Application {
 
     private Controller controller;
+    private Stage primaryStage;
     private Label count;
     private ArrayList<DieImage> images;
     private ArrayList<ImageView> views;
@@ -117,6 +119,8 @@ public class YahtzeeUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Yahtzee Game");
+        
+        this.primaryStage = primaryStage;
 
         Rectangle throwingArea = new Rectangle();
         Rectangle combinationArea = new Rectangle();
@@ -256,6 +260,32 @@ public class YahtzeeUI extends Application {
         Scene scene = new Scene(layout, 1200, 900);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    
+    public void endGame(String scoreText) {
+        Stage endGame = new Stage();
+        endGame.setTitle("Game Over");
+        VBox layout = new VBox();
+        
+        Label endText = new Label();
+        endText.setText(scoreText);
+        layout.getChildren().add(endText);
+        
+        Button closeGame = new Button();
+        closeGame.setText("Close the game.");
+        layout.getChildren().add(closeGame);
+        
+        closeGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                endGame.close();
+                primaryStage.close();
+            }
+        });
+        
+        Scene scene = new Scene(layout);
+        endGame.setScene(scene);
+        endGame.show();
     }
 
     public ArrayList<DieImage> getImages() {

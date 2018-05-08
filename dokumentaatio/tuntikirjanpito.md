@@ -22,4 +22,5 @@
 | 4.5. | 2h    | Lopetusruudun toteutus, .dao -luokkien aloittaminen. |
 | 5.5. | 2h    | Tietokannan ja daon toteutus. |
 | 7.5. | 2h    | Nimimerkin tallennusruudun toteutus. |
-| yht   | 59h    | | 
+| 7.5. | 3h    | Loppuvalikkojen parantelu, new game -nappi ja sen toiminnallisuus, debuggausta. |
+| yht   | 62h    | | 

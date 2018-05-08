@@ -21,4 +21,5 @@
 | 2.5. | 3h    | Arkkitehtuurikuvaus ja sen sekvenssikaavioiden päivittäminen, toinen release. |
 | 4.5. | 2h    | Lopetusruudun toteutus, .dao -luokkien aloittaminen. |
 | 5.5. | 2h    | Tietokannan ja daon toteutus. |
-| yht   | 57h    | | 
+| 7.5. | 2h    | Nimimerkin tallennusruudun toteutus. |
+| yht   | 59h    | | 

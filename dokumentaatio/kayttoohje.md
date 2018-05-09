@@ -81,3 +81,23 @@ tarkoitus on saada suurin yhteissumma, eli Total. Huomaa, että joka vuorolla on
 vaikka minkään kombinaation ehdot eivät täyty, jolloin tälle riville kirjataan 0 pistettä. Muista myös, että
 kombinaatioalueella on oltava väh. 1 noppa, jotta kombinaatio voidaan pisteyttää, vaikka minkään kombinaation 
 ehdot eivät täyttyisi.
+
+<h2>Nimimerkin valinta</h2>
+
+Mikäli pääset kymmenen parhaan listalle paikallisesti, sinulle avautuu alla olevassa kuvassa esitetty ikkuna. 
+Saat tällöin kirjoittaa tekstikenttään haluamasi nimimerkin (1-10 merkkiä), jonka jälkeen painetaan ikkunan
+pohjalla olevaa "Show Highscores" painiketta, jolloin pääset tarkastelemaan paikallista ennätystaulua. Jos et
+päässyt kymmenen parhaan joukkoon, sinulle ei näytetä nimimerkin valinta -valikkoa vaan siirryt automaattisesti
+tarkastelemaan ennätysvalikkoa.
+
+![GitHub Logo](nicknameSelection.png)
+
+<h2>Ennätykset ja pelistä poistuminen</h2>
+
+Pelin lopuksi avautuu alla esitetty ikkuna. Ylhäällä oleva teksti kertoo paljonko pisteitä sait pelissä. 
+Ennätystaulussa puolestaan on listattu 10 parasta paikallista tulosta. Jos pääsit kymmenen joukkoon niin myös
+sinun nimimerkkisi on listassa. Vasemmassa sarakkeessa on ennätyksen tekijän nimimerkki ja oikealla pisteet.
+Alla olevaa "New game" -nappia painamalla voit aloittaa uuden pelin, kun taas "Close the game" -painike sulkee
+pelin. 
+
+![GitHub Logo](gameOver.png)

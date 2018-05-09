@@ -1,6 +1,7 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 // @author rpulkka
@@ -9,12 +10,12 @@ import java.util.HashMap;
  * dice. The class thus aids some of the combination handlers, such as XOfAKind
  * and Pair to get their job done easier.
  */
-public class DataList {
+public class InstanceList {
 
     private ArrayList<Die> dice;
     private HashMap<Integer, Integer> map;
 
-    public DataList(ArrayList<Die> dice) {
+    public InstanceList(ArrayList<Die> dice) {
         this.dice = dice;
         this.map = new HashMap<Integer, Integer>();
         map.put(1, 0);
@@ -24,26 +25,36 @@ public class DataList {
         map.put(5, 0);
         map.put(6, 0);
     }
-
+    
     /**
-     * Makes a list based on values that have x instances in the list of chosen
-     * dice, x being the given parameter.
+     * Makes a list based on instances of values in the list of chosen dice.
      *
-     * @param howMany The searched number of instances.
-     *
-     * @return values List of values that show up in the original list of dice
-     * as many times as the parameter howMany tells.
+     * @return values List of values by their instances in chosen dice.
      */
-    public ArrayList<Integer> list(int howMany) {
+    public ArrayList<Integer> getList(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();
         for (Die die : dice) {
             map.put(die.getValue(), map.get(die.getValue()) + 1);
         }
         for (Integer i : map.keySet()) {
-            if (map.get(i) == howMany) {
+            if (map.get(i) == howMany || howMany!=-1) {
                 values.add(i);
             }
         }
+        return values;
+    }
+    
+    public ArrayList<Integer> limitedList(int lowerLimit) {
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        for (Die die : dice) {
+            map.put(die.getValue(), map.get(die.getValue()) + 1);
+        }
+        for (Integer i : map.keySet()) {
+            if (map.get(i) >= lowerLimit) {
+                values.add(i);
+            }
+        }
+        Collections.sort(values, Collections.reverseOrder());
         return values;
     }
 }

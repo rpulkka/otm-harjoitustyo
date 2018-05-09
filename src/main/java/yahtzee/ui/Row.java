@@ -5,21 +5,21 @@ import javafx.beans.property.SimpleStringProperty;
 // @author rpulkka
 public class Row {
 
-    private SimpleStringProperty combination;
+    private SimpleStringProperty text;
     private SimpleStringProperty points;
 
     public Row(String combo, String number) {
         super();
-        this.combination = new SimpleStringProperty(combo);
+        this.text = new SimpleStringProperty(combo);
         this.points = new SimpleStringProperty(number);
     }
 
-    public String getCombination() {
-        return combination.get();
+    public String getText() {
+        return text.get();
     }
 
-    public void setCombination(String newValue) {
-        combination.set(newValue);
+    public void setText(String newValue) {
+        text.set(newValue);
     }
 
     public String getPoints() {

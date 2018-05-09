@@ -1,6 +1,13 @@
 package yahtzee.ui;
 
 // @author rpulkka
+import java.sql.SQLException;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import yahtzee.dao.*;
+import yahtzee.domain.Highscore;
+
 /**
  * Controller is the bridge between YahtzeeUI and domain classes. It is called
  * directing tasks to domain classes once an event is triggered in the UI/main
@@ -9,9 +16,13 @@ package yahtzee.ui;
 public class Controller {
 
     private YahtzeeUI ui;
+    private HighscoresDao dao;
+    private Highscore newHighscore;
 
-    public Controller(YahtzeeUI ui) {
+    public Controller(YahtzeeUI ui) throws ClassNotFoundException {
         this.ui = ui;
+        Database database = new Database("jdbc:sqlite:yahtzee.db");
+        this.dao = new HighscoresDao(database);
     }
 
     /**
@@ -58,9 +69,9 @@ public class Controller {
      * @see Controller#checkRound()
      * @see Controller#refreshRound()
      */
-    public void handleCombinationScored() {
+    public void handleCombinationScored() throws SQLException {
         Row row = (Row) ui.getScoreboard().getSelectionModel().getSelectedItem();
-        if (ui.getCombinationManager().combinationIsValid(row.getCombination())) {
+        if (ui.getCombinationManager().combinationIsValid(row.getText())) {
             refreshThisCell("" + ui.getCombinationManager().countPoints());
             checkRound();
             refreshRound();
@@ -102,9 +113,9 @@ public class Controller {
      * @see Controller#changeRound()
      * @see domain.CombinationManager#gameIsOver()
      * @see Controller#refreshOtherCell()
-     * @see YahtzeeUI#endGame(java.lang.String) 
+     * @see YahtzeeUI#endGame(java.lang.String)
      */
-    public void checkRound() {
+    public void checkRound() throws SQLException {
         if (ui.getCombinationManager().isFirstRound()) {
             if (ui.getCombinationManager().firstRoundIsOver()) {
                 changeRound();
@@ -112,7 +123,7 @@ public class Controller {
         } else {
             if (ui.getCombinationManager().gameIsOver()) {
                 refreshOtherCell("" + ui.getCombinationManager().getTotal(), 16);
-                ui.endGame("Your total score: "+ui.getCombinationManager().getTotal());
+                handleEnding();
             }
         }
     }
@@ -213,5 +224,45 @@ public class Controller {
     public void refreshOtherCell(String points, int whichRow) {
         Row row = (Row) ui.getScoreboard().getItems().get(whichRow);
         row.setPoints(points);
+    }
+
+    public void handleEnding() throws SQLException {
+        newHighscore = dao.updateOrNot(ui.getCombinationManager().getTotal());
+        if (newHighscore == null) {
+            ending();
+        } else {
+            identification();
+        }
+    }
+
+    public void ending() throws SQLException {
+        String endText = "Your total score: " + ui.getCombinationManager().getTotal();
+        ui.endGame(endText);
+    }
+
+    public boolean handleIdentification(String nickname) throws SQLException {
+        if (nickname.length() > 0 && nickname.length() <= 10) {
+            setNickname(nickname);
+            ending();
+            return true;
+        }
+        return false;
+    }
+
+    public void identification() throws SQLException {
+        ui.identification();
+    }
+
+    public void setNickname(String nickname) throws SQLException {
+        dao.setHighscoreNickname(nickname, newHighscore.getId());
+    }
+    
+    public ObservableList<Row> tableConstructor() throws SQLException {
+        ObservableList<Row> data = FXCollections.observableArrayList();
+        List<Highscore> highscores = dao.findAll();
+        for (Highscore h : highscores) {
+            data.add(new Row(h.getName(), h.getScore()+""));
+        }
+        return data;
     }
 }

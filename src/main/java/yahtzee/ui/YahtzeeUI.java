@@ -4,26 +4,28 @@ import java.io.IOException;
 import yahtzee.domain.*;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 //author rpulkka
@@ -43,7 +45,12 @@ public class YahtzeeUI extends Application {
         launch(args);
     }
 
-    public YahtzeeUI() throws IOException {
+    public YahtzeeUI() throws IOException, ClassNotFoundException {
+        init();
+    }
+
+    @Override
+    public void init() throws IOException, ClassNotFoundException {
         controller = new Controller(this);
 
         count = new Label();
@@ -112,19 +119,6 @@ public class YahtzeeUI extends Application {
         thrower.setDice(dice);
 
         combinationManager = new CombinationManager(dice);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Yahtzee Game");
-        
-        this.primaryStage = primaryStage;
-
-        Rectangle throwingArea = new Rectangle();
-        Rectangle combinationArea = new Rectangle();
-
-        Button button = new Button();
-        button.setText("Throw the dice!");
 
         scoreboard = new TableView();
 
@@ -132,7 +126,7 @@ public class YahtzeeUI extends Application {
 
         TableColumn<String, String> combinationColumn = new TableColumn<>("Combination");
         combinationColumn.setMinWidth(200);
-        combinationColumn.setCellValueFactory(new PropertyValueFactory<String, String>("combination"));
+        combinationColumn.setCellValueFactory(new PropertyValueFactory<String, String>("text"));
         combinationColumn.setSortable(false);
         TableColumn<String, String> playerColumn = new TableColumn<>("Player 1");
         playerColumn.setMinWidth(200);
@@ -162,8 +156,19 @@ public class YahtzeeUI extends Application {
 
         scoreboard.getColumns().add(combinationColumn);
         scoreboard.getColumns().add(playerColumn);
+    }
 
-        Pane layout = new Pane();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Yahtzee Game");
+
+        this.primaryStage = primaryStage;
+
+        Rectangle throwingArea = new Rectangle();
+        Rectangle combinationArea = new Rectangle();
+
+        Button button = new Button();
+        button.setText("Throw the dice!");
 
         count.setLayoutX(600);
         count.setLayoutY(510);
@@ -190,6 +195,8 @@ public class YahtzeeUI extends Application {
 
         button.setLayoutX(800);
         button.setLayoutY(450);
+        
+        Pane layout = new Pane();
 
         views.get(0).setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -229,7 +236,11 @@ public class YahtzeeUI extends Application {
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                controller.handleCombinationScored();
+                try {
+                    controller.handleCombinationScored();
+                } catch (SQLException ex) {
+                    Logger.getLogger(YahtzeeUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -255,39 +266,135 @@ public class YahtzeeUI extends Application {
 
         layout.getChildren().add(scoreboard);
 
-        Scene scene = new Scene(layout, 1200, 900);
-        primaryStage.setScene(scene);
+        Scene gameScene = new Scene(layout, 1200, 900);
+        primaryStage.setScene(gameScene);
         primaryStage.show();
     }
-    
-    public void endGame(String scoreText) {
-        Stage endGame = new Stage();
-        endGame.setTitle("Game Over");
-        VBox layout = new VBox();
-        
+
+    public void endGame(String scoreText) throws SQLException {
+        Stage endGameScreen = new Stage();
+        endGameScreen.setTitle("Game Over");
+        Pane layout = new Pane();
+
         Label endText = new Label();
         endText.setText(scoreText);
-        endText.setLayoutX(40);
+        endText.setLayoutX(10);
         endText.setLayoutY(10);
         layout.getChildren().add(endText);
-        
+
+        Label highscoreTitle = new Label();
+        highscoreTitle.setText("Top 10 List");
+        highscoreTitle.setLayoutX(10);
+        highscoreTitle.setLayoutY(50);
+        layout.getChildren().add(highscoreTitle);
+
+        TableView highscores = highscoreTable();
+        layout.getChildren().add(highscores);
+
+        Button newGame = new Button();
+        newGame.setText("New game");
+        newGame.setLayoutX(10);
+        newGame.setLayoutY(400);
+        layout.getChildren().add(newGame);
+
+        newGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                primaryStage.close();
+                try {
+                    endGameScreen.close();
+                    init();
+                    start(primaryStage);
+                } catch (Exception ex) {
+                    Logger.getLogger(YahtzeeUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
         Button closeGame = new Button();
-        closeGame.setText("Close the game.");
-        closeGame.setLayoutX(70);
-        closeGame.setLayoutY(100);
+        closeGame.setText("Close the game");
+        closeGame.setLayoutX(10);
+        closeGame.setLayoutY(450);
         layout.getChildren().add(closeGame);
-        
+
         closeGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                endGame.close();
+                endGameScreen.close();
                 primaryStage.close();
             }
         });
-        
-        Scene scene = new Scene(layout, 150, 150);
-        endGame.setScene(scene);
-        endGame.show();
+
+        Scene scene = new Scene(layout, 300, 500);
+        endGameScreen.initModality(Modality.APPLICATION_MODAL);
+        endGameScreen.setScene(scene);
+        endGameScreen.show();
+    }
+
+    public void identification() {
+        Stage identificationScreen = new Stage();
+        identificationScreen.setTitle("Nickname Selection");
+        Pane layout = new Pane();
+
+        Label instructions = new Label();
+        instructions.setText("Write your nickname (1-10 letters)");
+        instructions.setLayoutX(10);
+        instructions.setLayoutY(10);
+        layout.getChildren().add(instructions);
+
+        TextField inputArea = new TextField();
+        inputArea.setLayoutX(40);
+        inputArea.setLayoutY(50);
+        inputArea.setMaxWidth(150);
+        layout.getChildren().add(inputArea);
+
+        Button submit = new Button();
+        submit.setText("Show Highscores");
+        submit.setLayoutX(40);
+        submit.setLayoutY(100);
+        layout.getChildren().add(submit);
+
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try {
+                    if (controller.handleIdentification(inputArea.getText())) {
+                        identificationScreen.close();
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(YahtzeeUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        Scene scene = new Scene(layout, 300, 150);
+        identificationScreen.initModality(Modality.APPLICATION_MODAL);
+        identificationScreen.setScene(scene);
+        identificationScreen.show();
+    }
+    
+    public TableView highscoreTable() throws SQLException {
+        TableView highscores = new TableView();
+        highscores.setMaxHeight(285);
+        highscores.setMaxWidth(250);
+        highscores.setEditable(false);
+        TableColumn<String, String> combinationColumn = new TableColumn<>("Name");
+        combinationColumn.setMinWidth(120);
+        combinationColumn.setMaxWidth(120);
+        combinationColumn.setCellValueFactory(new PropertyValueFactory<String, String>("text"));
+        combinationColumn.setSortable(false);
+        TableColumn<String, String> playerColumn = new TableColumn<>("Score");
+        playerColumn.setMinWidth(120);
+        playerColumn.setMaxWidth(120);
+        playerColumn.setCellValueFactory(new PropertyValueFactory<String, String>("points"));
+        playerColumn.setSortable(false);
+        ObservableList<Row> data = controller.tableConstructor();
+        highscores.setItems(data);
+        highscores.getColumns().add(combinationColumn);
+        highscores.getColumns().add(playerColumn);
+        highscores.setLayoutX(10);
+        highscores.setLayoutY(75);
+        return highscores;
     }
 
     public ArrayList<DieImage> getImages() {

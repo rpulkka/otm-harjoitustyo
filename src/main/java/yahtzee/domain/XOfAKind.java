@@ -1,8 +1,7 @@
 package yahtzee.domain;
 
 import java.util.ArrayList;
-import static yahtzee.domain.Combination.CombinationType.FOUROFAKIND;
-import static yahtzee.domain.Combination.CombinationType.THREEOFAKIND;
+import static yahtzee.domain.Combination.CombinationType.*;
 
 // @author rpulkka
 public class XOfAKind implements Combination {
@@ -13,35 +12,39 @@ public class XOfAKind implements Combination {
 
     public XOfAKind(ArrayList<Die> dice, CombinationType type) {
         this.dice = dice;
-        this.isAvailable = false;
         this.type = type;
+        this.isAvailable = false;
     }
 
     public int score() {
         this.isAvailable = false;
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-        DataList datalist = new DataList(dice);
-        if (type.equals(THREEOFAKIND)) {
-            return threeOfAKindPoints(datalist);
+        InstanceList instanceLister = new InstanceList(dice);
+        if (type.equals(PAIR)) {
+            return countPointsDefault(instanceLister, 2, 1);
+        } else if (type.equals(TWOPAIRS)) {
+            return countPointsDefault(instanceLister, 2, 2);
+        } else if (type.equals(THREEOFAKIND)) {
+            return countPointsDefault(instanceLister, 3, 1);
         } else if (type.equals(FOUROFAKIND)) {
-            return fourOfAKindPoints(datalist);
+            return countPointsDefault(instanceLister, 4, 1);
+        } else if (type.equals(YAHTZEE)) {
+            return countPointsDefault(instanceLister, 5, 1);
         }
         return 0;
     }
 
-    public int threeOfAKindPoints(DataList datalist) {
-        ArrayList<Integer> value = datalist.list(3);
-        if (value.isEmpty() == false) {
-            return value.get(0) * 3;
-        }
-        return 0;
-    }
-
-    public int fourOfAKindPoints(DataList datalist) {
-        ArrayList<Integer> value = datalist.list(4);
-        if (value.isEmpty() == false) {
-            return value.get(0) * 4;
+    public int countPointsDefault(InstanceList instanceLister, int lowerLimit, int appropriateValues) {
+        ArrayList<Integer> instanceList = instanceLister.limitedList(lowerLimit);
+        if (instanceList.size() >= appropriateValues) {
+            if (type.equals(YAHTZEE)) {
+                return 50;
+            } else if (type.equals(TWOPAIRS)) {
+                return instanceList.get(0) * lowerLimit + instanceList.get(1) * lowerLimit;
+            } else {
+                return instanceList.get(0) * lowerLimit;
+            }
         }
         return 0;
     }

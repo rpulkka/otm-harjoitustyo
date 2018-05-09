@@ -19,10 +19,10 @@ public class FullHouse implements Combination {
         this.isAvailable = false;
         ChosenDiceList correctDice = new ChosenDiceList();
         dice = correctDice.chosenList(dice);
-        DataList datalist1 = new DataList(dice);
-        ArrayList<Integer> tripleValue = datalist1.list(3);
-        DataList datalist2 = new DataList(dice);
-        ArrayList<Integer> pairValue = datalist2.list(2);
+        InstanceList instanceList1 = new InstanceList(dice);
+        ArrayList<Integer> tripleValue = instanceList1.getList(3);
+        InstanceList instanceList2 = new InstanceList(dice);
+        ArrayList<Integer> pairValue = instanceList2.getList(2);
         if (tripleValue.isEmpty() || pairValue.isEmpty()) {
             return 0;
         } else {

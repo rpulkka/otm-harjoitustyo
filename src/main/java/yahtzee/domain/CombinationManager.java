@@ -16,30 +16,30 @@ public class CombinationManager {
 
     private int total;
 
-    private final FirstRoundCombination aces;
-    private final FirstRoundCombination twos;
-    private final FirstRoundCombination threes;
-    private final FirstRoundCombination fours;
-    private final FirstRoundCombination fives;
-    private final FirstRoundCombination sixes;
+    private FirstRoundCombination aces;
+    private FirstRoundCombination twos;
+    private FirstRoundCombination threes;
+    private FirstRoundCombination fours;
+    private FirstRoundCombination fives;
+    private FirstRoundCombination sixes;
 
-    private final Pair pair;
-    private final Pair twoPairs;
+    private XOfAKind pair;
+    private XOfAKind twoPairs;
 
-    private final XOfAKind threeOfAKind;
-    private final XOfAKind fourOfAKind;
+    private XOfAKind threeOfAKind;
+    private XOfAKind fourOfAKind;
 
-    private final FullHouse fullHouse;
+    private FullHouse fullHouse;
 
-    private final Straight smallStraight;
-    private final Straight largeStraight;
+    private Straight smallStraight;
+    private Straight largeStraight;
 
-    private final Chance chance;
+    private Chance chance;
 
-    private final YahtzeeCombo yahtzee;
+    private XOfAKind yahtzee;
 
-    private final ArrayList<FirstRoundCombination> firstRound;
-    private final ArrayList<Combination> combinations;
+    private ArrayList<FirstRoundCombination> firstRound;
+    private ArrayList<Combination> combinations;
 
     private boolean isFirstRound;
 
@@ -47,80 +47,7 @@ public class CombinationManager {
 
     public CombinationManager(ArrayList<Die> dice) {
         this.dice = dice;
-
-        this.total = 0;
-
-        this.aces = new FirstRoundCombination(dice, ACES);
-        this.twos = new FirstRoundCombination(dice, TWOS);
-        this.threes = new FirstRoundCombination(dice, THREES);
-        this.fours = new FirstRoundCombination(dice, FOURS);
-        this.fives = new FirstRoundCombination(dice, FIVES);
-        this.sixes = new FirstRoundCombination(dice, SIXES);
-
-        this.pair = new Pair(dice, PAIR);
-        this.twoPairs = new Pair(dice, TWOPAIRS);
-
-        this.threeOfAKind = new XOfAKind(dice, THREEOFAKIND);
-        this.fourOfAKind = new XOfAKind(dice, FOUROFAKIND);
-
-        this.fullHouse = new FullHouse(dice, FULLHOUSE);
-
-        this.smallStraight = new Straight(dice, SMALLSTRAIGHT);
-        this.largeStraight = new Straight(dice, LARGESTRAIGHT);
-
-        this.chance = new Chance(dice, CHANCE);
-
-        this.yahtzee = new YahtzeeCombo(dice, YAHTZEE);
-
-        this.firstRound = new ArrayList<FirstRoundCombination>();
-        this.combinations = new ArrayList<Combination>();
-
-        this.firstRound.add(aces);
-        this.firstRound.add(twos);
-        this.firstRound.add(threes);
-        this.firstRound.add(fours);
-        this.firstRound.add(fives);
-        this.firstRound.add(sixes);
-
-        this.combinations.add(aces);
-        this.combinations.add(twos);
-        this.combinations.add(threes);
-        this.combinations.add(fours);
-        this.combinations.add(fives);
-        this.combinations.add(sixes);
-        this.combinations.add(pair);
-        this.combinations.add(twoPairs);
-        this.combinations.add(threeOfAKind);
-        this.combinations.add(fourOfAKind);
-        this.combinations.add(fullHouse);
-        this.combinations.add(smallStraight);
-        this.combinations.add(largeStraight);
-        this.combinations.add(chance);
-        this.combinations.add(yahtzee);
-
-        this.isFirstRound = true;
-
-        this.currentCombination = new Combination() {
-            @Override
-            public int score() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public boolean getIsAvailable() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void setIsAvailable(boolean b) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public CombinationType getCombinationType() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
+        reset();
     }
 
     /**
@@ -289,6 +216,82 @@ public class CombinationManager {
             die.setValue(1);
         }
     }
+    
+    public void reset() {
+        this.total = 0;
+
+        this.aces = new FirstRoundCombination(dice, ACES);
+        this.twos = new FirstRoundCombination(dice, TWOS);
+        this.threes = new FirstRoundCombination(dice, THREES);
+        this.fours = new FirstRoundCombination(dice, FOURS);
+        this.fives = new FirstRoundCombination(dice, FIVES);
+        this.sixes = new FirstRoundCombination(dice, SIXES);
+
+        this.pair = new XOfAKind(dice, PAIR);
+        this.twoPairs = new XOfAKind(dice, TWOPAIRS);
+
+        this.threeOfAKind = new XOfAKind(dice, THREEOFAKIND);
+        this.fourOfAKind = new XOfAKind(dice, FOUROFAKIND);
+
+        this.fullHouse = new FullHouse(dice, FULLHOUSE);
+
+        this.smallStraight = new Straight(dice, SMALLSTRAIGHT);
+        this.largeStraight = new Straight(dice, LARGESTRAIGHT);
+
+        this.chance = new Chance(dice, CHANCE);
+
+        this.yahtzee = new XOfAKind(dice, YAHTZEE);
+
+        this.firstRound = new ArrayList<FirstRoundCombination>();
+        this.combinations = new ArrayList<Combination>();
+
+        this.firstRound.add(aces);
+        this.firstRound.add(twos);
+        this.firstRound.add(threes);
+        this.firstRound.add(fours);
+        this.firstRound.add(fives);
+        this.firstRound.add(sixes);
+
+        this.combinations.add(aces);
+        this.combinations.add(twos);
+        this.combinations.add(threes);
+        this.combinations.add(fours);
+        this.combinations.add(fives);
+        this.combinations.add(sixes);
+        this.combinations.add(pair);
+        this.combinations.add(twoPairs);
+        this.combinations.add(threeOfAKind);
+        this.combinations.add(fourOfAKind);
+        this.combinations.add(fullHouse);
+        this.combinations.add(smallStraight);
+        this.combinations.add(largeStraight);
+        this.combinations.add(chance);
+        this.combinations.add(yahtzee);
+
+        this.isFirstRound = true;
+
+        this.currentCombination = new Combination() {
+            @Override
+            public int score() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean getIsAvailable() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setIsAvailable(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public CombinationType getCombinationType() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
 
     public int getTotal() {
         return total;
@@ -342,11 +345,11 @@ public class CombinationManager {
         return sixes;
     }
 
-    public Pair getPair() {
+    public XOfAKind getPair() {
         return pair;
     }
 
-    public Pair getTwoPairs() {
+    public XOfAKind getTwoPairs() {
         return twoPairs;
     }
 
@@ -374,7 +377,7 @@ public class CombinationManager {
         return chance;
     }
 
-    public YahtzeeCombo getYahtzee() {
+    public XOfAKind getYahtzee() {
         return yahtzee;
     }
 

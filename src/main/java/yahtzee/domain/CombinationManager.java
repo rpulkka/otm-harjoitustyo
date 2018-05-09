@@ -202,10 +202,10 @@ public class CombinationManager {
         }
         return false;
     }
-    
+
     /**
-     * Checks which dice are chosen by the player, in other words, which dice are 
-     * taken into account when scoring the combination.
+     * Checks which dice are chosen by the player, in other words, which dice
+     * are taken into account when scoring the combination.
      *
      * @return chosenDice List of dice that are chosen.
      */
@@ -232,65 +232,94 @@ public class CombinationManager {
             die.setValue(1);
         }
     }
-    
+
     /**
      * Basically a constructor which works for playing a new game without
      * quitting the game.
+     * 
+     * @see CombinationManager#initializeCombinations() 
+     * @see CombinationManager#firstRoundCombinations() 
+     * @see CombinationManager#combinations() 
+     * @see CombinationManager#newCombination() 
      */
     public void reset() {
         this.total = 0;
+        initializeCombinations();
+        this.firstRound = firstRoundCombinations();
+        this.combinations = combinations();
+        this.isFirstRound = true;
+        this.currentCombination = newCombination();
+    }
 
+    /**
+     * Initializes all combinations when starting a game.
+     */
+    public void initializeCombinations() {
         this.aces = new SumCombination(ACES);
         this.twos = new SumCombination(TWOS);
         this.threes = new SumCombination(THREES);
         this.fours = new SumCombination(FOURS);
         this.fives = new SumCombination(FIVES);
         this.sixes = new SumCombination(SIXES);
-
         this.pair = new XOfAKind(PAIR);
         this.twoPairs = new XOfAKind(TWOPAIRS);
-
         this.threeOfAKind = new XOfAKind(THREEOFAKIND);
         this.fourOfAKind = new XOfAKind(FOUROFAKIND);
-
         this.fullHouse = new FullHouse(FULLHOUSE);
-
         this.smallStraight = new Straight(SMALLSTRAIGHT);
         this.largeStraight = new Straight(LARGESTRAIGHT);
-
         this.chance = new SumCombination(CHANCE);
-
         this.yahtzee = new XOfAKind(YAHTZEE);
+    }
 
-        this.firstRound = new ArrayList<SumCombination>();
-        this.combinations = new ArrayList<Combination>();
+    /**
+     * Returns the firstRoundCombinations list
+     * 
+     * @return firstRoundCombinations List of first round combinations.
+     */
+    public ArrayList<SumCombination> firstRoundCombinations() {
+        ArrayList<SumCombination> firstRoundCombinations = new ArrayList<SumCombination>();
+        firstRoundCombinations.add(aces);
+        firstRoundCombinations.add(twos);
+        firstRoundCombinations.add(threes);
+        firstRoundCombinations.add(fours);
+        firstRoundCombinations.add(fives);
+        firstRoundCombinations.add(sixes);
+        return firstRoundCombinations;
+    }
 
-        this.firstRound.add(aces);
-        this.firstRound.add(twos);
-        this.firstRound.add(threes);
-        this.firstRound.add(fours);
-        this.firstRound.add(fives);
-        this.firstRound.add(sixes);
+    /**
+     * Returns the Combinations list
+     * 
+     * @return combinationList List of all combinations.
+     */
+    public ArrayList<Combination> combinations() {
+        ArrayList<Combination> combinationList = new ArrayList<Combination>();
+        combinationList.add(aces);
+        combinationList.add(twos);
+        combinationList.add(threes);
+        combinationList.add(fours);
+        combinationList.add(fives);
+        combinationList.add(sixes);
+        combinationList.add(pair);
+        combinationList.add(twoPairs);
+        combinationList.add(threeOfAKind);
+        combinationList.add(fourOfAKind);
+        combinationList.add(fullHouse);
+        combinationList.add(smallStraight);
+        combinationList.add(largeStraight);
+        combinationList.add(chance);
+        combinationList.add(yahtzee);
+        return combinationList;
+    }
 
-        this.combinations.add(aces);
-        this.combinations.add(twos);
-        this.combinations.add(threes);
-        this.combinations.add(fours);
-        this.combinations.add(fives);
-        this.combinations.add(sixes);
-        this.combinations.add(pair);
-        this.combinations.add(twoPairs);
-        this.combinations.add(threeOfAKind);
-        this.combinations.add(fourOfAKind);
-        this.combinations.add(fullHouse);
-        this.combinations.add(smallStraight);
-        this.combinations.add(largeStraight);
-        this.combinations.add(chance);
-        this.combinations.add(yahtzee);
-
-        this.isFirstRound = true;
-
-        this.currentCombination = new Combination() {
+    /**
+     * Returns a new combination for initializing the current combination.
+     * 
+     * @return New combination.
+     */
+    public Combination newCombination() {
+        return new Combination() {
             @Override
             public boolean getIsAvailable() {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

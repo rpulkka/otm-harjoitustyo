@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 
 // @author rpulkka
 /**
- * A UI class that represents that initializes images of the dice to a form
- * that is easily accessible and makes YahtzeeUI cleaner.
+ * A UI class that represents that initializes images of the dice to a form that
+ * is easily accessible and makes YahtzeeUI cleaner.
  */
 public class DieImage {
 

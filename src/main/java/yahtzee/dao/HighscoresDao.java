@@ -18,7 +18,7 @@ public class HighscoresDao {
 
     /**
      * Lists all of the top 10 highscores and sorts them.
-     * 
+     *
      * @return highscoreList A sorted list of highscores.
      */
     public List<Highscore> findAll() throws SQLException {
@@ -41,10 +41,10 @@ public class HighscoresDao {
     /**
      * Decides if highscore list will be updated and if a highscore must be
      * deleted from the highscores (in case it will be replaced).
-     * 
-     * @see HighscoresDao#save(yahtzee.domain.Highscore) 
-     * @see HighscoresDao#delete(java.lang.Integer) 
-     * 
+     *
+     * @see HighscoresDao#save(yahtzee.domain.Highscore)
+     * @see HighscoresDao#delete(java.lang.Integer)
+     *
      * @return Saved highscore.
      */
     public Highscore updateOrNot(int total) throws SQLException {
@@ -61,41 +61,31 @@ public class HighscoresDao {
 
     /**
      * Saves the new top 10 highscore and returns it.
-     * 
+     *
      * @return newHighscore The saved highscore.
      */
     public Highscore save(Highscore highscore) throws SQLException {
         Connection connection = highscores.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Highscores"
-                + " (name, score)"
-                + " VALUES (?, ?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Highscores (name, score) VALUES (?, ?)");
         statement.setString(1, highscore.getName());
         statement.setInt(2, highscore.getScore());
-
         statement.executeUpdate();
         statement.close();
-
-        statement = connection.prepareStatement("SELECT * FROM Highscores"
-                + " WHERE name = ? AND score = ?");
+        statement = connection.prepareStatement("SELECT * FROM Highscores WHERE name = ? AND score = ?");
         statement.setString(1, highscore.getName());
         statement.setInt(2, highscore.getScore());
-
         ResultSet resultSet = statement.executeQuery();
         resultSet.next();
-
         Highscore newHighscore = new Highscore(resultSet.getString("name"), resultSet.getInt("score"));
         newHighscore.setId(resultSet.getInt("id"));
-
         statement.close();
         resultSet.close();
-
         connection.close();
-
         return newHighscore;
     }
 
     /**
-     * Deletes a highscore from the database, which happens when an old 
+     * Deletes a highscore from the database, which happens when an old
      * highscore is displaced.
      */
     public void delete(Integer key) throws SQLException {

@@ -191,6 +191,20 @@ public class Controller {
     }
 
     /**
+     * Calls moveImage(int, int, int) to move images to starting points in the
+     * beginning of a new game.
+     *
+     * @see Controller#moveImage(int, int, int)
+     */
+    public void initializeImages() {
+        moveImage(650, 250, 0);
+        moveImage(750, 250, 1);
+        moveImage(850, 250, 2);
+        moveImage(700, 350, 3);
+        moveImage(800, 350, 4);
+    }
+
+    /**
      * Refreshes the scoreboard and calls resetNow()
      *
      * @see Controller#resetNow()
@@ -226,6 +240,14 @@ public class Controller {
         row.setPoints(points);
     }
 
+    /**
+     * Calls updateOrNot() from dao to find out if the player made it to the top
+     * 10 list and if so, then identification screen will open and otherwise the
+     * ending screen will open.
+     *
+     * @see Controller#ending()
+     * @see Controller#identification()
+     */
     public void handleEnding() throws SQLException {
         newHighscore = dao.updateOrNot(ui.getCombinationManager().getTotal());
         if (newHighscore == null) {
@@ -235,11 +257,23 @@ public class Controller {
         }
     }
 
+    /**
+     * Calls endGame(String) from main to open the ending screen.
+     *
+     * @see YahtzeeUI#endGame(java.lang.String)
+     */
     public void ending() throws SQLException {
         String endText = "Your total score: " + ui.getCombinationManager().getTotal();
         ui.endGame(endText);
     }
 
+    /**
+     * Checks if the nickname is appropriate and calls setNickname(String) and
+     * ending().
+     *
+     * @see Controller#ending()
+     * @see Controller#setNickname(java.lang.String)
+     */
     public boolean handleIdentification(String nickname) throws SQLException {
         if (nickname.length() > 0 && nickname.length() <= 10) {
             setNickname(nickname);
@@ -249,19 +283,36 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Calls identification() from main to open the ending screen.
+     *
+     * @see YahtzeeUI#identification()
+     */
     public void identification() throws SQLException {
         ui.identification();
     }
 
+    /**
+     * Calls dao's setHighscoreNickname(String) from main to open the ending
+     * screen.
+     *
+     * @see dao.HighscoresDao#setHighscoreNickname(java.lang.String, int)
+     */
     public void setNickname(String nickname) throws SQLException {
         dao.setHighscoreNickname(nickname, newHighscore.getId());
     }
-    
-    public ObservableList<Row> tableConstructor() throws SQLException {
+
+    /**
+     * Initializes the highscore table by calling dao's findAll() and inserting
+     * the highscores from database into a list of Row objects.
+     *
+     * @see dao.HighscoresDao#findAll()
+     */
+    public ObservableList<Row> highscoreTableConstructor() throws SQLException {
         ObservableList<Row> data = FXCollections.observableArrayList();
         List<Highscore> highscores = dao.findAll();
         for (Highscore h : highscores) {
-            data.add(new Row(h.getName(), h.getScore()+""));
+            data.add(new Row(h.getName(), h.getScore() + ""));
         }
         return data;
     }

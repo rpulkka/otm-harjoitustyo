@@ -23,14 +23,14 @@ public class XOfAKind implements Combination {
 
     /**
      * This method returns the score given for a XOfAKind combination. It calls
-     * countPoints with different parameters depending on what type of 
+     * countPoints with different parameters depending on what type of
      * combination is being scored.
-     * 
+     *
      * @param dice The chosen dice that are being scored.
-     * 
-     * @see XOfAKind#countPoints(yahtzee.domain.InstanceList, int, int) 
-     * 
-     * @return The points given for the combination. 
+     *
+     * @see XOfAKind#countPoints(yahtzee.domain.InstanceList, int, int)
+     *
+     * @return The points given for the combination.
      */
     public int score(ArrayList<Die> dice) {
         this.isAvailable = false;
@@ -53,12 +53,12 @@ public class XOfAKind implements Combination {
      * This method calls limitedList() using the parameters given to it. It also
      * checks if the combination being scored is Yahtzee or Two Pairs as those
      * need a little extra functionality.
-     * 
+     *
      * @param instanceLister An object that creates instance lists.
      * @param lowerLimit Lowest legitimate number of instances.
      * @param appropriateValues Desired number of values that are legitimate.
-     * 
-     * @return The points given for the combination. 
+     *
+     * @return The points given for the combination.
      */
     public int countPoints(InstanceList instanceLister, int lowerLimit, int appropriateValues) {
         ArrayList<Integer> instanceList = instanceLister.limitedList(lowerLimit);

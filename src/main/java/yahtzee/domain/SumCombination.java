@@ -20,11 +20,11 @@ public class SumCombination implements Combination {
     /**
      * Counts the points for the sum combinations by counting the sum of dice
      * which have the value of wantedValue().
-     * 
+     *
      * @param dice The chosen dice that are being scored.
-     * 
-     * @see SumCombination#wantedValue() 
-     * 
+     *
+     * @see SumCombination#wantedValue()
+     *
      * @return sum Sum of the appropriate dice values.
      */
     public int score(ArrayList<Die> dice) {
@@ -41,7 +41,7 @@ public class SumCombination implements Combination {
     /**
      * Returns the value that is being looked for by checking which type of
      * combination is being scored.
-     * 
+     *
      * @return Desired value.
      */
     public int wantedValue() {

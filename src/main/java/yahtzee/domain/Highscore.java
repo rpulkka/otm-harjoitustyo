@@ -2,8 +2,8 @@ package yahtzee.domain;
 
 // @author rpulkka
 /**
- * This class represents the highscores that are shown in the top 10 list in 
- * the end screen.
+ * This class represents the highscores that are shown in the top 10 list in the
+ * end screen.
  */
 public class Highscore implements Comparable<Highscore> {
 

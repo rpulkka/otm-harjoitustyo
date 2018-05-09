@@ -20,10 +20,11 @@ public interface Combination {
     }
 
     /**
-     * Method in the combination handler which counts points for the combination.
+     * Method in the combination handler which counts points for the
+     * combination.
      */
     public int score(ArrayList<Die> dice);
-    
+
     public boolean getIsAvailable();
 
     public void setIsAvailable(boolean b);

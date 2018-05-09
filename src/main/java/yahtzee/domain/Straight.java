@@ -24,13 +24,13 @@ public class Straight implements Combination {
 
     /**
      * A method for counting the points for the straight combinations by calling
-     * getRequirements() and comparing it to the chosen dice and by giving 
+     * getRequirements() and comparing it to the chosen dice and by giving
      * points according to what type of straight the combination is.
-     * 
+     *
      * @param dice The chosen dice that are being scored.
-     * 
-     * @see Straight#getRequirements() 
-     * 
+     *
+     * @see Straight#getRequirements()
+     *
      * @return The points given for the combination
      */
     public int score(ArrayList<Die> dice) {
@@ -53,10 +53,10 @@ public class Straight implements Combination {
     /**
      * Returns the requirements for the combination that is being scored by
      * calling the right requirement constructor.
-     * 
-     * @see Straight#largeStraightRequirements() 
-     * @see Straight#smallStraightRequirements() 
-     * 
+     *
+     * @see Straight#largeStraightRequirements()
+     * @see Straight#smallStraightRequirements()
+     *
      * @return A list of required values.
      */
     public ArrayList<Integer> getRequirements() {
@@ -71,7 +71,7 @@ public class Straight implements Combination {
 
     /**
      * Returns the requirements for the large straight.
-     * 
+     *
      * @return List of required values for large straight.
      */
     public ArrayList<Integer> largeStraightRequirements() {
@@ -86,7 +86,7 @@ public class Straight implements Combination {
 
     /**
      * Returns the requirements for the small straight.
-     * 
+     *
      * @return List of required values for small straight.
      */
     public ArrayList<Integer> smallStraightRequirements() {
@@ -101,7 +101,7 @@ public class Straight implements Combination {
 
     /**
      * Returns the values of the chosen dice.
-     * 
+     *
      * @return List of chosen dice values.
      */
     public ArrayList<Integer> originalList(ArrayList<Die> dice) {

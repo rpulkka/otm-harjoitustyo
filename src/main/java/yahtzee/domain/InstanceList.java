@@ -24,14 +24,14 @@ public class InstanceList {
         map.put(5, 0);
         map.put(6, 0);
     }
-    
+
     /**
-     * Makes a list based on values that have x instances in the list of chosen 
+     * Makes a list based on values that have x instances in the list of chosen
      * dice, x being the given parameter.
-     * 
+     *
      * @param howMany The searched number of instances.
      *
-     * @return values List of values that show up in the original list of dice 
+     * @return values List of values that show up in the original list of dice
      * as many times as the parameter tells.
      */
     public ArrayList<Integer> getList(int howMany) {
@@ -40,20 +40,20 @@ public class InstanceList {
             map.put(die.getValue(), map.get(die.getValue()) + 1);
         }
         for (Integer i : map.keySet()) {
-            if (map.get(i) == howMany || howMany!=-1) {
+            if (map.get(i) == howMany || howMany != -1) {
                 values.add(i);
             }
         }
         return values;
     }
-    
+
     /**
-     * Makes a list based on values that have more than x instances in the list 
+     * Makes a list based on values that have more than x instances in the list
      * of chosen dice, x being the given parameter.
-     * 
+     *
      * @param lowerLimit Lowest amount of instances accepted to the list.
      *
-     * @return values List of values that show up in the original list of dice 
+     * @return values List of values that show up in the original list of dice
      * more times as the parameter tells.
      */
     public ArrayList<Integer> limitedList(int lowerLimit) {

@@ -4,7 +4,9 @@ package yahtzee.dao;
 import java.sql.*;
 
 // @author rpulkka
-
+/**
+ * This class represents the database that is connected to the game.
+ */
 public class Database {
 
     private String address;

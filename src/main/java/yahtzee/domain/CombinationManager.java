@@ -16,12 +16,12 @@ public class CombinationManager {
 
     private int total;
 
-    private FirstRoundCombination aces;
-    private FirstRoundCombination twos;
-    private FirstRoundCombination threes;
-    private FirstRoundCombination fours;
-    private FirstRoundCombination fives;
-    private FirstRoundCombination sixes;
+    private SumCombination aces;
+    private SumCombination twos;
+    private SumCombination threes;
+    private SumCombination fours;
+    private SumCombination fives;
+    private SumCombination sixes;
 
     private XOfAKind pair;
     private XOfAKind twoPairs;
@@ -34,11 +34,11 @@ public class CombinationManager {
     private Straight smallStraight;
     private Straight largeStraight;
 
-    private Chance chance;
+    private SumCombination chance;
 
     private XOfAKind yahtzee;
 
-    private ArrayList<FirstRoundCombination> firstRound;
+    private ArrayList<SumCombination> firstRound;
     private ArrayList<Combination> combinations;
 
     private boolean isFirstRound;
@@ -106,7 +106,7 @@ public class CombinationManager {
      * @return score The points from the combination.
      */
     public int countPoints() {
-        int score = currentCombination.score();
+        int score = currentCombination.score(chosenDiceList());
         total += score;
         return score;
     }
@@ -120,7 +120,7 @@ public class CombinationManager {
      */
     public boolean firstRoundIsOver() {
         boolean check = true;
-        for (FirstRoundCombination combo : firstRound) {
+        for (SumCombination combo : firstRound) {
             if (combo.getIsAvailable() == true) {
                 check = false;
             }
@@ -202,6 +202,22 @@ public class CombinationManager {
         }
         return false;
     }
+    
+    /**
+     * Checks which dice are chosen by the player, in other words, which dice are 
+     * taken into account when scoring the combination.
+     *
+     * @return chosenDice List of dice that are chosen.
+     */
+    public ArrayList<Die> chosenDiceList() {
+        ArrayList<Die> chosenDice = new ArrayList<Die>();
+        for (Die die : dice) {
+            if (die.getChosen() == true) {
+                chosenDice.add(die);
+            }
+        }
+        return chosenDice;
+    }
 
     /**
      * Designed to be called after scoring the combination to return the dice to
@@ -217,32 +233,36 @@ public class CombinationManager {
         }
     }
     
+    /**
+     * Basically a constructor which works for playing a new game without
+     * quitting the game.
+     */
     public void reset() {
         this.total = 0;
 
-        this.aces = new FirstRoundCombination(dice, ACES);
-        this.twos = new FirstRoundCombination(dice, TWOS);
-        this.threes = new FirstRoundCombination(dice, THREES);
-        this.fours = new FirstRoundCombination(dice, FOURS);
-        this.fives = new FirstRoundCombination(dice, FIVES);
-        this.sixes = new FirstRoundCombination(dice, SIXES);
+        this.aces = new SumCombination(ACES);
+        this.twos = new SumCombination(TWOS);
+        this.threes = new SumCombination(THREES);
+        this.fours = new SumCombination(FOURS);
+        this.fives = new SumCombination(FIVES);
+        this.sixes = new SumCombination(SIXES);
 
-        this.pair = new XOfAKind(dice, PAIR);
-        this.twoPairs = new XOfAKind(dice, TWOPAIRS);
+        this.pair = new XOfAKind(PAIR);
+        this.twoPairs = new XOfAKind(TWOPAIRS);
 
-        this.threeOfAKind = new XOfAKind(dice, THREEOFAKIND);
-        this.fourOfAKind = new XOfAKind(dice, FOUROFAKIND);
+        this.threeOfAKind = new XOfAKind(THREEOFAKIND);
+        this.fourOfAKind = new XOfAKind(FOUROFAKIND);
 
-        this.fullHouse = new FullHouse(dice, FULLHOUSE);
+        this.fullHouse = new FullHouse(FULLHOUSE);
 
-        this.smallStraight = new Straight(dice, SMALLSTRAIGHT);
-        this.largeStraight = new Straight(dice, LARGESTRAIGHT);
+        this.smallStraight = new Straight(SMALLSTRAIGHT);
+        this.largeStraight = new Straight(LARGESTRAIGHT);
 
-        this.chance = new Chance(dice, CHANCE);
+        this.chance = new SumCombination(CHANCE);
 
-        this.yahtzee = new XOfAKind(dice, YAHTZEE);
+        this.yahtzee = new XOfAKind(YAHTZEE);
 
-        this.firstRound = new ArrayList<FirstRoundCombination>();
+        this.firstRound = new ArrayList<SumCombination>();
         this.combinations = new ArrayList<Combination>();
 
         this.firstRound.add(aces);
@@ -272,11 +292,6 @@ public class CombinationManager {
 
         this.currentCombination = new Combination() {
             @Override
-            public int score() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
             public boolean getIsAvailable() {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
@@ -288,6 +303,11 @@ public class CombinationManager {
 
             @Override
             public CombinationType getCombinationType() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int score(ArrayList<Die> dice) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         };
@@ -321,27 +341,27 @@ public class CombinationManager {
         return dice;
     }
 
-    public FirstRoundCombination getAces() {
+    public SumCombination getAces() {
         return aces;
     }
 
-    public FirstRoundCombination getTwos() {
+    public SumCombination getTwos() {
         return twos;
     }
 
-    public FirstRoundCombination getThrees() {
+    public SumCombination getThrees() {
         return threes;
     }
 
-    public FirstRoundCombination getFours() {
+    public SumCombination getFours() {
         return fours;
     }
 
-    public FirstRoundCombination getFives() {
+    public SumCombination getFives() {
         return fives;
     }
 
-    public FirstRoundCombination getSixes() {
+    public SumCombination getSixes() {
         return sixes;
     }
 
@@ -373,7 +393,7 @@ public class CombinationManager {
         return largeStraight;
     }
 
-    public Chance getChance() {
+    public SumCombination getChance() {
         return chance;
     }
 
@@ -381,7 +401,7 @@ public class CombinationManager {
         return yahtzee;
     }
 
-    public ArrayList<FirstRoundCombination> getFirstRound() {
+    public ArrayList<SumCombination> getFirstRound() {
         return firstRound;
     }
 

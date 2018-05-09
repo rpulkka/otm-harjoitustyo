@@ -1,14 +1,16 @@
-
 package yahtzee.domain;
 
-
 // @author rpulkka
+/**
+ * This class represents the highscores that are shown in the top 10 list in 
+ * the end screen.
+ */
+public class Highscore implements Comparable<Highscore> {
 
-public class Highscore implements Comparable<Highscore>{
     private int id;
     private String name;
     private int score;
-    
+
     public Highscore(String name, int score) {
         this.name = name;
         this.score = score;
@@ -42,8 +44,7 @@ public class Highscore implements Comparable<Highscore>{
     public int compareTo(Highscore highscore) {
         return highscore.getScore() - this.score;
     }
-    
-    
+
     public String toString() {
         return name + "  " + score;
     }

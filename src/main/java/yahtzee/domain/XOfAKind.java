@@ -4,38 +4,63 @@ import java.util.ArrayList;
 import static yahtzee.domain.Combination.CombinationType.*;
 
 // @author rpulkka
+/**
+ * A class meant to handle "XOfAKind" combinations which are combinations that
+ * require some number of instances of dice values to receive points. The
+ * approach is different from "sum combinations" because sum combinations
+ * already know which value is being looked for, when in XOfAKind, only the
+ * number of instances is known and values can vary.
+ */
 public class XOfAKind implements Combination {
 
-    private ArrayList<Die> dice;
     private CombinationType type;
     private boolean isAvailable;
 
-    public XOfAKind(ArrayList<Die> dice, CombinationType type) {
-        this.dice = dice;
+    public XOfAKind(CombinationType type) {
         this.type = type;
         this.isAvailable = false;
     }
 
-    public int score() {
+    /**
+     * This method returns the score given for a XOfAKind combination. It calls
+     * countPoints with different parameters depending on what type of 
+     * combination is being scored.
+     * 
+     * @param dice The chosen dice that are being scored.
+     * 
+     * @see XOfAKind#countPoints(yahtzee.domain.InstanceList, int, int) 
+     * 
+     * @return The points given for the combination. 
+     */
+    public int score(ArrayList<Die> dice) {
         this.isAvailable = false;
-        ChosenDiceList correctDice = new ChosenDiceList();
-        dice = correctDice.chosenList(dice);
         InstanceList instanceLister = new InstanceList(dice);
         if (type.equals(PAIR)) {
-            return countPointsDefault(instanceLister, 2, 1);
+            return countPoints(instanceLister, 2, 1);
         } else if (type.equals(TWOPAIRS)) {
-            return countPointsDefault(instanceLister, 2, 2);
+            return countPoints(instanceLister, 2, 2);
         } else if (type.equals(THREEOFAKIND)) {
-            return countPointsDefault(instanceLister, 3, 1);
+            return countPoints(instanceLister, 3, 1);
         } else if (type.equals(FOUROFAKIND)) {
-            return countPointsDefault(instanceLister, 4, 1);
+            return countPoints(instanceLister, 4, 1);
         } else if (type.equals(YAHTZEE)) {
-            return countPointsDefault(instanceLister, 5, 1);
+            return countPoints(instanceLister, 5, 1);
         }
         return 0;
     }
 
-    public int countPointsDefault(InstanceList instanceLister, int lowerLimit, int appropriateValues) {
+    /**
+     * This method calls limitedList() using the parameters given to it. It also
+     * checks if the combination being scored is Yahtzee or Two Pairs as those
+     * need a little extra functionality.
+     * 
+     * @param instanceLister An object that creates instance lists.
+     * @param lowerLimit Lowest legitimate number of instances.
+     * @param appropriateValues Desired number of values that are legitimate.
+     * 
+     * @return The points given for the combination. 
+     */
+    public int countPoints(InstanceList instanceLister, int lowerLimit, int appropriateValues) {
         ArrayList<Integer> instanceList = instanceLister.limitedList(lowerLimit);
         if (instanceList.size() >= appropriateValues) {
             if (type.equals(YAHTZEE)) {

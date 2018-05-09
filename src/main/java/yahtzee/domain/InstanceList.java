@@ -7,8 +7,7 @@ import java.util.HashMap;
 // @author rpulkka
 /**
  * This class is meant to find all multiple instances of a value from the chosen
- * dice. The class thus aids some of the combination handlers, such as XOfAKind
- * and Pair to get their job done easier.
+ * dice. The class thus aids XOfAKind to get its job done easier.
  */
 public class InstanceList {
 
@@ -27,9 +26,13 @@ public class InstanceList {
     }
     
     /**
-     * Makes a list based on instances of values in the list of chosen dice.
+     * Makes a list based on values that have x instances in the list of chosen 
+     * dice, x being the given parameter.
+     * 
+     * @param howMany The searched number of instances.
      *
-     * @return values List of values by their instances in chosen dice.
+     * @return values List of values that show up in the original list of dice 
+     * as many times as the parameter tells.
      */
     public ArrayList<Integer> getList(int howMany) {
         ArrayList<Integer> values = new ArrayList<Integer>();
@@ -44,6 +47,15 @@ public class InstanceList {
         return values;
     }
     
+    /**
+     * Makes a list based on values that have more than x instances in the list 
+     * of chosen dice, x being the given parameter.
+     * 
+     * @param lowerLimit Lowest amount of instances accepted to the list.
+     *
+     * @return values List of values that show up in the original list of dice 
+     * more times as the parameter tells.
+     */
     public ArrayList<Integer> limitedList(int lowerLimit) {
         ArrayList<Integer> values = new ArrayList<Integer>();
         for (Die die : dice) {

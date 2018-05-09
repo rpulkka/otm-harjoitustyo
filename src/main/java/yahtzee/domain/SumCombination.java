@@ -2,32 +2,48 @@ package yahtzee.domain;
 
 import java.util.ArrayList;
 
+/**
+ * Combination handler for "sum combinations" meaning combinations that are
+ * basically a sum of dice of the desired value.
+ */
 // @author rpulkka
-public class FirstRoundCombination implements Combination {
+public class SumCombination implements Combination {
 
     private CombinationType type;
-    private ArrayList<Die> dice;
     private boolean isAvailable;
 
-    public FirstRoundCombination(ArrayList<Die> dice, CombinationType type) {
+    public SumCombination(CombinationType type) {
         this.type = type;
-        this.dice = dice;
         this.isAvailable = true;
     }
 
-    public int score() {
+    /**
+     * Counts the points for the sum combinations by counting the sum of dice
+     * which have the value of wantedValue().
+     * 
+     * @param dice The chosen dice that are being scored.
+     * 
+     * @see SumCombination#wantedValue() 
+     * 
+     * @return sum Sum of the appropriate dice values.
+     */
+    public int score(ArrayList<Die> dice) {
         this.isAvailable = false;
-        ChosenDiceList correctDice = new ChosenDiceList();
-        dice = correctDice.chosenList(dice);
         int sum = 0;
         for (Die die : dice) {
-            if (die.getValue() == wantedValue()) {
+            if (wantedValue() == 0 || die.getValue() == wantedValue()) {
                 sum += die.getValue();
             }
         }
         return sum;
     }
 
+    /**
+     * Returns the value that is being looked for by checking which type of
+     * combination is being scored.
+     * 
+     * @return Desired value.
+     */
     public int wantedValue() {
         switch (type) {
             case ACES:

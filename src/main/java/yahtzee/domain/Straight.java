@@ -5,29 +5,40 @@ import java.util.Collections;
 import static yahtzee.domain.Combination.CombinationType.LARGESTRAIGHT;
 import static yahtzee.domain.Combination.CombinationType.SMALLSTRAIGHT;
 
+/**
+ * Combination handler class for combinations that are formed of straights of
+ * dice values.
+ */
 //@author rpulkka
 public class Straight implements Combination {
 
     ArrayList<Die> requirements;
-    private ArrayList<Die> dice;
     private CombinationType type;
     private boolean isAvailable;
 
-    public Straight(ArrayList<Die> dice, CombinationType type) {
+    public Straight(CombinationType type) {
         requirements = new ArrayList<Die>();
-        this.dice = dice;
         this.type = type;
         this.isAvailable = false;
     }
 
-    public int score() {
+    /**
+     * A method for counting the points for the straight combinations by calling
+     * getRequirements() and comparing it to the chosen dice and by giving 
+     * points according to what type of straight the combination is.
+     * 
+     * @param dice The chosen dice that are being scored.
+     * 
+     * @see Straight#getRequirements() 
+     * 
+     * @return The points given for the combination
+     */
+    public int score(ArrayList<Die> dice) {
         this.isAvailable = false;
-        ChosenDiceList correctDice = new ChosenDiceList();
-        if (correctDice.chosenList(dice).size() != 5) {
+        if (dice.size() != 5) {
             return 0;
         }
-        dice = correctDice.chosenList(dice);
-        ArrayList<Integer> org = originalList();
+        ArrayList<Integer> org = originalList(dice);
         ArrayList<Integer> req = getRequirements();
         if (org.equals(req)) {
             if (type.equals(LARGESTRAIGHT)) {
@@ -39,6 +50,15 @@ public class Straight implements Combination {
         return 0;
     }
 
+    /**
+     * Returns the requirements for the combination that is being scored by
+     * calling the right requirement constructor.
+     * 
+     * @see Straight#largeStraightRequirements() 
+     * @see Straight#smallStraightRequirements() 
+     * 
+     * @return A list of required values.
+     */
     public ArrayList<Integer> getRequirements() {
         ArrayList<Integer> requirements = new ArrayList<Integer>();
         if (type.equals(LARGESTRAIGHT)) {
@@ -49,6 +69,11 @@ public class Straight implements Combination {
         return requirements;
     }
 
+    /**
+     * Returns the requirements for the large straight.
+     * 
+     * @return List of required values for large straight.
+     */
     public ArrayList<Integer> largeStraightRequirements() {
         ArrayList<Integer> requirements = new ArrayList<Integer>();
         requirements.add(2);
@@ -59,6 +84,11 @@ public class Straight implements Combination {
         return requirements;
     }
 
+    /**
+     * Returns the requirements for the small straight.
+     * 
+     * @return List of required values for small straight.
+     */
     public ArrayList<Integer> smallStraightRequirements() {
         ArrayList<Integer> requirements = new ArrayList<Integer>();
         requirements.add(1);
@@ -69,7 +99,12 @@ public class Straight implements Combination {
         return requirements;
     }
 
-    public ArrayList<Integer> originalList() {
+    /**
+     * Returns the values of the chosen dice.
+     * 
+     * @return List of chosen dice values.
+     */
+    public ArrayList<Integer> originalList(ArrayList<Die> dice) {
         ArrayList<Integer> original = new ArrayList<Integer>();
         original.add(dice.get(0).getValue());
         original.add(dice.get(1).getValue());

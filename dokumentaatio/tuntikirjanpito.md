@@ -23,4 +23,5 @@
 | 5.5. | 2h    | Tietokannan ja daon toteutus. |
 | 7.5. | 2h    | Nimimerkin tallennusruudun toteutus. |
 | 8.5. | 3h    | Loppuvalikkojen parantelu, new game -nappi ja sen toiminnallisuus, debuggausta. |
-| yht   | 62h    | | 
+| 8.5. | 7h    | Paljon refaktorointia, ohjelma on valmis ja debugattu. Javadoc edistynyt, käyttöohje päivitetty. |
+| yht   | 69h    | | 

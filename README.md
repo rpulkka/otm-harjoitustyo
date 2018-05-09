@@ -2,8 +2,9 @@
 
 Sovellus on kuuluisan Yatzy -noppapelin virtuaalinen versio. Pelin tarkoituksena on keräillä viittä noppaa 
 heittämällä ennalta määrättyjä kombinaatioita, joista sitten saa lähtökohtaisesti noppien silmälukujen verran
-pisteitä ja lopussa eniten pisteitä kerännyt pelaaja voittaa. Peliä voi pelata kahdestaan vuorottelemalla tai
-kilpailla yksin tavoitellen omaa ennätystä.
+pisteitä ja tavoitteena on kerätä mahdollisimman suuri pistesaalis pelin loppuun mennessä. Peliä pelataan
+yksitellen, mutta paikallisen top 10 -listan ansiosta voit haastaa kaverisi kilpailemaan pisteistä, sillä
+ennätykset tallennetaan paikallisesti. Pelin iloa!
 
 <h2>Dokumentaatio</h2>
 
@@ -21,8 +22,6 @@ kilpailla yksin tavoitellen omaa ennätystä.
 [Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko5)
 
 [Yahtzee_v01_2](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko6)
-
-Ei ulkoisia muutoksia edelliseen, mutta ohjelma on refaktoroitu. Huomaa, että JavaDoc on myös Controller -luokalle.
 
 <h2>Komentorivitoiminnot</h2>
 

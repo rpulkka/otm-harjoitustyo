@@ -10,13 +10,26 @@ Alla olevassa kaaviossa on kuvattu ohjelman pakkausrakenne, joka koostuu käytt�
 
 <h2>Käyttöliittymä</h2>
 
-Käyttöliittymä sovelluksessa on toteutettu yksinkertaisesti yhtenä Java FX Scene -oliona. Pelilauta jakautuu
+Käyttöliittymä sovelluksessa jakautuu kolmeen ikkunaan: pelilauta, nimimerkin valinta ja ennätykset. 
+
+Pelilauta jakautuu
 heittoalueeseen (ympyröity sinisellä), kombinaatioalueeseen (ympyröity punaisella) ja tulostauluun (ympyröity
 vihreällä). Heittoalueen painiketta painamalla heitetään noppia ja sen alla on laskuri jäljellä olevista heitoista.
 Noppia klikkaamalla ne liikkuvat kombinaatioalueelle, joihin kombinaatiot muodostetaan. Tulostaulun riviä
 klikkaamalla rivin mukainen kombinaatio pisteytetään, laskuri nollataan ja uusi kierros alkaa. 
 
 ![GitHub Logo](ui.png)
+
+Nimimerkin valinta -ikkuna avautuu pelin päätteeksi mikäli pelaaja on päässyt kymmenen parhaan joukkoon. Tässä
+ikkunassa yksinkertaisesti valitaan nimimerkki kirjoittamalla se tekstikenttään ja painamalla "Show Highscores" 
+-nappia, joka avaa ennätykset.
+
+![GitHub Logo](nicknameSelection.png)
+
+Ennätysvalikko avautuu jokaisen pelin jälkeen. Se kertoo pelaajan pistemäärän ja näyttää taulukossa paikallisen
+top 10 -listan, eli ennätykset. Ikkunan alla olevista painikkeista voi aloittaa uuden pelin tai sulkea pelin.
+
+![GitHub Logo](gameOver.png)
 
 <h2>Sovelluslogiikka</h2>
 

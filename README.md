@@ -21,8 +21,13 @@ ennätykset tallennetaan paikallisesti. Pelin iloa!
 
 <h2>Releaset</h2>
 
+[FINAL RELEASE](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/final)
+
+
+Viikko 5
 [Yahtzee_v01_1](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko5)
 
+Viikko 6
 [Yahtzee_v01_2](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/viikko6)
 
 <h2>Komentorivitoiminnot</h2>

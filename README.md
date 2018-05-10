@@ -10,7 +10,7 @@ ennätykset tallennetaan paikallisesti. Pelin iloa!
 
 [Käyttöohje](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
-[Vaativuusmäärittely](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/vaativuusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Arkkitehtuurikuvaus](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 

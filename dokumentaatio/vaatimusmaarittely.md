@@ -17,6 +17,14 @@
  
  ![GitHub Logo](Yahtzee.jpg)
  
+ Viimeisellä viikolla ohjelmaan lisättiin myös pelin lopussa top 10 -listalle päässeelle pelaajalle nimimerkin
+ valintaikkuna, sekä kaikille lopuksi näkyvä ennätysikkuna, joka näyttää paikalliset ennätykset sekä antaa 
+ mahdollisuuden valita uuden pelin tai lopettaa pelin painamalla ikkunan alalaidan painikkeita.
+ 
+ ![GitHub Logo](nicknameSelection.png)
+ 
+ ![GitHub Logo](gameOver.png)
+ 
  <h2>Perusversion tarjoama toiminnallisuus</h2>
  
  Heittoalueella (throwing area) olevia viittä noppaa voi heittää painamalla "Throw the dice" painiketta, jolloin
@@ -34,7 +42,9 @@
  saa alkaa täyttämään sen alapuolella olevia kombinaatioita ja kun pelaajat ovat täyttäneet jokaisen "bonus" kombinaation
  yläpuolella olevan rivin, niin mikäli näiden rivien summa on suurempi kuin 63, niin pelaajan "bonus" riville kirjataan 50
  (muutoin 0), jonka jälkeen aletaan täyttämään taulukon alempia rivejä. Joka vuorolla on pisteytettävä jokin kombinaatioista,
- vaikka saisi nolla pistettä. Sarakkeet erottavat pelaajien pisteet toisistaan. Pelin lopuksi kombinaatioista kerrytetyt pisteet 
+ vaikka saisi nolla pistettä. Sarakkeet erottavat pelaajien pisteet toisistaan. 
+ 
+ Pelin lopuksi kombinaatioista kerrytetyt pisteet 
  lasketaan yhteen ja mikäli pelaaja on päässyt paikallisesti kymmenen parhaan pelaajan joukkoon, niin hän saa 
  kirjoittaa nimimerkkinsä avautuneen ikkunan tekstikenttään ja tämän jälkeen avautuu ennätystaulukko, josta
  näkyy ennätyksen tehneiden pelaajien nimimerkit ja pisteet. Tästä näkymästä voi sitten valita nappia painamalla

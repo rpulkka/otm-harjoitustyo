@@ -14,8 +14,12 @@
  <h2>Käyttöliittymäluonnos</h2>
  
  Käyttöliittymän ydin on pelinäkymä, joka jakautuu kolmeen alueeseen: heittoalue, kombinaatioalue ja tulostaulukko.
+ Alla on kuvat alkuperäisestä käyttöliittymäluonnoksesta sekä lopputuloksesta, jossa on ympyröitynä edellä
+ mainitut 3 aluetta, mihin pelilauta jakautuu.
  
  ![GitHub Logo](Yahtzee.jpg)
+ 
+ ![GitHub Logo](ui.jpg)
  
  Viimeisellä viikolla ohjelmaan lisättiin myös pelin lopussa top 10 -listalle päässeelle pelaajalle nimimerkin
  valintaikkuna, sekä kaikille lopuksi näkyvä ennätysikkuna, joka näyttää paikalliset ennätykset sekä antaa 

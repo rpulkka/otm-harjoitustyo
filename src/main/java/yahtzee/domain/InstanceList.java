@@ -40,7 +40,7 @@ public class InstanceList {
             map.put(die.getValue(), map.get(die.getValue()) + 1);
         }
         for (Integer i : map.keySet()) {
-            if (map.get(i) == howMany || howMany != -1) {
+            if (map.get(i) == howMany) {
                 values.add(i);
             }
         }

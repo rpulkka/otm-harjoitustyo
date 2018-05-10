@@ -236,11 +236,11 @@ public class CombinationManager {
     /**
      * Basically a constructor which works for playing a new game without
      * quitting the game.
-     * 
-     * @see CombinationManager#initializeCombinations() 
-     * @see CombinationManager#firstRoundCombinations() 
-     * @see CombinationManager#combinations() 
-     * @see CombinationManager#newCombination() 
+     *
+     * @see CombinationManager#initializeCombinations()
+     * @see CombinationManager#firstRoundCombinations()
+     * @see CombinationManager#combinations()
+     * @see CombinationManager#newCombination()
      */
     public void reset() {
         this.total = 0;
@@ -248,7 +248,7 @@ public class CombinationManager {
         this.firstRound = firstRoundCombinations();
         this.combinations = combinations();
         this.isFirstRound = true;
-        this.currentCombination = newCombination();
+        this.currentCombination = null;
     }
 
     /**
@@ -274,7 +274,7 @@ public class CombinationManager {
 
     /**
      * Returns the firstRoundCombinations list
-     * 
+     *
      * @return firstRoundCombinations List of first round combinations.
      */
     public ArrayList<SumCombination> firstRoundCombinations() {
@@ -290,7 +290,7 @@ public class CombinationManager {
 
     /**
      * Returns the Combinations list
-     * 
+     *
      * @return combinationList List of all combinations.
      */
     public ArrayList<Combination> combinations() {
@@ -311,35 +311,6 @@ public class CombinationManager {
         combinationList.add(chance);
         combinationList.add(yahtzee);
         return combinationList;
-    }
-
-    /**
-     * Returns a new combination for initializing the current combination.
-     * 
-     * @return New combination.
-     */
-    public Combination newCombination() {
-        return new Combination() {
-            @Override
-            public boolean getIsAvailable() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void setIsAvailable(boolean b) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public CombinationType getCombinationType() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public int score(ArrayList<Die> dice) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
     }
 
     public int getTotal() {

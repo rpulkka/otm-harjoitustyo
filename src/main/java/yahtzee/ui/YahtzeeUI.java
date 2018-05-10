@@ -231,7 +231,7 @@ public class YahtzeeUI extends Application {
      * @see YahtzeeUI#initializeIdentificationStage(javafx.stage.Stage,
      * javafx.scene.layout.Pane)
      */
-    public void identification() {
+    public void identification() throws SQLException {
         Stage identificationScreen = new Stage();
         Pane layout = new Pane();
         Label instructions = instructions();
@@ -243,7 +243,6 @@ public class YahtzeeUI extends Application {
                 try {
                     if (controller.handleIdentification(inputArea.getText())) {
                         identificationScreen.close();
-                    } else {
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(YahtzeeUI.class.getName()).log(Level.SEVERE, null, ex);

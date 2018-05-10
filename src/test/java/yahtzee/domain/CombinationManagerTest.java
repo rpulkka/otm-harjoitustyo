@@ -49,6 +49,30 @@ public class CombinationManagerTest {
     }
 
     @Test
+    public void rejectsIllegalCombinationType() {
+        assertEquals(combinationManager.combinationIsValid("BONUS"), false);
+    }
+
+    @Test
+    public void rejectsZeroDiceChosen() {
+        for (Die die : dice) {
+            die.setChosen(false);
+        }
+        assertEquals(combinationManager.combinationIsValid("ACES"), false);
+    }
+
+    @Test
+    public void acceptsLegitimateCombination() {
+        assertEquals(combinationManager.combinationIsValid("ACES"), true);
+    }
+
+    @Test
+    public void rejectsUsedCombination() {
+        combinationManager.getAces().setIsAvailable(false);
+        assertEquals(combinationManager.combinationIsValid("ACES"), false);
+    }
+
+    @Test
     public void scoresAces() {
         dice.get(0).setValue(2);
         dice.get(1).setValue(2);
@@ -226,6 +250,162 @@ public class CombinationManagerTest {
         combinationManager.setCurrentCombination(combinationManager.findCombination(YAHTZEE));
         int points = combinationManager.countPoints();
         assertEquals(points, 50);
+    }
+
+    @Test
+    public void wontScorePairWithoutReason() {
+        dice.get(0).setValue(1);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(3);
+        dice.get(3).setValue(4);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(PAIR));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreTwoPairsWithoutReason() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(2);
+        dice.get(3).setValue(4);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(TWOPAIRS));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreThreeOfAKindWithoutReason() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(3);
+        dice.get(3).setValue(4);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(THREEOFAKIND));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreFourOfAKindWithoutReason() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(2);
+        dice.get(3).setValue(4);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(FOUROFAKIND));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreFullHouseWithoutReasonPt1() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(3);
+        dice.get(3).setValue(3);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(FULLHOUSE));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreFullHouseWithoutReasonPt2() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(2);
+        dice.get(3).setValue(2);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(FULLHOUSE));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreSmallStraightWithoutReason() {
+        dice.get(0).setValue(2);
+        dice.get(1).setValue(3);
+        dice.get(2).setValue(4);
+        dice.get(3).setValue(5);
+        dice.get(4).setValue(6);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(SMALLSTRAIGHT));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreLargeStraightWithoutReason() {
+        dice.get(0).setValue(1);
+        dice.get(1).setValue(2);
+        dice.get(2).setValue(3);
+        dice.get(3).setValue(4);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(LARGESTRAIGHT));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void wontScoreYahtzeeWithoutReason() {
+        dice.get(0).setValue(5);
+        dice.get(1).setValue(5);
+        dice.get(2).setValue(5);
+        dice.get(3).setValue(5);
+        dice.get(4).setValue(1);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(YAHTZEE));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 0);
+    }
+
+    @Test
+    public void moreThanPairCountsAsPair() {
+        dice.get(0).setValue(1);
+        dice.get(1).setValue(1);
+        dice.get(2).setValue(1);
+        dice.get(3).setValue(1);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(PAIR));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 2);
+    }
+
+    @Test
+    public void moreThanTwoPairsCountsAsTwoPairs() {
+        dice.get(0).setValue(1);
+        dice.get(1).setValue(1);
+        dice.get(2).setValue(1);
+        dice.get(3).setValue(5);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(TWOPAIRS));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 12);
+    }
+
+    @Test
+    public void moreThanThreeOfAKindCountsAsThreeOfAKind() {
+        dice.get(0).setValue(1);
+        dice.get(1).setValue(1);
+        dice.get(2).setValue(1);
+        dice.get(3).setValue(1);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(THREEOFAKIND));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 3);
+    }
+
+    @Test
+    public void yahtzeeCountsAsFourOfAKind() {
+        dice.get(0).setValue(5);
+        dice.get(1).setValue(5);
+        dice.get(2).setValue(5);
+        dice.get(3).setValue(5);
+        dice.get(4).setValue(5);
+        combinationManager.setCurrentCombination(combinationManager.findCombination(FOUROFAKIND));
+        int points = combinationManager.countPoints();
+        assertEquals(points, 20);
     }
 
     @Test

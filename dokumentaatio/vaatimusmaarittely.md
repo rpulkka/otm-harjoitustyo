@@ -19,7 +19,7 @@
  
  ![GitHub Logo](Yahtzee.jpg)
  
- ![GitHub Logo](ui.jpg)
+ ![GitHub Logo](ui.png)
  
  Viimeisellä viikolla ohjelmaan lisättiin myös pelin lopussa top 10 -listalle päässeelle pelaajalle nimimerkin
  valintaikkuna, sekä kaikille lopuksi näkyvä ennätysikkuna, joka näyttää paikalliset ennätykset sekä antaa 

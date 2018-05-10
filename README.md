@@ -21,7 +21,8 @@ ennätykset tallennetaan paikallisesti. Pelin iloa!
 
 <h2>Releaset</h2>
 
-[FINAL RELEASE](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/final)
+FINAL RELEASE
+[Loppupalautus](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/loppupalautus)
 
 
 Viikko 5

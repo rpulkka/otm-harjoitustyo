@@ -24,4 +24,5 @@
 | 7.5. | 2h    | Nimimerkin tallennusruudun toteutus. |
 | 8.5. | 3h    | Loppuvalikkojen parantelu, new game -nappi ja sen toiminnallisuus, debuggausta. |
 | 9.5. | 7h    | Paljon refaktorointia, ohjelma on valmis ja debugattu. Javadoc edistynyt, käyttöohje päivitetty. |
-| yht   | 69h    | | 
+| 10.5. | 9h    | FINAL RELEASE. Refaktorointi, JavaDoc, debuggaus ja testaus valmiina. Dokumentointi valmiina. |
+| yht   | 80h    | | 

@@ -39,8 +39,8 @@ fuksiläppäri onnistui suoritttamaan ladatun ohjelman oikein valmiin tietokanna
 
 <h3>Toiminnallisuudet</h3>
 
-Kaikkia [määrittelydokumentin](https://github.com/rpulkka/otm-harjoitustyo/edit/master/dokumentaatio/testaus.md)
-ja [käyttöohjeen](https://github.com/rpulkka/otm-harjoitustyo/edit/master/dokumentaatio/testaus.md) toimintoja on
+Kaikkia [määrittelydokumentin](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+ja [käyttöohjeen](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/testaus.md) toimintoja on
 testattu ja todettu toimiviksi. Nimimerkin valintakenttään on yritetty syöttää liian pitkiä ja lyhyitä 
 nimimerkkejä ja olemattomia kombinaatioita on yritetty pisteyttää sekä noppia on yritetty valita ennen heittoja
 tuloksetta, joten ohjelma näyttäisi toimivalle.

@@ -12,9 +12,11 @@ ennätykset tallennetaan paikallisesti. Pelin iloa!
 
 [Vaativuusmäärittely](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/vaativuusmaarittely.md)
 
-[Tuntikirjanpito](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
-
 [Arkkitehtuurikuvaus](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
+[Testausdokumentti](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
+[Tuntikirjanpito](https://github.com/rpulkka/otm-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 
 <h2>Releaset</h2>

@@ -7,6 +7,8 @@ Lataa tiedoston Yahtzee.jar uusin versio [täältä](https://github.com/rpulkka/
 HUOM! Jotta ohjelma toimisi oikein, tietokoneellasi on oltava asennettuna SQLite tietokantajärjestelmä, sillä
 ohjelma käsittelee tietokantoja.
 
+Huomaa myös, että ohjelma tallentaa tietokantansa itse tekemäänsä kansioon nimeltään db.
+
 Ohjelma käynnistetään komennolla:
 
 ```

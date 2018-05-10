@@ -14,7 +14,6 @@ import yahtzee.domain.Highscore;
 // @author rpulkka
 public class DaoTest {
 
-    private Database highscores;
     private HighscoresDao dao;
     private Highscore matti;
     private Highscore maija;
@@ -24,13 +23,8 @@ public class DaoTest {
 
     @Before
     public void setUp() throws ClassNotFoundException, SQLException {
-        this.highscores = new Database("jdbc:sqlite:test.db");
+        Database highscores = new Database("test.db");
         this.dao = new HighscoresDao(highscores);
-        Connection connection = highscores.getConnection();
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE Highscores (id integer PRIMARY KEY, name varchar(10), score integer);");
-        statement.execute();
-        statement.close();
-        connection.close();
         matti = dao.save(new Highscore("Matti", 100));
         maija = dao.save(new Highscore("Maija", 200));
     }

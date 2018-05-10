@@ -1,6 +1,7 @@
 package yahtzee.ui;
 
 // @author rpulkka
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -19,9 +20,11 @@ public class Controller {
     private HighscoresDao dao;
     private Highscore newHighscore;
 
-    public Controller(YahtzeeUI ui) throws ClassNotFoundException {
+    public Controller(YahtzeeUI ui) throws ClassNotFoundException, SQLException {
         this.ui = ui;
-        Database database = new Database("jdbc:sqlite:src/main/resources/db/yahtzee.db");
+        File databaseDirectory = new File("db");
+        databaseDirectory.mkdir();
+        Database database = new Database("db" + File.separator + "yahtzee.db");
         this.dao = new HighscoresDao(database);
     }
 

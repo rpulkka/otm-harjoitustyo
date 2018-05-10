@@ -42,14 +42,18 @@ Sovelluslogiikan olennaisimmat luokat ovat noppien arvoja ja tiloja käsittelev�
 käsittelevä luokka DiceThrower, sekä CombinationManager, joka hallinnoi kombinaatioiden pisteytystä ja niiiden
 rajoituksia. 
 
-CombinationManager sisältää oliot kaikista eri kombinaatioluokista, joita on lukuisia ja kuvassa on
-niistä vain pari mallina. Kombinaatioluokkien tehtävä on siis laskea kyseisen kombinaation tuottamat pisteet. 
+CombinationManager sisältää oliot kaikista eri kombinaatiotyypeistä, joihin kombinaatiot jakautuvat. Kombinaatioluokkien tehtävä on siis laskea kyseisen kombinaation tuottamat pisteet. 
 Osaa kombinaatioluokista tukee luokka InstanceList, joka tarjoaa dataa saman arvon ilmentymistä noppien joukossa,
-esim. onko noppien joukossa kolmen saman joukkoa, ja mitä arvoa ne ovat (kuutosia?, kolmosia?..). 
+esim. onko noppien joukossa kolmen saman joukkoa, ja mitä arvoa ne ovat (kuutosia?, kolmosia?..). Huomaa, että
+kombinaatiot jaetaan neljään päätyyppiin, joista on omat luokkansa, esim. sekä sattuma (chance) että kolmoset 
+(threes) ovat SumCombination olioita, sillä molempien perusperiaate on pisteyttää noppien summa tietyllä ehdolla.
+Kombinaatiotyypit joihin kombinaatiot jakautuvat ovat SumCombination, XOfAKind, Straight ja niiden ulkopuolelle
+jää FullHouse, joka on eriytetty XOfAKind:sta, sillä sen ehdot ovat liian poikkeavat toteutettavaksi samaan 
+luokkaan.
 
 Controller toimii myös liitoskappaleena Dao -luokkien ja käyttöliittymän välillä. HighscoresDao hallinnoi
 tietokantoja ja se käyttää apunaan ennätyksen abstraktoivaa luokkaa Highscore ja Database luokkaa, jossa on
-tietokannan osoite.
+tietokannan osoite. Tietokantaan siis tallennetaan ennätystuloksia.
 
 Keltainen tausta tarkoittaa, että luokka sisältyy pakkaukseen yahtzee.ui, valkoinen puolestaan pakkaukseen yahtzee.domain ja vihreä yahtzee.dao.
 

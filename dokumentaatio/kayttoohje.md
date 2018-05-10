@@ -1,6 +1,6 @@
 <h1>Käyttöohje</h1>
 
-Lataa tiedoston Yahtzee.jar uusin versio [täältä](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/loppupalautus)
+Lataa ohjelman Yahtzee.jar uusin versio [täältä](https://github.com/rpulkka/otm-harjoitustyo/releases/tag/loppupalautus)
 
 <h2>Ohjelman käynnistäminen</h2>
 

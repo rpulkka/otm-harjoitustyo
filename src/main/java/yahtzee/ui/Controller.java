@@ -21,7 +21,7 @@ public class Controller {
 
     public Controller(YahtzeeUI ui) throws ClassNotFoundException {
         this.ui = ui;
-        Database database = new Database("jdbc:sqlite://db/yahtzee.db");
+        Database database = new Database("jdbc:sqlite:src/main/resources/db/yahtzee.db");
         this.dao = new HighscoresDao(database);
     }
 

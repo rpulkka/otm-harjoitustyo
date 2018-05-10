@@ -4,12 +4,15 @@ Lataa tiedoston Yahtzee.jar uusin versio [täältä](https://github.com/rpulkka/
 
 <h2>Ohjelman käynnistäminen</h2>
 
-Ohjelma käynnistetään komennolla
+HUOM! Jotta ohjelma toimisi oikein, tietokoneellasi on oltava asennettuna SQLite tietokantajärjestelmä, sillä
+ohjelma käsittelee tietokantoja.
+
+Ohjelma käynnistetään komennolla:
 
 ```
-java -jar Yahtzee_v01_1.jar
+java -jar Yahtzee.jar
 ```
-Huomaa myös korjata version numero lataamasi version mukaiseksi, mikäli se poikkeaa ylläolevasta.
+Tai voit myös yksinkertaisesti tuplaklikata lataamasi .jar tiedoston kuvaketta.
 
 <h2>Nopan heittäminen</h2>
 

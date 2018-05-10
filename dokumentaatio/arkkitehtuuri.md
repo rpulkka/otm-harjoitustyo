@@ -44,9 +44,12 @@ rajoituksia.
 
 CombinationManager sisältää oliot kaikista eri kombinaatioluokista, joita on lukuisia ja kuvassa on
 niistä vain pari mallina. Kombinaatioluokkien tehtävä on siis laskea kyseisen kombinaation tuottamat pisteet. 
-Kombinaatioluokkia tukevia luokkia ovat ChosenDiceList, joka antaa valitut, eli pisteytykseen osallistuvat nopat,
-sekä DataList, joka tarjoaa dataa saman arvon ilmentymistä noppien joukossa, esim. onko noppien joukossa kolmen
-saman joukkoa, ja mitä arvoa ne ovat (kuutosia?, kolmosia?..). 
+Osaa kombinaatioluokista tukee luokka InstanceList, joka tarjoaa dataa saman arvon ilmentymistä noppien joukossa,
+esim. onko noppien joukossa kolmen saman joukkoa, ja mitä arvoa ne ovat (kuutosia?, kolmosia?..). 
+
+Controller toimii myös liitoskappaleena Dao -luokkien ja käyttöliittymän välillä. HighscoresDao hallinnoi
+tietokantoja ja se käyttää apunaan ennätyksen abstraktoivaa luokkaa Highscore ja Database luokkaa, jossa on
+tietokannan osoite.
 
 Keltainen tausta tarkoittaa, että luokka sisältyy pakkaukseen yahtzee.ui, valkoinen puolestaan pakkaukseen yahtzee.domain ja vihreä yahtzee.dao.
 
